@@ -1,0 +1,327 @@
+package kr.or.ddit.service.auction;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.dao.aution.auctionDAOImpl;
+import kr.or.ddit.vo.A_articleVO;
+import kr.or.ddit.vo.Auctioning_RecordVO;
+
+
+public class auctionServerImpl  extends UnicastRemoteObject implements IauctionServer{
+
+	private Map<String,List<Socket>> roomMap = Collections.synchronizedMap(new HashMap<String, List<Socket>>());
+	private Map<String,List<Socket>> cntMap = Collections.synchronizedMap(new HashMap<String, List<Socket>>());
+	private Map<String,List<String>> setMap = Collections.synchronizedMap(new HashMap<String, List<String>>());
+	private Map<String,cntThread> TimerMap = Collections.synchronizedMap(new HashMap<String, cntThread>());
+	
+	private auctionDAOImpl dao; 
+	private static auctionServerImpl instance;
+	
+	private auctionServerImpl() throws RemoteException {
+		dao = auctionDAOImpl.getInstance();
+		StartSocket th = new StartSocket();
+		StartSocket1 th1 = new StartSocket1();
+		th.start();
+		th1.start();
+		new AcutionStartScheduler(this);
+		new AuctionInsertDataScheduler(this);
+		
+	}
+	
+	public static auctionServerImpl getInstance() {
+		if(instance == null) {
+			try {
+				instance = new auctionServerImpl();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			} 
+		}
+		return  instance;
+	}
+	
+	
+	@Override
+	public List<A_articleVO> getMyArticleList(String mem_id) throws RemoteException {
+		return dao.getMyArticleList(mem_id);
+	}
+
+	@Override
+	public List<A_articleVO> getTotalArticleList() throws RemoteException {	
+		return dao.getTotalArticleList();
+	}
+
+	@Override
+	public A_articleVO getArticleInfo(String a_art_no) throws RemoteException {
+		return dao.getArticleInfo(a_art_no);
+	}
+	
+	
+	public void setRoomMap(Map<String,List<Socket>> map) {
+		roomMap = map;
+	}
+
+	public void setSetMap(Map<String,List<String>> map) {
+		setMap = map;
+	}
+	
+	
+	public void sendtoAlldata(String a_art_no,String data) {
+		for(Socket socket:roomMap.get(a_art_no)) {
+			DataOutputStream out ;
+			try {
+				out = new DataOutputStream(socket.getOutputStream());
+				out.writeUTF(data);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void sendtoAlldata1(String a_art_no,String data) {
+		
+		System.out.println("cntMap의 사이즈 : "+cntMap.get(a_art_no).size());
+		
+		for(Socket socket : cntMap.get(a_art_no)) {
+			DataOutputStream out ;
+			try {
+				out = new DataOutputStream(socket.getOutputStream());
+				out.writeUTF(data);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+
+	
+	
+	class StartSocket extends Thread{
+		@Override
+		public void run() {
+			try {
+				ServerSocket server = new ServerSocket(9999);
+				while (server != null) {
+					Socket socket = server.accept();
+					insertSocket th = new insertSocket(socket);
+					th.start();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+
+	class StartSocket1 extends Thread{
+		@Override
+		public void run() {
+			try {
+				ServerSocket server = new ServerSocket(9998);
+	
+				while (server != null) {
+					Socket socket = server.accept();
+					insertSocket1 th = new insertSocket1(socket);
+					th.start();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	
+	class insertSocket extends Thread{
+		Socket socket;
+		DataInputStream in;
+		DataOutputStream out;
+		String a_art_no;
+	
+		public insertSocket(Socket socket) {
+			this.socket = socket;
+			try {
+				in = new DataInputStream(socket.getInputStream());
+				out = new DataOutputStream(socket.getOutputStream());
+				a_art_no = in.readUTF();
+	
+				if(roomMap.get(a_art_no)==null) {
+					List<Socket>list = Collections.synchronizedList(new ArrayList<Socket>());
+					list.add(socket);
+					roomMap.put(a_art_no, list);
+				}else {
+					roomMap.get(a_art_no).add(socket);
+				}
+				
+				if (setMap.get(a_art_no) == null) {
+					List<String> datalist = Collections.synchronizedList(new ArrayList<String>());
+					datalist.add(dao.getArticleInfo(a_art_no).getA_art_low());
+					datalist.add("입찰자 없음");
+					datalist.add("준비중");
+					datalist.add("0");
+					setMap.put(a_art_no, datalist);
+				} 
+				
+				
+				out.writeUTF(setMap.get(a_art_no).get(0)); // 돈 
+				out.writeUTF(setMap.get(a_art_no).get(1)); // 입찰자
+				out.writeUTF(setMap.get(a_art_no).get(2)); // 상태
+				out.writeUTF(setMap.get(a_art_no).get(3)); // 카운트 상태
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
+		}
+		
+		@Override
+		public void run() {
+			try {
+				while (socket != null) {
+					String state = in.readUTF();
+					if(state.equals("info")) {
+						String id = in.readUTF();
+						String won = in.readUTF();
+						setMap.get(a_art_no).set(0, won);
+						setMap.get(a_art_no).set(1, id);
+						sendtoAlldata(a_art_no, setMap.get(a_art_no).get(1)); // 아이디
+						sendtoAlldata(a_art_no, setMap.get(a_art_no).get(0)); // 금액					 						
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				roomMap.get(a_art_no).remove(socket);
+			}
+		}
+	}
+	
+	
+	class insertSocket1 extends Thread{
+		Socket socket;
+		DataInputStream in;
+		DataOutputStream out;
+		String a_art_no;
+
+		public insertSocket1(Socket socket) {
+			this.socket = socket;
+			try {
+				in = new DataInputStream(socket.getInputStream());
+				out = new DataOutputStream(socket.getOutputStream());
+				a_art_no = in.readUTF();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (cntMap.get(a_art_no) == null) {
+				List<Socket> list = Collections.synchronizedList(new ArrayList<Socket>());
+				list.add(socket);
+				cntMap.put(a_art_no, list);
+			} else {
+				cntMap.get(a_art_no).add(socket);
+			}
+			
+			if (setMap.get(a_art_no) == null) {
+				List<String> datalist = Collections.synchronizedList(new ArrayList<String>());
+				datalist.add(dao.getArticleInfo(a_art_no).getA_art_low());
+				datalist.add("입찰자 없음");
+				datalist.add("준비중");
+				datalist.add("0");
+				setMap.put(a_art_no, datalist);
+			} 
+			
+			if(TimerMap.get(a_art_no) == null) {
+				TimerMap.put(a_art_no,new cntThread(a_art_no));
+			}	
+			
+			if(TimerMap.get(a_art_no).getState()==State.NEW) {
+				TimerMap.get(a_art_no).start();
+			}
+			
+		}
+		
+		@Override
+		public void run() {
+			try {			
+				while (socket != null) {
+					if (setMap.get(a_art_no).get(2).equals("경매중")) {
+						sendtoAlldata1(a_art_no, "경매중");
+						while (setMap.get(a_art_no).get(2).equals("경매중")) {
+							String state = in.readUTF();
+							if (state.equals("reset")) {
+								TimerMap.get(a_art_no).interrupt();
+								TimerMap.put(a_art_no,new cntThread(a_art_no));
+								TimerMap.get(a_art_no).start();		
+							} else if (state.equals("낙찰")||state.equals("유찰")) {
+								setMap.get(a_art_no).set(2, state);
+								setMap.get(a_art_no).set(3, "3");
+							}							
+						}
+
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+			
+				cntMap.get(a_art_no).remove(socket);
+			}
+		}
+	}
+	
+	
+	public Map<String,List<String>> getAuctionState() {
+		return setMap;
+	}
+	
+	
+	class cntThread extends Thread{
+		private String a_art_no;
+		
+		public cntThread(String a_art_no) {
+			this.a_art_no = a_art_no;
+		}
+		
+		
+		@Override
+		public void run() {
+			try {
+				while(!setMap.get(a_art_no).get(2).equals("낙찰")||!setMap.get(a_art_no).get(2).equals("유찰")) {
+					if(setMap.get(a_art_no).get(2).equals("경매중")) {
+						setMap.get(a_art_no).set(3,"1");
+						sendtoAlldata1(a_art_no, setMap.get(a_art_no).get(3));
+						Thread.sleep(4000);
+						setMap.get(a_art_no).set(3,"2");
+						sendtoAlldata1(a_art_no, setMap.get(a_art_no).get(3));
+						Thread.sleep(4000);
+						setMap.get(a_art_no).set(3,"3");
+						sendtoAlldata1(a_art_no, setMap.get(a_art_no).get(3));
+						return;
+					}
+				}
+			} catch (InterruptedException e) {}
+			
+		}
+		
+	}
+
+
+	@Override
+	public int insertArticleResult(Map<String, String> info) {
+		return dao.insertArticleResult(info);
+	}
+
+	@Override
+	public void insertRecording(Auctioning_RecordVO recordVO) throws RemoteException {
+		dao.insertRecording(recordVO);
+	}
+
+}

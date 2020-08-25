@@ -1,0 +1,25 @@
+#btnAgency{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}
+
+#btnBack{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+	
+}
+#btnBidding{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+	
+}

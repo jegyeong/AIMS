@@ -1,0 +1,279 @@
+package kr.or.ddit.controller.InformationUse;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import kr.or.ddit.controller.login.loginController;
+import kr.or.ddit.controller.main.MainPageController;
+import kr.or.ddit.controller.search.ButtonController;
+import kr.or.ddit.vo.FAQVO;
+
+public class SiteMapController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane anchorSiteMap;
+
+    @FXML
+    private Label auctionNoticeList;
+
+    @FXML
+    private Label auctionNotice;
+
+    @FXML
+    private Label actionGoods;
+
+    @FXML
+    private Label actionSearchNum;
+
+    @FXML
+    private Label actionSearchMap;
+
+    @FXML
+    private Label actionSearchTime;
+
+    @FXML
+    private Label actionSearchLike;
+
+    @FXML
+    private Label actionSearchResult;
+
+    @FXML
+    private Label statistics;
+
+    @FXML
+    private Label statisticsYear;
+
+    @FXML
+    private Label statisticsCourt;
+
+    @FXML
+    private Label statisticsAtea;
+
+    @FXML
+    private Label statisticsPurpose;
+
+    @FXML
+    private Label knowledgeStep;
+
+    @FXML
+    private Label knowledgeTerms;
+
+    @FXML
+    private Label knowledgeFormat;
+
+    @FXML
+    private Label knowledgeGuide;
+
+    @FXML
+    private Label knowledgeRules;
+
+    @FXML
+    private Label knowledge;
+
+    @FXML
+    private Label myAction;
+
+    @FXML
+    private Label myActionSchedule;
+
+    @FXML
+    private Label myActionLike;
+
+    @FXML
+    private Label myActionInfo;
+
+    @FXML
+    private Label myActionCompl;
+
+    @FXML
+    private Label myActionHistory;
+
+    @FXML
+    private Label myActionSecession;
+
+    @FXML
+    void actionGoodsClicked(MouseEvent event) {
+    	
+    }
+
+    @FXML
+    void actionSearchLikeClicked(MouseEvent event) {
+		
+    	try {
+
+			//FXMLLoader loader = new FXMLLoader(loginController.class.getResource("../../fxml/main/mainPage.fxml"));
+			FXMLLoader loader = new FXMLLoader(loginController.class.getResource("../../fxml/search/fxmlButtonMain.fxml.fxml"));
+			Parent root = loader.load();
+//			MainPageController logCon = loader.getController();
+			ButtonController logCon = loader.getController();
+			Stage stage = (Stage) statistics.getScene().getWindow();
+			Scene scene = new Scene(root);
+
+			stage.setScene(scene);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		
+    }
+
+    @FXML
+    void actionSearchMapClicked(MouseEvent event) {
+    	
+    }
+
+    @FXML
+    void actionSearchNumClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void actionSearchResultClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void actionSearchTime(MouseEvent event) {
+
+    }
+
+    @FXML
+    void auctionNoticeList(MouseEvent event) {
+
+    }
+
+    @FXML
+    void auctionNoticeTitle(MouseEvent event) {
+
+    }
+
+    @FXML
+    void knowledgeClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void knowledgeFormatClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void knowledgeGuideClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void knowledgeRules(MouseEvent event) {
+
+    }
+
+    @FXML
+    void knowledgeStepClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void knowledgeTermsClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void myActionComplClciked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void myActionHistoryClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void myActionInfo(MouseEvent event) {
+
+    }
+
+    @FXML
+    void myActionLikeClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void myActionScheduleClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void myActionSecessionClciked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void statisticsAteaClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void statisticsClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void statisticsCourtClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void statisticsPurposeClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void statisticsYearClicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void initialize() {
+        assert anchorSiteMap != null : "fx:id=\"anchorSiteMap\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert auctionNoticeList != null : "fx:id=\"auctionNoticeList\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert auctionNotice != null : "fx:id=\"auctionNotice\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert actionGoods != null : "fx:id=\"actionGoods\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert actionSearchNum != null : "fx:id=\"actionSearchNum\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert actionSearchMap != null : "fx:id=\"actionSearchMap\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert actionSearchTime != null : "fx:id=\"actionSearchTime\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert actionSearchLike != null : "fx:id=\"actionSearchLike\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert actionSearchResult != null : "fx:id=\"actionSearchResult\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert statistics != null : "fx:id=\"statistics\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert statisticsYear != null : "fx:id=\"statisticsYear\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert statisticsCourt != null : "fx:id=\"statisticsCourt\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert statisticsAtea != null : "fx:id=\"statisticsAtea\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert statisticsPurpose != null : "fx:id=\"statisticsPurpose\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert knowledgeStep != null : "fx:id=\"knowledgeStep\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert knowledgeTerms != null : "fx:id=\"knowledgeTerms\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert knowledgeFormat != null : "fx:id=\"knowledgeFormat\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert knowledgeGuide != null : "fx:id=\"knowledgeGuide\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert knowledgeRules != null : "fx:id=\"knowledgeRules\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert knowledge != null : "fx:id=\"knowledge\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert myAction != null : "fx:id=\"myAction\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert myActionSchedule != null : "fx:id=\"myActionSchedule\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert myActionLike != null : "fx:id=\"myActionLike\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert myActionInfo != null : "fx:id=\"myActionInfo\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert myActionCompl != null : "fx:id=\"myActionCompl\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert myActionHistory != null : "fx:id=\"myActionHistory\" was not injected: check your FXML file 'SiteMap.fxml'.";
+        assert myActionSecession != null : "fx:id=\"myActionSecession\" was not injected: check your FXML file 'SiteMap.fxml'.";
+
+    }
+}

@@ -1,0 +1,58 @@
+package kr.or.ddit.dao.InformationUse;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.ibatis.InfomationUse.BuildedSqlMapClient;
+import kr.or.ddit.vo.FAQVO;
+
+
+
+public class FAQDaoImpl implements IFAQDao {
+	
+	private SqlMapClient smc;
+	
+	private static FAQDaoImpl dao;
+	
+	//생성자
+	private FAQDaoImpl() {
+		smc = BuildedSqlMapClient.getSqlMapClient();
+	}
+	
+	public static FAQDaoImpl getInstance() {
+		if(dao==null) dao = new FAQDaoImpl();
+		return dao;
+	}
+	
+	@Override
+	public List<FAQVO> getAllFAQList() {
+		List<FAQVO> faqList = null;
+		try {
+			faqList = smc.queryForList("faq.getAllFAQList");
+		} catch (SQLException e) {
+			faqList = null;
+			e.printStackTrace();
+		}
+		
+		return faqList;
+	}
+
+	@Override
+	public List<FAQVO> getDetailsList(String faqNum) {
+		List<FAQVO> faqList = null;
+		try {
+			faqList = smc.queryForList("faq.getDetailsList");
+		} catch (SQLException e) {
+			faqList = null;
+			e.printStackTrace();
+		}
+		
+		return faqList;
+	}
+
+	
+
+	
+}

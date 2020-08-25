@@ -1,0 +1,72 @@
+package kr.or.ddit.server;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+
+import kr.or.ddit.dao.InformationUse.IFAQDao;
+import kr.or.ddit.dao.InformationUse.AgencyDaoImpl;
+import kr.or.ddit.dao.InformationUse.FAQDaoImpl;
+import kr.or.ddit.dao.InformationUse.IAgencyDao;
+import kr.or.ddit.dao.InformationUse.IFAQDao;
+import kr.or.ddit.dao.InformationUse.IManagerAgencyDao;
+import kr.or.ddit.dao.InformationUse.IManagerFAQDao;
+import kr.or.ddit.dao.InformationUse.ManagerAgencyDaoImpl;
+import kr.or.ddit.dao.InformationUse.ManagerFAQDaoImpl;
+import kr.or.ddit.service.InoticeServer;
+import kr.or.ddit.service.noticeServerImpl;
+import kr.or.ddit.service.InformationUse.AgencyServiceImpl;
+import kr.or.ddit.service.InformationUse.FAQServiceImpl;
+import kr.or.ddit.service.InformationUse.IAgencyService;
+import kr.or.ddit.service.InformationUse.IFAQService;
+import kr.or.ddit.service.InformationUse.IManagerAgencyService;
+import kr.or.ddit.service.InformationUse.IManagerFAQService;
+import kr.or.ddit.service.InformationUse.ManagerAgencyServiceImpl;
+import kr.or.ddit.service.InformationUse.ManagerFAQServiceImpl;
+import kr.or.ddit.service.knowledge.IKnowledgeService;
+import kr.or.ddit.service.knowledge.KnowledgeServiceImpl;
+
+
+
+
+// RMI�슜 媛앹껜 留뚮뱾湲� : RMI�슜 �씤�꽣�럹�씠�뒪瑜� 援ы쁽�븯�룄濡� �옉�꽦�븳�떎.
+//			   : UnicastRemoteObject瑜� �긽�냽�븯怨�
+public class NoticeServer extends UnicastRemoteObject {
+
+	protected NoticeServer() throws RemoteException {
+	}
+
+	void startNoiceServer() {
+		System.out.println("�떆�옉");
+		try {
+		InoticeServer inf = noticeServerImpl.getInstance();
+		Registry reg = LocateRegistry.createRegistry(8888);
+//		reg.rebind("notice", inf);
+		
+		IFAQService inf1 = FAQServiceImpl.getInstance();
+		reg.rebind("FAQ", inf1);
+		IAgencyService inf2 = AgencyServiceImpl.getInstance();
+		reg.rebind("Agency", inf2);
+		IManagerFAQService inf3 = ManagerFAQServiceImpl.getInstance();
+		reg.rebind("ManagerFAQ", inf3);
+		IManagerAgencyService inf4 = ManagerAgencyServiceImpl.getInstance();
+		reg.rebind("ManagerAgency", inf4);
+		IKnowledgeService inf5 = KnowledgeServiceImpl.getInstance();
+		reg.rebind("knowledge", inf5);
+		
+		System.out.println("�꽌踰꾧� 以�鍮꾨릺�뿀�뒿�땲�떎.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		// �궗�슜�븷 媛앹껜�뒗 �꽌踰꾩뿉 �벑濡앸맂 Alias濡� 李얠븘�꽌 媛앹껜瑜� 遺덈윭�삩�떎.
+		// �삎�떇) Registry媛앹껜蹂��닔.lookup("媛앹껜 Alias");
+		
+	}
+	
+	public static void main(String[] args) throws RemoteException {
+		new NoticeServer().startNoiceServer();
+	}
+
+}

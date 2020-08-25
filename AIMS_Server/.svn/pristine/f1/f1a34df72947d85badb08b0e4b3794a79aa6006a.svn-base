@@ -1,0 +1,30 @@
+package kr.or.ddit.vo;
+
+import java.io.Serializable;
+
+public class Related_LawVO implements Serializable{
+
+	private String rel_l_no;
+	private String rel_l_content;
+	private String rel_l_name;
+	
+	public String getRel_l_no() {
+		return rel_l_no;
+	}
+	public void setRel_l_no(String rel_l_no) {
+		this.rel_l_no = rel_l_no;
+	}
+	public String getRel_l_content() {
+		return rel_l_content;
+	}
+	public void setRel_l_content(String rel_l_content) {
+		this.rel_l_content = rel_l_content;
+	}
+	public String getRel_l_name() {
+		return rel_l_name;
+	}
+	public void setRel_l_name(String rel_l_name) {
+		this.rel_l_name = rel_l_name;
+	}
+	
+}

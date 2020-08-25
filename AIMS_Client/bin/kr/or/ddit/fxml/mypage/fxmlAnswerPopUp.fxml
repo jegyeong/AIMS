@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="749.0" stylesheets="@../../../../../../css/mypage.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.mypage.AnswerPopUpController">
+   <children>
+      <WebView fx:id="webView" layoutX="96.0" layoutY="114.0" prefHeight="302.0" prefWidth="573.0" />
+      <ListView fx:id="listView" layoutX="96.0" layoutY="443.0" prefHeight="87.0" prefWidth="573.0" />
+      <Label layoutX="96.0" layoutY="48.0" text="제목 : ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="tfTitle" layoutX="165.0" layoutY="48.0" prefHeight="25.0" prefWidth="508.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

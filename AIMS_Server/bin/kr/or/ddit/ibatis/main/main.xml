@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="main">
+
+	<select id="getLocalList" resultClass="string">
+		select distinct  SUBSTR(cou_loc,INSTR(cou_loc,')',1,1)+1,INSTR(cou_loc,' ',1,1)-INSTR(cou_loc,')',1,1)) as deo from court order by deo asc
+	</select>
+	<select id="getCourtList" parameterClass="string"
+		resultClass="CourtVO">
+		select * from court where cou_loc like '%$local$%'
+	</select>
+	<select id="getBestArticleInfo" resultClass="A_articleVO">
+		select aa.A_ART_NO,A_ART_LOC,
+		(select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+		(select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO)
+		CAT_A_NO,
+		(select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO)
+		CAT_b_NO,
+		(select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO)
+		CAT_c_NO,
+		A_ART_LOW,A_ART_AREA,A_ART_CNT,
+		(select count(*) from article_result a1
+		where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+		A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+		(select count(*) from interest where interest.a_art_no = aa.a_art_no)
+		a_art_inter,
+		nvl((
+		select res_state from article_result a1
+		where res_date = (select max(res_date) from article_result b1 where
+		a1.a_art_no=b1.a_art_no)
+		and a1.a_art_no = aa.a_art_no
+		), '준비중') a_art_result
+		from A_article aa
+		where aa.a_art_no=(select a_art_no from interest having
+		count(a_art_no)=(select max(count(A_art_no)) from interest where
+		a_art_no in (select a_art_no from a_article where a_art_day &gt;=
+		sysdate) group by a_art_no) group by a_art_no)
+	</select>
+
+	
+	
+	<select id="getTodyAuctionList" resultClass="A_articleVO">
+		select * from a_article where to_number(to_char(sysdate,'yyyymmdd'))-to_number(to_char(a_art_day,'yyyymmdd')) = 0 order by a_art_no asc
+	</select>
+	
+	<select id="getNoticeList" resultClass="NoticeVO">
+		select * from notice  where rownum &lt;=5 order by notice_no desc
+	</select>
+	
+	<select id="getNoticeInfo" parameterClass="string" resultClass="NoticeVO">
+		select * from notice where notice_no = #notice_no#
+	</select>
+
+</sqlMap>

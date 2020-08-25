@@ -1,0 +1,215 @@
+package kr.or.ddit.service.auction;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.dao.aution.IauctionDAO;
+import kr.or.ddit.vo.A_articleVO;
+
+
+public class auctionServerImpl  extends UnicastRemoteObject implements IauctionServer{
+
+	IauctionDAO dao;
+	AcutionScheduler scheduler;
+	private static auctionServerImpl instance;
+	private auctionServerImpl()throws RemoteException {
+		scheduler = new AcutionScheduler();
+		
+		for(A_articleVO articleVO :dao.getTotalArticleList()) {
+			createServerSocket(articleVO);
+		}
+	}
+	
+	public static auctionServerImpl getInstance() {
+		if(instance == null) {
+			instance = new auctionServerImpl();
+		}
+		return  instance;
+	}
+	
+	public void finalize() {
+		scheduler.endSchedule();
+	}
+
+	
+	
+	final int  MIN_PORT_NUMBER = 6000 ;
+	final int  MAX_PORT_NUMBER = 8000 ;
+	int port = 7777;
+	
+	private Map<ServerSocket,A_articleVO> serverSocketMap;
+	private Map<A_articleVO,ServerSocket> articleMap;
+	private Map<ServerSocket,Map<String,String>> dataMap;
+	private Map<Socket,ServerSocket> socketMap;
+	
+	public void mapClear() {
+		serverSocketMap.clear();
+		articleMap.clear();
+		dataMap.clear();
+		socketMap.clear();
+	}
+	
+	public List<ServerSocket> getMyServerList(){
+		ArrayList<ServerSocket> serverList = new ArrayList<ServerSocket>();
+		
+		for(A_articleVO info : dao.getMyArticleList()) {
+			serverList.add(articleMap.get(info));
+		}
+		return serverList;
+	}
+	
+	public List<ServerSocket> getServerList(){
+		ArrayList<ServerSocket> serverList = new ArrayList<ServerSocket>();
+		
+		Iterator<Socket> it = socketMap.keySet().iterator();
+		while(it.hasNext()) {
+			serverList.add(socketMap.get(it.next()));
+		}
+		
+		return serverList;
+	}
+
+	public Map<ServerSocket,A_articleVO> getServerSocketMap(){
+		return serverSocketMap;
+	}
+	
+	
+	
+	public boolean available(int port) {
+	    if (port < MIN_PORT_NUMBER || port > MAX_PORT_NUMBER) {
+	        throw new IllegalArgumentException("Invalid start port: " + port);
+	    }
+
+	    ServerSocket ss = null;
+	    DatagramSocket ds = null;
+	    try {
+	        ss = new ServerSocket(port);
+	        ss.setReuseAddress(true);
+	        ds = new DatagramSocket(port);
+	        ds.setReuseAddress(true);
+	        return true;
+	    } catch (IOException e) {
+	    } finally {
+	        if (ds != null) {
+	            ds.close();
+	        }
+
+	        if (ss != null) {
+	            try {
+	                ss.close();
+	            } catch (IOException e) {
+	                /* should not be thrown */
+	            }
+	        }
+	    }
+
+	    return false;
+	}
+
+	
+	public void createServerSocket(A_articleVO a_articleVO) {
+		ServerSocket server = null;
+		do {
+			if(available(port)) {
+				try {
+					server = new ServerSocket(port);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}else {
+				port++;
+				if(port >MAX_PORT_NUMBER)
+					port = MIN_PORT_NUMBER;
+			}
+		}while(server == null);
+		
+		serverSocketMap.put(server,a_articleVO);
+		articleMap.put(a_articleVO,server);
+		
+		while(server!=null) {
+			try {
+				Socket socket = server.accept();
+				socketMap.put(socket, server);
+				ServerReceiver th = new ServerReceiver(socket);
+				th.start();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+
+	
+	class ServerReceiver extends Thread{
+		Socket socket;
+		DataInputStream in;
+		DataOutputStream out;
+		
+		public ServerReceiver(Socket socket) {
+			this.socket = socket;
+			try {
+				in = new DataInputStream(this.socket.getInputStream());
+				out = new DataOutputStream(this.socket.getOutputStream());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		@Override
+		public void run() {
+				try {
+					while(socket!=null) {
+						ServerSocket server = socketMap.get(socket);
+						dataMap.get(server).put("id",in.readUTF());
+						dataMap.get(server).put("won",in.readUTF());
+						SendToAll(socket);
+					}			
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+	}
+
+	
+	public void SendToAll(Socket baseSocket) {
+		Iterator<Socket> it =socketMap.keySet().iterator();
+		while(it.hasNext()) {
+			try {
+				Socket socket = it.next(); // key값인 소켓을 구한다.
+				if(socketMap.get(socket) == socketMap.get(baseSocket)) {
+					ServerSocket server = socketMap.get(baseSocket);
+					DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+					dos.writeUTF(dataMap.get(server).get("id")); //아이디
+					dos.writeUTF(dataMap.get(server).get("won")); //금액
+				}
+			} catch (IOException e) {
+			}
+		}
+	}
+
+	@Override
+	public List<A_articleVO> getTotalArticleList() {
+		ArrayList<A_articleVO> artList = new ArrayList<A_articleVO>();
+		
+		return artList;
+	}
+
+	
+
+	@Override
+	public A_articleVO getArticleInfo(String a_art_no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

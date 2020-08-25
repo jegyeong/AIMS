@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.adminmypage.MemberInfoController">
+   <children>
+      <Label layoutX="258.0" layoutY="67.0" text="회원ID검색">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textfiled" layoutX="430.0" layoutY="54.0" onAction="#textfiled" prefHeight="50.0" prefWidth="420.0" />
+      <Button fx:id="search" layoutX="915.0" layoutY="54.0" mnemonicParsing="false" onAction="#serchBtn" prefHeight="50.0" prefWidth="150.0" text="검색">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <TableView fx:id="memTable" layoutX="67.0" layoutY="158.0" onMouseClicked="#memTableView" prefHeight="644.0" prefWidth="1146.0">
+        <columns>
+          <TableColumn fx:id="memid" prefWidth="326.0" text="회원ID" />
+          <TableColumn fx:id="memName" prefWidth="414.0" text="회원이름" />
+            <TableColumn fx:id="memReg" prefWidth="438.0" text="주민번호" />
+        </columns>
+      </TableView>
+      <Button fx:id="memberModi" disable="true" layoutX="195.0" layoutY="861.0" mnemonicParsing="false" onAction="#memModiBtn" prefHeight="50.0" prefWidth="150.0" text="회원정보 수정">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="blacklist" layoutX="565.0" layoutY="861.0" mnemonicParsing="false" onAction="#blacklistBtn" prefHeight="50.0" prefWidth="150.0" text="블랙리스트">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="home" layoutX="915.0" layoutY="861.0" mnemonicParsing="false" onAction="#homeBtn" prefHeight="50.0" prefWidth="150.0" text="홈으로">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

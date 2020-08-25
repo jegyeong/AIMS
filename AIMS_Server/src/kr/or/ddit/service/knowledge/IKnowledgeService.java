@@ -1,0 +1,66 @@
+package kr.or.ddit.service.knowledge;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.List;
+
+import kr.or.ddit.vo.A_FormJoinForm_FileVO;
+import kr.or.ddit.vo.A_FormVO;
+import kr.or.ddit.vo.A_TerminologyVO;
+import kr.or.ddit.vo.FileInfoVO;
+import kr.or.ddit.vo.Form_FileVO;
+import kr.or.ddit.vo.Related_LawVO;
+
+
+
+public interface IKnowledgeService extends Remote {
+
+	public List<A_FormJoinForm_FileVO> joinForm() throws RemoteException; // 경매서식 글번호
+	
+	public List<A_TerminologyVO> getAllTerm() throws RemoteException;
+	
+	public List<Related_LawVO> getAllLaw() throws RemoteException;
+	
+	public List<A_TerminologyVO> searchTerms(String a_ter_name) throws RemoteException; //용어 이름으로 검색
+	
+	public List<A_FormVO> getAllForm() throws RemoteException; // 경매 서식 정보 출력
+	public List<Form_FileVO> getAllFile() throws RemoteException; // 경매 서식 정보에 필요한 파일 정보 출력
+	
+	public List<Related_LawVO> searchLaw(String rel_l_name) throws RemoteException;
+	
+	//--------------------------------------------- 경매용어
+	
+	public List<A_TerminologyVO> getTerms() throws RemoteException;
+	
+	public int insertTerms(A_TerminologyVO termVo) throws RemoteException;
+	
+	public int updateTerms(A_TerminologyVO termVo) throws RemoteException;
+	
+	public int deleteTerms(A_TerminologyVO termVo) throws RemoteException;
+
+	//--------------------------------------------- 경매서식
+	
+	public String insertForm(A_FormVO formVo) throws RemoteException;
+	
+	public int insertFile(Form_FileVO fileVo) throws RemoteException;
+	
+	public int updateForm(A_FormVO formVo) throws RemoteException;
+	
+	public int updateFile(Form_FileVO fileVo) throws RemoteException;
+	
+	public int deleteForm(A_FormVO formVo) throws RemoteException;
+	
+	public int deleteFile(Form_FileVO fileVo) throws RemoteException;
+	
+	//--------------------------------------------- 관련법률 
+	
+	public int insertLaw(Related_LawVO lawVo) throws RemoteException;
+	
+	public int updateLaw(Related_LawVO lawVo) throws RemoteException;
+	
+	public int deleteLaw(Related_LawVO lawVO) throws RemoteException;
+	
+	
+	public String clientToServer(String folderName, FileInfoVO fileData) throws RemoteException;
+	public List<FileInfoVO> formServerToClient(String a_form_no) throws RemoteException;
+}

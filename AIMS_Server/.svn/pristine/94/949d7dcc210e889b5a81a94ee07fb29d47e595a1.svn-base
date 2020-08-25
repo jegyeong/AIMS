@@ -1,0 +1,126 @@
+package kr.or.ddit.service.auction;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
+
+import kr.or.ddit.vo.A_articleVO;
+
+public class auctionServerImpl {
+	final int  MIN_PORT_NUMBER = 6000 ;
+	final int  MAX_PORT_NUMBER = 8000 ;
+	int port = 7777;
+	
+	private Map<ServerSocket,A_articleVO> serverSocketMap;
+	private Map<ServerSocket,Map<String,Socket>> sinkMap;
+
+
+	
+	public boolean available(int port) {
+	    if (port < MIN_PORT_NUMBER || port > MAX_PORT_NUMBER) {
+	        throw new IllegalArgumentException("Invalid start port: " + port);
+	    }
+
+	    ServerSocket ss = null;
+	    DatagramSocket ds = null;
+	    try {
+	        ss = new ServerSocket(port);
+	        ss.setReuseAddress(true);
+	        ds = new DatagramSocket(port);
+	        ds.setReuseAddress(true);
+	        return true;
+	    } catch (IOException e) {
+	    } finally {
+	        if (ds != null) {
+	            ds.close();
+	        }
+
+	        if (ss != null) {
+	            try {
+	                ss.close();
+	            } catch (IOException e) {
+	                /* should not be thrown */
+	            }
+	        }
+	    }
+
+	    return false;
+	}
+	
+	public void createAuctionServerSocket() {
+		do{port++;if(port>9998)port=6000;}while(!available(port));
+		try {
+			
+			ServerSocket server = new ServerSocket(port);
+			Map<String,Socket> socketMap = new HashMap<String, Socket>();
+			sinkMap.put(server, socketMap);
+			
+			while(server!=null) {
+				Socket socket = server.accept();
+				
+			}
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	class ServerReceiver extends Thread{
+		Socket socket;
+		DataInputStream in;
+		DataOutputStream out;
+		
+		public ServerReceiver(Socket socket) {
+			this.socket = socket;
+			try {
+				in = new DataInputStream(this.socket.getInputStream());
+				out = new DataOutputStream(this.socket.getOutputStream());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+
+		@Override
+		public void run() {
+			String name = "";
+			try {
+				socketMap.put(name, socket); // name을 수정해야함..
+				
+				while(in!=null) {
+					SendToAll(in.readUTF());
+				}
+				
+			} catch (IOException e) {
+				
+			} finally {
+				socketMap.remove(name);
+			}
+			
+		}
+	}
+	
+	
+	public void SendToAll(String msg) {
+		// 대화방에 접속한 사용자의 대화명(Key값)들을 추출한다.
+		Iterator<String> it =socketMap.keySet().iterator();
+		while(it.hasNext()) {
+			try {
+				String name = it.next(); // 대화명(Key값) 구하기.
+				Socket soc = clientMap.get(name);	//대화명에  Socket객체 구하기
+				DataOutputStream dos = new DataOutputStream(soc.getOutputStream());
+				
+				dos.writeUTF(msg);	// 메시지 전송
+				
+			} catch (IOException e) {
+			}
+		}
+	}
+}

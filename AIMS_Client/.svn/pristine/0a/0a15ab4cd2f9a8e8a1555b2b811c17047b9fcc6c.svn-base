@@ -1,0 +1,52 @@
+#btnYear{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnCourt{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnArea{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnTerm{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnHome{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnSearch{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnNotice{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}

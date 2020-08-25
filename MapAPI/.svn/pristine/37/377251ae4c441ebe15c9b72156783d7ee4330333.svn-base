@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>지도</title>
+</head>
+<body>
+<div id="map" style="width:100%; height:1300px;"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	e95d606e2f0b909ea826e6c2e7940323&libraries=services"></script>
+<script>
+$(function(){
+	$.ajax({
+		url:"Map.jsp",
+		datatype:"json",
+		type:"get"
+	}).done(function(data){
+		data =  JSON.parse(data.trim());
+
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = { //지도를 생성할 때 필요한 기본 옵션
+			center : new kakao.maps.LatLng(36.340453, 127.399441), // 지도의 중심좌표
+			level : 7// 지도의 확대 레벨 (확대, 축소 정도)
+		};
+
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		
+		for (var i = 0; i < data.length; i++) {
+			
+			(function(i){
+				geocoder.addressSearch(data[i].addr, function(result, status) {
+					// 정상적으로 검색이 완료됐으면 
+				    if (status === kakao.maps.services.Status.OK) {
+				    	var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+				    	 
+						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+							map:map, // 마커를 표시할 지도
+							position : coords, // 마커를 표시할 위치
+							title : data[i].title // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						});
+			
+						// 인포윈도우를 생성합니다
+						var infowindow = new kakao.maps.InfoWindow({
+							content : data[i].title
+						});
+			
+						kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+						
+						kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+					}
+				});
+			})(i);
+		} 
+	});
+});
+	
+	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	function makeOverListener(map, marker, infowindow) {
+		return function() {
+			infowindow.open(map, marker);
+		};
+	}
+
+	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	function makeOutListener(infowindow) {
+		return function() {
+			infowindow.close();
+		};
+	}
+</script>
+</body>
+</html>
+
+<!-- 
+	// 마커를 표시할 위치와 title 객체 배열입니다 
+// 	var positions = [ 
+// 	{
+// 		title : '카카오',
+// 		latlng : new kakao.maps.LatLng(33.450705, 126.570677)
+// 	}, {
+// 		title : '생태연못',
+// 		latlng : new kakao.maps.LatLng(33.450936, 126.569477)
+// 	}, {
+// 		title : '텃밭',
+// 		latlng : new kakao.maps.LatLng(33.450879, 126.569940)
+// 	}, {
+// 		title : '근린공원',
+// 		latlng : new kakao.maps.LatLng(33.451393, 126.570738)
+// 	} 
+// 	]; //////----------------------- 여기가마커 표시되는 위치(여기에 디비 주소 뿌려서 마커 생성 하고 싶어)
+ -->
+

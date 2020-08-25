@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace = "login">
+
+	<select id="getmemUser" parameterClass="MemberVO" resultClass="MemberVO">
+		select * from member where mem_id = #mem_id# and mem_pass=#mem_pass#
+	</select>
+	<select id="findIdUser" parameterClass="MemberVO" resultClass="MemberVO">
+		select * from member where mem_name = #mem_name# and mem_email=#mem_email# and MEM_ACTIVE = 'y'
+	</select>
+	<select id="findPassUser" parameterClass="MemberVO" resultClass="MemberVO">
+		select * from member where mem_id = #mem_id# and mem_name=#mem_name# and mem_regno=#mem_regno# and MEM_ACTIVE = 'y'
+	</select>
+	<update id="updateTemporaryPass" parameterClass="MemberVO">
+		update member set mem_pass = #mem_pass# 
+		where mem_id = #mem_id#
+	</update>
+	
+	
+</sqlMap>

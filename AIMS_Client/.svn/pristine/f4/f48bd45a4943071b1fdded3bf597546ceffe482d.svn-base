@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.knowledge.user.GuideSub2Controller">
+   <children>
+      <ImageView fx:id="subView1" fitHeight="33.0" fitWidth="162.0" layoutX="1.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView2" fitHeight="33.0" fitWidth="162.0" layoutX="1.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView3" fitHeight="33.0" fitWidth="162.0" layoutX="1.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView4" fitHeight="33.0" fitWidth="162.0" layoutX="1.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView5" fitHeight="33.0" fitWidth="162.0" layoutX="1.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView6" fitHeight="33.0" fitWidth="162.0" layoutX="1.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="180.0" layoutY="14.0" prefHeight="33.0" prefWidth="555.0" text="기간입찰에서 입찰기간은 1주 이상 1월 이하의 범위 안에서 정합니다. 매각기일은 입찰기간이 끝날 후 1주 안의 날로 정합니다." wrapText="true" />
+      <Label layoutX="180.0" layoutY="54.0" prefHeight="33.0" prefWidth="555.0" text="기간입찰에 참여하려면 입찰기간 안에 입찰표를 집행관에게 직접 제출하거나 집행관을 수취인으로 하여 등기우편으로 부치는 방법으로 합니다." wrapText="true" />
+      <Label layoutX="180.0" layoutY="94.0" prefHeight="60.0" prefWidth="555.0" text="기간입찰에서는 연두색 용지로 된 “기간입찰표”를 작성하여야 합니다. 기간입찰표에는 ① 사건번호, ② 입찰자의 성명과 주소, ③ 물건번호, ④ 입찰가격, ⑤ 대리인에 의하여 입찰하는 경우에는 대리인의 성명과 주소, ⑥ 입찰보증금액을 기재합니다. 입찰가격은 일정한 금액으로 표시하여야 하며, 다른 사람의 입찰가격에 대한 비율로 표시할 수 없습니다." wrapText="true" />
+      <Label layoutX="180.0" layoutY="162.0" prefHeight="18.0" prefWidth="555.0" text="매수신청보증의 제공방법으로는 다음의 2가지 방법이 있습니다. " wrapText="true" />
+      <Label layoutX="4.0" layoutY="199.0" prefHeight="33.0" prefWidth="730.0" text="○ 입금증명서 : 입찰기간 동안 법원보관금 취급은행에 매수신청보증금을 납부한 후 발급받은 보관금영수필통지서를 법원에 비치된 입금증명서 양식에 붙여서 입찰표와 함께 입찰봉투에 넣어 제출합니다." wrapText="true" />
+      <Label layoutX="4.0" layoutY="232.0" prefHeight="33.0" prefWidth="730.0" text="○ 보증서 : 서울보증보험 주식회사에 일정액의 보증료를 지불한 후 보증보험증권을 발급받아 기간입찰표와 함께 기간입찰봉투에 넣어 제출합니다." wrapText="true" />
+      <Label layoutX="180.0" layoutY="269.0" prefHeight="50.0" prefWidth="555.0" text="입찰표, 매수신청보증(입금증명서 또는 보증서), 기타 첨부서류를 기간입찰봉투에 넣고, 봉투 겉면에 매각기일을 적은 다음 입찰기간 동안 집행관에게 제출하여야 합니다. 봉투 겉면에 매각기일을 기재하지 않으면 입찰이 무효로 된다는 점을 주의하시기 바랍니다." wrapText="true" />
+      <Label layoutX="4.0" layoutY="319.0" prefHeight="33.0" prefWidth="730.0" text="○ 직접 제출 : 평일에는 09:00부터 12:00까지, 13:00부터 18:00까지 집행관 사무실을 방문하여 집행관 또는 그 사무원에게 제출하고, 입찰봉투접수증을 받아야 합니다. 토요일과 공휴일에는 법원 당직근무자에게 제출하면 됩니다." wrapText="true" />
+      <Label layoutX="4.0" layoutY="354.0" prefHeight="33.0" prefWidth="730.0" text="○ 등기우편 제출 : 입찰기간 개시일 00:00경부터 마감일 24:00까지 법원에 우편물이 도착하여야 합니다. 입찰봉투가 등기우편 이외의 방법으로 송부되거나 마감일 이후에 접수되면 무효처리 됩니다." wrapText="true" />
+      <Label layoutX="180.0" layoutY="394.0" prefHeight="144.0" prefWidth="555.0" text="입찰에 참여한 사람은 매각기일에 입찰표를 개봉할 때 참여할 수 있습니다. 차순위매수신고를 하고자 하는 입찰참가자는 매각기일에 반드시 참석하여 신고하여야 합니다. 최고가매수신고인이 2인 이상인 경우에는 그들만을 상대로 기일입찰 방식으로 추가입찰을 합니다. 출석하지 아니한 사람에게는 추가입찰 자격을 부여하지 않고, 출석한 사람들만을 상대로 추가입찰을 실시하며, 출석한 사람이 1인인 경우에는 출석자에게만 추가입찰을 실시합니다. 최고가매수신고인 중 매각기일에 출석한 사람이 없는 경우, 출석한 전원이 추가입찰을 하지 않는 경우, 추가입찰가격이 동액인 경우, 추가입찰을 실시하였으나 그 입찰이 전부 무효인 경우에는 그들 중에서 추첨에 의하여 최고가매수신고인을 정합니다. 이때 입찰자 중 출석하지 아니한 사람 또는 추첨을 하지 아니한 사람이 있는 경우에는 법원사무관등 상당하다고 인정되는 사람이 추첨을 대신 합니다." wrapText="true" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,229 @@
+package kr.or.ddit.controller.auction;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Pagination;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+import kr.or.ddit.service.InoticeServer;
+import kr.or.ddit.service.auction.IauctionServer;
+import kr.or.ddit.vo.A_articleVO;
+
+public class AuctionMainController {
+	private IauctionServer service;
+	private int rowsPerPage = 29; // 한 화면에 보여줄 데이터 개수
+	private int My_totalCount; // 전체 레코드 수가 저장될 변수
+	private int My_pageCount; // 페이지 수
+	private int Total_totalCount; // 전체 레코드 수가 저장될 변수
+	private int Total_pageCount; // 페이지 수
+	
+	private Map<ServerSocket,A_articleVO> dataMap;
+	private List<ServerSocket> ServerList;
+	private ObservableList<ServerSocket> serverTotalData;
+	private ObservableList<ServerSocket> serverMyData;
+	
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private ListView<ServerSocket> lv_totalAuction;
+
+    @FXML
+    private Pagination pageinTotal;
+
+    @FXML
+    private ListView<ServerSocket> lv_myAuction;
+
+    @FXML
+    private Pagination pageinMy;
+
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    void onClickedBtnBack(ActionEvent event) {
+    	Stage stage = (Stage)btnBack.getScene().getWindow();
+    	FXMLLoader loader = new FXMLLoader(AuctionMainController.class.getResource("")); // 홈 fxml추가!
+    	try {
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.setTitle("홈");
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    }
+
+    @FXML
+    void onClickedMyAuction(MouseEvent event) {
+    	int port =lv_myAuction.getSelectionModel().getSelectedItem().getLocalPort();
+    	InetAddress ip = lv_myAuction.getSelectionModel().getSelectedItem().getInetAddress();
+    	try {
+			Socket socket = new Socket(ip, port);
+			FXMLLoader loader = new FXMLLoader(AuctionMainController.class.getResource("../../fxml/auction/AuctionRoom.fxml"));
+			Parent root = loader.load();
+			AuctionRoomController controller = loader.getController();
+			controller.setdata(socket, dataMap.get(lv_myAuction.getSelectionModel().getSelectedItem()));
+			
+			Stage stage = (Stage)btnBack.getScene().getWindow();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.setTitle("경매장");
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    void onClickedTotalAuction(MouseEvent event) {
+    	int port =lv_totalAuction.getSelectionModel().getSelectedItem().getLocalPort();
+    	InetAddress ip = lv_totalAuction.getSelectionModel().getSelectedItem().getInetAddress();
+    	try {
+			Socket socket = new Socket(ip, port);
+			FXMLLoader loader = new FXMLLoader(AuctionMainController.class.getResource("../../fxml/auction/AuctionRoom.fxml"));
+			Parent root = loader.load();
+			AuctionRoomController controller = loader.getController();
+			controller.setdata(socket, dataMap.get(lv_totalAuction.getSelectionModel().getSelectedItem()));
+			
+			Stage stage = (Stage)btnBack.getScene().getWindow();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.setTitle("경매장");
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+	public void MychangeTableView(int index,ObservableList<ServerSocket> List) {
+		int start = index * rowsPerPage; // 시작번호
+		int end = Math.min(start + rowsPerPage, My_totalCount); // 끝 번호
+		for(int i = start ;start <= end;start++) {
+			lv_myAuction.getItems().add(List.get(i));
+		}
+	}
+	
+	public void TotalchangeTableView(int index, ObservableList<ServerSocket> List) {
+		int start = index * rowsPerPage; // 시작번호
+		int end = Math.min(start + rowsPerPage, Total_totalCount); // 끝 번호
+
+		for(int i = start ;start <= end;start++) {
+			lv_totalAuction.getItems().add(List.get(i));
+		}
+	}
+	
+
+    @FXML
+    void initialize() {
+    	try {
+			Registry reg = LocateRegistry.getRegistry("localhost", 8888);
+			service = (IauctionServer) reg.lookup("auction");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+    	
+    	
+    	
+    	try {
+			dataMap=service.getServerSocketMap();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	try {
+			serverTotalData = FXCollections.observableArrayList(service.getTotalServerList());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	lv_totalAuction.setItems(serverTotalData);
+    	
+    	try {
+			serverMyData = FXCollections.observableArrayList(service.getMyServerList("eme"));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	lv_totalAuction.setItems(serverMyData);		
+    			
+    	
+    	lv_totalAuction.setCellFactory(new Callback<ListView<ServerSocket>, ListCell<ServerSocket>>() {
+			@Override
+			public ListCell<ServerSocket> call(ListView<ServerSocket> param) {
+				return new ListCell<ServerSocket>() {
+					@Override
+					protected void updateItem(ServerSocket item, boolean empty) {
+						super.updateItem(item, empty);
+						
+						if(!empty) {
+							setText(dataMap.get(item).getA_art_name()+"의 경매");
+						}else {
+							setText(null);
+						}
+					}
+				};
+			}
+		});
+    	
+    	lv_myAuction.setCellFactory(new Callback<ListView<ServerSocket>, ListCell<ServerSocket>>() {	
+			@Override
+			public ListCell<ServerSocket> call(ListView<ServerSocket> param) {
+				return new ListCell<ServerSocket>() {
+					@Override
+					protected void updateItem(ServerSocket item, boolean empty) {
+						super.updateItem(item, empty);
+						
+						if(!empty) {
+							setText(dataMap.get(item).getA_art_name()+"의 경매");
+						}else {
+							setText(null);
+						}
+					}
+				};
+			}
+		});
+    	
+    	Total_totalCount = serverTotalData.size();
+		Total_pageCount = (int) Math.ceil((double) Total_totalCount / rowsPerPage);
+		pageinTotal.setPageCount(Total_pageCount);
+		pageinTotal.setCurrentPageIndex(0);
+		TotalchangeTableView(0,serverTotalData);
+
+		My_totalCount = serverMyData.size();
+		My_pageCount = (int) Math.ceil((double) My_totalCount / rowsPerPage);
+		pageinMy.setPageCount(My_pageCount);
+		pageinMy.setCurrentPageIndex(0);
+		MychangeTableView(0,serverMyData);
+    }
+}

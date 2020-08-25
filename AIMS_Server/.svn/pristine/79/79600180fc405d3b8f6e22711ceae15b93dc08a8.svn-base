@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="calendar">
+	<!-- 캘린더 데이터 INSERT -->
+		<insert id="insertCal" parameterClass="calVo">
+			INSERT INTO calendar 
+			VALUES(CALENDAR_SEQ.NEXTVAL, 101, #cal_conn#, #cal_title#, TO_DATE(#cal_sdate#), TO_DATE(#cal_edate#))
+		</insert>
+	 
+	<!-- 캘린더 데이터 select -->
+	  	<select id="selectCal" parameterClass="HashMap" resultClass="calVo" >
+	  		select CAL_NUM, EMP_ID, CAL_CONN, CAL_TITLE, TO_CHAR(CAL_SDATE, 'YYYYMMDD') CAL_SDATE , TO_CHAR(CAL_EDATE, 'YYYYMMDD') CAL_EDATE 
+			  from calendar
+			 where TO_NUMBER(TO_CHAR(CAL_SDATE, 'YYYY'))= $nYear$
+			   AND TO_NUMBER(TO_CHAR(CAL_SDATE, 'MM'))= $nMonth$ 
+			   AND TO_NUMBER(TO_CHAR(CAL_SDATE, 'DD'))= $inputDate$ 
+	  	</select>
+	<!-- detail 제목과 내용 얻어오기 --> 	
+		<select id="selectdetail" parameterClass="HashMap" resultClass="theBug.calendar.controller.calDateVO">
+			select CAL_CONN clickCont, CAL_TITLE clickTitle, cal_num
+			  from calendar
+			 where TO_NUMBER(TO_CHAR(CAL_SDATE, 'YYYY'))= $clickYear$
+			   AND TO_NUMBER(TO_CHAR(CAL_SDATE, 'MM'))= $clickMonth$ 
+			   AND TO_NUMBER(TO_CHAR(CAL_SDATE, 'DD'))= $clickDay$
+		</select>
+	<!-- 캘린더 삭제하기 -->
+		<delete id="delDetail" parameterClass="Integer">
+		 	delete calendar where CAL_NUM=$cal_num$
+		</delete>
+	<!--  캘린더 수정하기 -->	
+		<update id="updateDetail" parameterClass="calVo">
+			update calendar
+			   set CAL_TITLE = #cal_title#,
+				   CAL_CONN = #cal_conn#
+			  where CAL_NUM = $cal_num$ 
+		</update>
+</sqlMap>

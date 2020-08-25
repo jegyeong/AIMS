@@ -1,0 +1,27 @@
+package kr.or.ddit.dao.InformationUse;
+
+import java.rmi.Remote;
+import java.util.List;
+
+import kr.or.ddit.vo.FAQVO;
+
+
+
+public interface IFAQDao {
+	
+	/**
+	 * ëª¨ë“  FAQë¥? ê²??ƒ‰?•´?„œ ë°˜í™˜?•˜?Š” ë©”ì„œ?“œ
+	 * @return ê²??ƒ‰?œ FAQë¦¬ìŠ¤?Š¸!
+	 */
+	public List<FAQVO> getAllFAQList();
+	
+	/**
+	 * FAQ_Num?„ ë§¤ê°œë³??ˆ˜ë¡? ë°›ì•„ ?•´?‹¹?•˜?Š” FAQë¥? ë°˜í™˜?•˜?Š” ë©”ì„œ?“œ
+	 * @param faqNum ê²??ƒ‰ë²ˆí˜¸
+	 * @return ê²??ƒ‰?œ FAQë¦¬ìŠ¤?Š¸
+	 */
+	public List<FAQVO> getDetailsList(String faqNum);
+	
+	
+
+}

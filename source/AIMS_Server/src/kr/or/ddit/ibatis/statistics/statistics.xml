@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="statistics">
+
+<!-- 	<select id="getLocation" parameterClass="String" resultClass="a_artjoinresultVo"> -->
+<!-- 		select SUBSTR(a_art_loc, 0, 5) a_art_loc from a_article where a_art_loc like '%' || #sido# || '%' -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="getAuctionNum" parameterClass="String" resultClass="a_artjoinresultVo"> -->
+<!-- 		select sum(count(a.a_art_no) + count(b.res_no)) auction -->
+<!-- 		  from a_article a, article_result b -->
+<!-- 		 where a.a_art_no = b.a_art_no -->
+<!-- 		   and a.a_art_loc like '%' || #sido# || '%' -->
+<!-- 		 group by 1 -->
+<!-- 	</select> -->
+
+<!-- 	<select id="getAllResultCount" parameterClass="String" resultClass="a_artjoinresultVo"> -->
+<!-- 		select sum(count(b.res_no)) sale from a_article a, article_result b -->
+<!-- 		 where a.a_art_loc like '%' || #sido# || '%'  -->
+<!-- 		 group by 1 -->
+<!-- 	</select> -->
+
+<!-- 	<select id="getConnoisseur" parameterClass="String" resultClass="a_artjoinresultVo"> -->
+<!-- 		select sum(a.a_art_price) conn from a_article a, article_result b -->
+<!--  		 where a.a_art_no = b.a_art_no -->
+<!--  		 group by 1 -->
+<!-- 	</select> -->
+
+<!-- 	<select id="getSeller" parameterClass="String" resultClass="a_artjoinresultVo"> -->
+<!-- 		select sum(b.res_won) seller from a_article a, article_result b  -->
+<!-- 		 where a.a_art_loc like '%' || #sido# || '%' -->
+<!-- 		 group by 1 -->
+<!-- 	</select> -->
+
+<!-- 	<select id="getSalerate" parameterClass="String" resultClass="a_artjoinresultVo"> -->
+<!-- 		select round(sum(count(b.res_no)) / sum(count(a.a_art_no) + count(b.res_no)),1) salerate -->
+<!--   		  from a_article a, article_result b -->
+<!--  		 where a.a_art_no = b.a_art_no -->
+<!--  		   and a.a_art_loc like '%' || #sido# || '%' -->
+<!--  		 group by 1 -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="getSellerrate" parameterClass="String" resultClass="a_artjoinresultVo"> -->
+<!-- 		select round((sum(b.res_won) / sum(a.a_art_price)) * 100, 1) sellerrate -->
+<!--   		  from a_article a, article_result b -->
+<!--  		 where a.a_art_no = b.a_art_no -->
+<!--  		   and a.a_art_loc like '%' || #sido# || '%' -->
+<!--  		 group by 1 -->
+<!-- 	</select> -->
+	
+	<select id="getAllResult" parameterClass="String" resultClass="resVo" >
+		select SUBSTR(a.a_art_loc, 0, 5) a_art_loc,
+       		   count(a.a_art_no) + count(b.res_no) auction,
+       		   count(b.res_no) sale,
+       		   trim(to_char(sum(a.a_art_price), '999,999,999,999,999')) conn,
+	           trim(to_char(sum(b.res_won), '999,999,999,999,999')) seller,
+	       	   trim(to_char(round(count(b.res_no) / (count(a.a_art_no) + count(b.res_no)),1),'90D9')) || '%' salerate,
+	       	   trim(to_char(round((sum(b.res_won) / sum(a.a_art_price)) * 100, 1),'90D9')) || '%' sellerrate
+  		  from a_article a, article_result b
+ 		 where a.a_art_no = b.a_art_no
+  		   and a.a_art_loc like '%' || #sido# || '%'
+ 		 group by SUBSTR(a.a_art_loc, 0, 5)
+	</select>
+
+</sqlMap>

@@ -1,0 +1,99 @@
+
+TableView{
+	-fx-base : #ffffff;
+	-fx-background-color: #ffffff;
+	-fx-border-color : #d9d9d9;
+	-fx-border-width: 3;
+}
+
+#fileList{
+	-fx-border-color : #d9d9d9;
+	-fx-border-width: 3;
+}
+
+#exTxtArea{
+	-fx-border-color : #d9d9d9;
+	-fx-border-width: 3;
+}
+
+#btnTerms{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnFormat{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnLaw{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnStep{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnGuide{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnHome{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnAdd{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnModify{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnSearch{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnEdit{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnDel{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}
+

@@ -1,0 +1,20 @@
+package kr.or.ddit.service.auction;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+import kr.or.ddit.vo.A_articleVO;
+
+public class AuctionListUpdate implements Job{
+	auctionServerImpl service;
+	public AuctionListUpdate() {
+		service = auctionServerImpl.getInstance(); 
+	}
+		@Override
+		public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		
+			for(A_articleVO a_articleVO : service.getTotalArticleList()) {
+				createServerSocket(a_articleVO);
+			}	
+		}		
+	}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="890.0" stylesheets="@../../../../../../css/javafx.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.InformationUse.AgencyDeitalsController">
+   <children>
+      <Label fx:id="lableAddr" layoutX="116.0" layoutY="151.0" text="법원주소 : ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lableTel" layoutX="116.0" layoutY="203.0" text="연락처 : ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lableRoad" layoutX="116.0" layoutY="260.0" text="찾아오시는길 : ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfAddr" layoutX="272.0" layoutY="151.0" onAction="#tfAddrClicked" prefHeight="25.0" prefWidth="518.0" />
+      <TextField fx:id="tfTel" layoutX="272.0" layoutY="203.0" onAction="#tfTelclicked" prefHeight="25.0" prefWidth="518.0" />
+      <Label fx:id="labelName" layoutX="116.0" layoutY="107.0" text="법원이름 : ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfName" layoutX="272.0" layoutY="107.0" onAction="#tfNameClicked" prefHeight="25.0" prefWidth="518.0" />
+      <WebView fx:id="webView" layoutX="272.0" layoutY="260.0" maxHeight="498.0" maxWidth="518.0" prefHeight="498.0" prefWidth="518.0" />
+   </children>
+</AnchorPane>

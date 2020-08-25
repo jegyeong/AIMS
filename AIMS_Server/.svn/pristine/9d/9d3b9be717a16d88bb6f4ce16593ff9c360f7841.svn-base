@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ 	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ 	
+ 	<sqlMap namespace = "mymember">
+ 	
+ 	<!-- 내 관심물건 가져오기   물건 번호,물건명,경매날짜-->
+ 	<select id="getAllInterstProd" resultClass="InterestVO" parameterClass="string">
+ 		select a.a_art_no a_art_no, a.a_art_name a_art_name, a.a_art_day a_art_day from a_article a, interest b
+    	where a.a_art_no =b.a_art_no and mem_id=#mem_id#
+ 	</select>
+ 	
+ 
+ 	
+ 	<!--   내 관심 물건 삭제 -->
+ 	<delete id="delInterstProd" parameterClass="InterestVO">
+ 		delete  from INTEREST where mem_id=#mem_id#
+ 	
+ 	</delete> 	
+ 	
+ 	
+ 	
+ 	<!--내 정보 수정  아이디, 비밀번호,이름,주민번호,주소,전화번호,이메일 -->
+ 	<update id="updataMyInfo" parameterClass="MemberVO">
+ 		update member set mem_id=#mem_id#,mem_pass=#mem_pass#,mem_name=#mem_name#,
+ 							mem_addr=#mem_addr#,mem_tel=#mem_tel#,mem_email=#mem_email#,
+ 							mem_regno=#mem_regno#
+ 		where mem_id=#mem_id#					
+ 	</update>
+	
+	
+	<!-- 내 정보 불러오기  아이디, 비밀번호,이름,주민번호,주소,전화번호,이메일 -->
+	<select id="getMyInfoList" parameterClass="String" resultClass="MemberVO">
+		select * from member where mem_id=#id#
+	</select>
+ 	
+ 	
+ 	<!-- 내 민원 가져오기  제목 날짜-->
+ 	<select id="getMyQuestion" parameterClass="string" resultClass="Com_QuestionVO">
+ 		select * from COM_QUESTION  where COM_QUE_WRITEID='연습용 아이디'
+ 	</select>
+ 	
+ 	<select id="getMyAnswer" parameterClass="map" resultClass="Com_AnswerVO">
+ 		select * 
+ 		  from Com_Answer 
+ 		 where com_ans_no  = #no#
+ 	</select>
+ 	
+ 	<!--  내 경매 내역 물건번호, 물건이름, 경매결과  -->
+ 	<select id="getMyArticle" parameterClass="string" resultClass="Auction_RecordVO">
+	select a.a_art_no, b.a_art_name,
+	case when a.mem_id=#id# then '낙찰'
+	else '유찰' end a_result
+	from article_result a,a_article b
+	where a.a_art_no = b.a_art_no
+	and a.a_art_no in (select distinct a_art_no from auction_record where
+	mem_id=#id#)
+	and a.res_date = (select max(res_date) from article_result b1 where
+	a.a_art_no=b1.a_art_no)
+ 	</select> 
+ 	
+ 	<!--  회원 탈퇴  -->
+ 	<update id="updateActive"  parameterClass="String">
+		update member set mem_active='n'
+		where mem_pass=#pass# 
+ 	</update>
+ 	
+ 	<!-- 경매결과  -->
+ 	<delete id="delAresult" parameterClass="String">
+ 	
+ 	</delete>
+ 	
+ 	
+ 	</sqlMap>
+ 	

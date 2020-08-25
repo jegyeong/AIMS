@@ -1,0 +1,115 @@
+package kr.or.ddit.controller.auction;
+
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Pagination;
+import javafx.scene.input.MouseEvent;
+import kr.or.ddit.service.InoticeServer;
+import kr.or.ddit.vo.A_articleVO;
+
+public class AuctionMainController {
+	private int rowsPerPage = 29; // 한 화면에 보여줄 데이터 개수
+	private int My_totalCount; // 전체 레코드 수가 저장될 변수
+	private int My_pageCount; // 페이지 수
+	private int Total_totalCount; // 전체 레코드 수가 저장될 변수
+	private int Total_pageCount; // 페이지 수
+	private InoticeServer service;
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private ListView<A_articleVO> lv_totalAuction;
+
+    @FXML
+    private Pagination pageinTotal;
+
+    @FXML
+    private ListView<A_articleVO> lv_myAuction;
+
+    @FXML
+    private Pagination pageinMy;
+
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    void onClickedBtnBack(ActionEvent event) {
+    	//메인화면으로 이동한다.
+    }
+
+    @FXML
+    void onClickedMyAuction(MouseEvent event) {
+    	//나의 관심 경매 클릭했을떄
+    }
+
+    @FXML
+    void onClickedTotalAuction(MouseEvent event) {
+    	//모든 경매 클릭했을떄
+    }
+    
+	public void MychangeTableView(int index ) {
+		int start = index * rowsPerPage; // 시작번호
+		int end = Math.min(start + rowsPerPage, My_totalCount); // 끝 번호
+
+		Map<String, Integer> pageMap = new HashMap<String, Integer>();
+		pageMap.put("start", start);
+		pageMap.put("end", end);
+
+		// 테이블에 갖고온 데이터 설정하기
+//		try {
+//			lv_myAuction.setItems(FXCollections.observableArrayList(service.getPaginQuestionList(pageMap)));
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
+	}
+	
+	public void TotalchangeTableView(int index ) {
+		int start = index * rowsPerPage; // 시작번호
+		int end = Math.min(start + rowsPerPage, Total_totalCount); // 끝 번호
+
+		Map<String, Integer> pageMap = new HashMap<String, Integer>();
+		pageMap.put("start", start);
+		pageMap.put("end", end);
+
+		// 테이블에 갖고온 데이터 설정하기
+//		try {
+//			lv_totalAuction.setItems(FXCollections.observableArrayList(service.getPaginQuestionList(pageMap)));
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
+	}
+	
+
+    @FXML
+    void initialize() {
+//    	try {
+////			Total_totalCount = service.getQuestionTotalcount();
+////			My_totalCount = service.getQuestionTotalcount();
+//		} catch (RemoteException e) {
+//
+//			e.printStackTrace();
+//		}
+//    			
+		Total_pageCount = (int) Math.ceil((double) Total_totalCount / rowsPerPage);
+		pageinTotal.setPageCount(Total_pageCount);
+		pageinTotal.setCurrentPageIndex(0);
+		TotalchangeTableView(0);
+
+		My_pageCount = (int) Math.ceil((double) My_totalCount / rowsPerPage);
+		pageinMy.setPageCount(My_pageCount);
+		pageinMy.setCurrentPageIndex(0);
+		MychangeTableView(0);
+    }
+}

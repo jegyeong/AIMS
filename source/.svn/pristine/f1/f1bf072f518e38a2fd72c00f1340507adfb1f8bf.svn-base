@@ -1,0 +1,44 @@
+#btnAgency{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}
+
+#btnOK{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnCancle{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnChooseDir{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 13.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnNext{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btnConfirm{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}

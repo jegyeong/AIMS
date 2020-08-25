@@ -1,0 +1,74 @@
+package kr.or.ddit.controller.knowledge.user;
+
+import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import kr.or.ddit.service.knowledge.IKnowledgeService;
+import kr.or.ddit.vo.A_FormJoinForm_FileVO;
+
+public class AuctionFormatController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private TableView<A_FormJoinForm_FileVO> formatTable;
+
+    @FXML
+    private TableColumn<?, ?> numCol;
+
+    @FXML
+    private TableColumn<?, ?> titleCol;
+
+    @FXML
+    private TableColumn<?, ?> downCol;
+
+    private IKnowledgeService service;
+    private ObservableList<A_FormJoinForm_FileVO> data;
+    
+    private void setData() {
+    	try {
+	    	List<A_FormJoinForm_FileVO> joinVo = service.joinForm();
+	    	data = FXCollections.observableArrayList(joinVo);
+	    	formatTable.setItems(data);
+    	
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    @FXML
+    void initialize() {
+    	try {
+			Registry reg = LocateRegistry.getRegistry(8888);
+			
+			service = (IKnowledgeService) reg.lookup("knowledge");
+			
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+    	
+    	numCol.setCellValueFactory(new PropertyValueFactory<>("rownum"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("a_form_name"));
+        downCol.setCellValueFactory(new PropertyValueFactory<>("form_f_addr"));
+    	
+    	setData();
+
+    }
+}

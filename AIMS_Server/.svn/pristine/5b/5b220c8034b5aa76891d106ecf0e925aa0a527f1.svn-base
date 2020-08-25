@@ -1,0 +1,29 @@
+package kr.or.ddit.service.auction;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.util.Iterator;
+
+import org.quartz.Job;
+import org.quartz.JobDataMap;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+public class AuctionListDelete implements Job{
+	auctionServerImpl service;
+	@Override
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		JobDataMap dataMap = arg0.getMergedJobDataMap(); 
+		service = (auctionServerImpl) dataMap.get("list");
+		
+	Iterator<ServerSocket> it = service.getServerSocketMap().keySet().iterator();
+	
+		while(it.hasNext()) {
+			try {
+				it.next().close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+			}
+		}	
+	}		
+}

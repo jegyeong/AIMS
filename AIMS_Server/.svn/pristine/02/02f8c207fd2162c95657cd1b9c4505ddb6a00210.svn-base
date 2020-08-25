@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+	"http://ibatis.apache.org/dtd/spl-map-config-2.dtd">
+<sqlMapConfig>
+	 <!-- DB와 연결하는 정보를 properties파일에 설정해 놓고 이 properties파일의 내용을 읽어와 설정한다.-->
+	 <properties resource="dbinfo.properties"/>
+	 
+	 <!-- ibatis가 실행될 때 필요한 여러가지 옵션 설정하기 -->
+	 <!-- 보통 : maxRequests >= maxSessions >= maxTransactions -->
+	 <settings cacheModelsEnabled="true" enhancementEnabled="true" lazyLoadingEnabled="true" 
+	 maxRequests="128" maxSessions="64" maxTransactions="16" useStatementNamespaces="true"/>
+	 <!-- maxRequests="512" maxSessions="128" maxTransactions="32" -->
+	 
+	 <!--
+	 	VO객체를 사용할 때 해당 객체의 이름을 지정해 주어야 하는데 이때 전체 패키지명까지 모두 기술해야 한다.
+	 	그렇게 되면 전체 이름의 길이가 너무 길어지는 데 이 긴 이름을 대신해서 사용할 이름을 설정한다.
+	 	형식) <typeAlias alias="alias명" type="VO클래스의 전체이름"/>
+	  -->
+	  
+	  <typeAlias alias="NoticeVO" type="kr.or.ddit.vo.NoticeVO"/>
+	  <typeAlias alias="Notice_FileVO" type="kr.or.ddit.vo.Notice_FileVO"/>
+	  <typeAlias alias="Com_AnswerVO" type="kr.or.ddit.vo.Com_AnswerVO"/>
+	  <typeAlias alias="Answer_FileVO" type="kr.or.ddit.vo.Answer_FileVO"/>
+	  <typeAlias alias="Com_QuestionVO" type="kr.or.ddit.vo.Com_QuestionVO"/>
+	  <typeAlias alias="Question_FileVO" type="kr.or.ddit.vo.Question_FileVO"/>
+	  <typeAlias alias="Category_AVO" type="kr.or.ddit.vo.Category_AVO"/>
+	  <typeAlias alias="faqVo" type="kr.or.ddit.vo.FAQVO"/>
+	  <typeAlias alias="AgencyVO" type="kr.or.ddit.vo.AgencyVO"/>
+	  <typeAlias alias="formVo" type="kr.or.ddit.vo.A_FormVO"/>
+	  <typeAlias alias="termVo" type="kr.or.ddit.vo.A_TerminologyVO"/>
+	  <typeAlias alias="fileVo" type="kr.or.ddit.vo.Form_FileVO"/>
+	  <typeAlias alias="lawVo" type="kr.or.ddit.vo.Related_LawVO"/>
+	  <typeAlias alias="joinVo" type="kr.or.ddit.vo.A_FormJoinForm_FileVO"/>
+	     <typeAlias alias="articleVo" type="kr.or.ddit.vo.A_articleVO"/>
+	 <typeAlias alias="CAVo" type="kr.or.ddit.vo.CategoryAVO"/>
+	 <typeAlias alias="CBVo" type="kr.or.ddit.vo.CategoryBVO"/>
+	 <typeAlias alias="CCVo" type="kr.or.ddit.vo.CategoryCVO"/>
+	 <typeAlias alias="courtVo" type="kr.or.ddit.vo.CourtVO"/>
+	 <typeAlias alias="imgVo" type="kr.or.ddit.vo.ImageVO"/>
+	  <typeAlias alias="fileeVo" type="kr.or.ddit.vo.FileInfoVO"/>
+	     
+<!-- 	  <typeAlias alias="prodVO" type="prod.vo.ProdVO"/> -->
+<!-- 	  <typeAlias alias="lprodVO" type="prod.vo.LprodVO"/> -->
+<!-- 	  <typeAlias alias="memVO" type="kr.or.ddit.member.vo.MemberVO"/> -->
+<!-- 	  <typeAlias alias="stdVO" type="kr.or.ddit.student.vo.StudentVO"/> -->
+<!-- 	  <typeAlias alias="zipVO" type="kr.or.ddit.searchzip.vo.SearchZipVO"/> -->
+	  <!-- DB와 연동하기 : 위에서 읽어온 properties파일의 내용으로 설정한다. -->
+	  <transactionManager type="JDBC">
+		   <dataSource type="SIMPLE">
+			   	<property name="JDBC.Driver" value="${driver}"/>
+			   	<property name="JDBC.ConnectionURL" value="${url}"/>
+			   	<property name="JDBC.Username" value="${user}"/>
+			   	<property name="JDBC.Password" value="${pass}"/>
+		   </dataSource>
+	  </transactionManager>
+	 
+	 <!-- 
+	 	처리할 SQL문은 따로 XML문서로 작성한 후 다음과 같은 형식으로 등록해준다.
+	 	형식) <sqlMap resource="경로명/파일명.xml"/>
+	  -->
+
+		<sqlMap resource="kr/or/ddit/ibatis/notice.xml"/>
+		<sqlMap resource="kr/or/ddit/ibatis/InformationUse/Agency.xml"/>
+		<sqlMap resource="kr/or/ddit/ibatis/InformationUse/FAQ.xml"/>
+		<sqlMap resource="kr/or/ddit/ibatis/InformationUse/ManagerFAQ.xml"/>
+		<sqlMap resource="kr/or/ddit/ibatis/InformationUse/ManagerAgency.xml"/>
+		<sqlMap resource="kr/or/ddit/ibatis/knowledge/a_knowledge.xml"/>
+		<sqlMap resource="kr/or/ddit/ibatis/stuff/admin.xml"/>
+		<sqlMap resource="kr/or/ddit/ibatis/search/search.xml"/>
+</sqlMapConfig>

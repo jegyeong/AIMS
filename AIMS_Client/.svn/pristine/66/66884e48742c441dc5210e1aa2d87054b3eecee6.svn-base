@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="kr.or.ddit.controller.InformationUse.SiteMapController">
+   <children>
+      <AnchorPane fx:id="anchorSiteMap" prefHeight="870.0" prefWidth="890.0">
+         <children>
+            <HBox layoutX="48.0" layoutY="122.0" prefHeight="75.0" prefWidth="794.0" spacing="20.0" style="-fx-border-color: black;">
+               <children>
+                  <Label fx:id="auctionNoticeList" onMouseClicked="#auctionNoticeList" text="전체경매리스트">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="auctionNotice" layoutX="48.0" layoutY="47.0" onMouseClicked="#auctionNoticeTitle" text="● 경매공고">
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </Label>
+            <Label fx:id="actionGoods" layoutX="48.0" layoutY="197.0" onMouseClicked="#actionGoodsClicked" text="● 경매물건">
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </Label>
+            <HBox layoutX="48.0" layoutY="272.0" prefHeight="75.0" prefWidth="794.0" spacing="20.0" style="-fx-border-color: black;">
+               <children>
+                  <Label fx:id="actionSearchNum" onMouseClicked="#actionSearchNumClicked" text="물건번호검색">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="actionSearchMap" onMouseClicked="#actionSearchMapClicked" text="지도검색">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="actionSearchTime" onMouseClicked="#actionSearchTime" text="기간검색">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="actionSearchLike" onMouseClicked="#actionSearchLikeClicked" text="다수관심물건">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="actionSearchResult" onMouseClicked="#actionSearchResultClicked" text="매각결과검색">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="statistics" layoutX="48.0" layoutY="347.0" onMouseClicked="#statisticsClicked" text="● 매각통계">
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </Label>
+            <HBox layoutX="48.0" layoutY="422.0" prefHeight="75.0" prefWidth="794.0" spacing="20.0" style="-fx-border-color: black;">
+               <children>
+                  <Label fx:id="statisticsYear" onMouseClicked="#statisticsYearClicked" text="연도별매각통계">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="statisticsCourt" onMouseClicked="#statisticsCourtClicked" text="법원별매각통계">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="statisticsAtea" onMouseClicked="#statisticsAteaClicked" text="지역별매각통계">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="statisticsPurpose" onMouseClicked="#statisticsPurposeClicked" text="용도별매각통계">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="48.0" layoutY="572.0" prefHeight="75.0" prefWidth="794.0" spacing="20.0" style="-fx-border-color: black;">
+               <children>
+                  <Label fx:id="knowledgeStep" onMouseClicked="#knowledgeStepClicked" text="경매절차">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="knowledgeTerms" onMouseClicked="#knowledgeTermsClicked" text="경매용어">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="knowledgeFormat" onMouseClicked="#knowledgeFormatClicked" text="경매서식">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="knowledgeGuide" onMouseClicked="#knowledgeGuideClicked" text="입찰안내">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="knowledgeRules" onMouseClicked="#knowledgeRules" text="관련법률">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="knowledge" layoutX="48.0" layoutY="497.0" onMouseClicked="#knowledgeClicked" text="● 경매지식">
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </Label>
+            <Label fx:id="myAction" layoutX="48.0" layoutY="647.0" text="● 나의 경매 (회원만 사용 가능합니다)">
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </Label>
+            <HBox layoutX="48.0" layoutY="722.0" prefHeight="75.0" prefWidth="794.0" spacing="20.0" style="-fx-border-color: black;">
+               <children>
+                  <Label fx:id="myActionSchedule" onMouseClicked="#myActionScheduleClicked" text="내일정">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="myActionLike" onMouseClicked="#myActionLikeClicked" text="내관심물건">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="myActionInfo" onMouseClicked="#myActionInfo" text="내정보">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="myActionCompl" onMouseClicked="#myActionComplClciked" text="내민원">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="myActionHistory" onMouseClicked="#myActionHistoryClicked" text="내경매내역">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="myActionSecession" onMouseClicked="#myActionSecessionClciked" text="회원탈퇴">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

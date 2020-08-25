@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ 	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ 	
+ 	<sqlMap namespace="member">
+ 		<!-- 회원가입 입력 -->
+ 		<insert id="insertMemberJoin"  parameterClass="MemberVO">
+ 			insert into member values (#mem_id#,#mem_pass#,#mem_name#,#mem_addr#,#mem_tel#,#mem_email#,#mem_regno#,#mem_zip#)
+ 		</insert>
+ 	
+ 	
+ 		<!-- 아이디 중복확인 -->
+ 		<select id="getMemberId" resultClass="MemberVO">
+ 			select * from member
+ 		</select>
+ 	
+ 	
+ 	</sqlMap>

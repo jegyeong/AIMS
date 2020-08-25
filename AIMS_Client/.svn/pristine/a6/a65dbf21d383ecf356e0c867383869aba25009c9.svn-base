@@ -1,0 +1,53 @@
+package kr.or.ddit.controller.main;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+
+public class MainPageYetLoginController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private Button btnLogin;
+
+    @FXML
+    private Label lbSearchId;
+
+    @FXML
+    private Label lvSearchPW;
+
+    @FXML
+    private Label lvCreateId;
+
+    @FXML
+    void onClickedLbSearchId(MouseEvent event) {
+
+    }
+
+    @FXML
+    void onClickedLvCreateId(MouseEvent event) {
+
+    }
+
+    @FXML
+    void onClickedLvSearchPW(MouseEvent event) {
+
+    }
+
+    @FXML
+    void initialize() {
+        assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'MainPageYetLogin.fxml'.";
+        assert lbSearchId != null : "fx:id=\"lbSearchId\" was not injected: check your FXML file 'MainPageYetLogin.fxml'.";
+        assert lvSearchPW != null : "fx:id=\"lvSearchPW\" was not injected: check your FXML file 'MainPageYetLogin.fxml'.";
+        assert lvCreateId != null : "fx:id=\"lvCreateId\" was not injected: check your FXML file 'MainPageYetLogin.fxml'.";
+
+    }
+}

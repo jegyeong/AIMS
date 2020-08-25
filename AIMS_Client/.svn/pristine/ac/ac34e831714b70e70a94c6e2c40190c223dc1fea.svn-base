@@ -1,0 +1,39 @@
+package kr.or.ddit.service.InformationUse;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.List;
+
+import kr.or.ddit.vo.FAQVO;
+
+
+public interface IManagerFAQService extends Remote {
+	
+	/**
+	 * 모든 FAQ를 검색해서 반환하는 메서드
+	 * @return 검색된 FAQ리스트!
+	 */
+	public List<FAQVO> getAllFAQList()throws RemoteException ;
+	
+	/**
+	 * FAQ_Num을 매개변수로 받아 해당하는 FAQ를 반환하는 메서드
+	 * @param faqNum 검색번호
+	 * @return 검색된 FAQ리스트
+	 */
+	public List<FAQVO> getDetailsList(String faqNum)throws RemoteException ;
+	
+	/**
+	 * faqVo에 담겨진 자료를 DB에 insert하는 메서드
+	 * @param faqVo DB에 insert할 자료가 저장된 FAQVO 객체
+	 * @return DB작업 성공 : 1, 실패 : 0
+	 */ 
+	public int insertFAQ(FAQVO faqVo)throws RemoteException ;
+	
+	/**
+	 * faqVo에 담겨진 자료를 이용하여 DB에 FAQ의 정보를  update하는 메서드
+	 * @param faqVo 수정할 정보가 저장된 vo객체
+	 * @return 작업성공 : 1, 실패 : 0
+	 */
+	public int updateFAQ(FAQVO faqVo)throws RemoteException ;
+	
+}

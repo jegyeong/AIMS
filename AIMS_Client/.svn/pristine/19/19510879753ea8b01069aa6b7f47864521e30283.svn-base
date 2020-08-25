@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="an_entirety" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.main.MainPageController">
+   <children>
+      <AnchorPane fx:id="topLogo" layoutX="52.0" layoutY="31.0" onMouseClicked="#topLogo_Clicked" prefHeight="72.0" prefWidth="225.0" style="-fx-background-color: yellow;">
+         <children>
+            <ImageView fx:id="imageView_logo" fitHeight="75.0" fitWidth="225.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="19.0" layoutY="9.0" text="로고" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="an_Notice" layoutX="52.0" layoutY="509.0" onMouseClicked="#an_Notice_clicked" prefHeight="178.0" prefWidth="634.0" style="-fx-background-color: white;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="178.0" layoutX="9.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="613.0" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="15.0" prefWidth="66.0" style="-fx-background-color: white;" text="공지사항" />
+            <Label fx:id="lbMoreNotice" layoutX="559.0" layoutY="21.0" onMouseClicked="#onClickedLbMoreNotice" prefHeight="20.0" prefWidth="48.0" text="더보기">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNotice1" layoutX="26.0" layoutY="46.0"  prefHeight="15.0" prefWidth="490.0" text="Label">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNotice2" layoutX="26.0" layoutY="75.0"  prefHeight="15.0" prefWidth="490.0" text="Label">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNotice3" layoutX="26.0" layoutY="104.0"  prefHeight="15.0" prefWidth="490.0" text="Label">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNotice4" layoutX="26.0" layoutY="132.0" prefHeight="15.0" prefWidth="490.0" text="Label">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNotice5" layoutX="26.0" layoutY="161.0"  prefHeight="15.0" prefWidth="490.0" text="Label">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="an_Login" layoutX="931.0" layoutY="240.0" onMouseClicked="#an_Login_Clicked" prefHeight="227.0" prefWidth="275.0" />
+      <AnchorPane fx:id="an_interest" layoutX="55.0" layoutY="229.0" onMouseClicked="#an_interest_Clicked" prefHeight="249.0" prefWidth="750.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="235.0" layoutX="8.0" layoutY="13.0" stroke="BLACK" strokeType="INSIDE" width="832.0" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="7.0" prefHeight="15.0" prefWidth="88.0" style="-fx-background-color: white;" text="최고관심물건" />
+            <Accordion layoutX="77.0" layoutY="90.0" />
+            <ImageView fx:id="imgViewer" fitHeight="178.0" fitWidth="252.0" layoutX="25.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../D_Other/코알라.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnImgNext" layoutX="232.0" layoutY="122.0" mnemonicParsing="false" onAction="#onClickedBtnImgNext" prefHeight="15.0" prefWidth="15.0" style="-fx-background-radius: 15; -fx-background-color: #f7f3f2;" text="&gt;" />
+            <VBox layoutX="305.0" layoutY="35.0" prefHeight="200.0" prefWidth="366.0">
+               <children>
+                  <HBox prefHeight="25.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefWidth="75.0" text="물건번호 :" />
+                        <Label fx:id="lbArtNo" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="75.0" text="물건이름 :" />
+                        <Label fx:id="lbArtName" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="75.0" text="위치 :" />
+                        <Label fx:id="lbArtLoc" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="75.0" text="소유 법원 :" />
+                        <Label fx:id="lbArtCou" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefWidth="75.0" text="최저 매각액 :" />
+                        <Label fx:id="lbArtLow" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefWidth="75.0" text="감정 평가액 :" />
+                        <Label fx:id="lbArtPrice" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="75.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefWidth="75.0" text="경매 기간 :" />
+                        <Label fx:id="lbArtDay" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefWidth="75.0" text="대분류 :" />
+                        <Label fx:id="lbArtCatA" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefWidth="75.0" text="중분류 :" />
+                        <Label fx:id="lbArtCatB" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefWidth="75.0" text="소분류 :" />
+                        <Label fx:id="lbArtCatC" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="btnImgPrev" layoutX="29.0" layoutY="120.0" mnemonicParsing="false" onAction="#onClickedBtnImgPrev" prefHeight="15.0" prefWidth="15.0" style="-fx-background-radius: 15; -fx-background-color: #f7f3f2;" text="&lt;" />
+         </children>
+      </AnchorPane>
+      <HBox fx:id="an_navigation" alignment="CENTER_RIGHT" layoutX="55.0" layoutY="121.0" onMouseClicked="#an_navigation_clicked" prefHeight="63.0" prefWidth="1151.0" spacing="3.0" style="-fx-background-color: yellow;">
+         <children>
+            <Label fx:id="lbSearch" alignment="CENTER" onMouseClicked="#label_search_clicked" prefHeight="47.0" prefWidth="79.0" text="검색">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="label_search1" alignment="CENTER" onMouseClicked="#label_search_clicked" prefHeight="47.0" prefWidth="26.0" text="l">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="lbStatistics" alignment="CENTER" onMouseClicked="#label_statistics_clicked" prefHeight="47.0" prefWidth="79.0" text="통계">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="label_search11" alignment="CENTER" onMouseClicked="#label_search_clicked" prefHeight="47.0" prefWidth="26.0" text="l">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="lbAuction" alignment="CENTER" onMouseClicked="#label_auction_clicked" prefHeight="47.0" prefWidth="79.0" text="경매">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="label_search12" alignment="CENTER" onMouseClicked="#label_search_clicked" prefHeight="47.0" prefWidth="26.0" text="l">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="lbNotice" alignment="CENTER" onMouseClicked="#label_notice_clicked" prefHeight="47.0" prefWidth="88.0" text="민원접수">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="label_search13" alignment="CENTER" onMouseClicked="#label_search_clicked" prefHeight="47.0" prefWidth="26.0" text="l">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="lbKnowledge" alignment="CENTER" onMouseDragged="#label_knowledge_clicked" prefHeight="46.0" prefWidth="98.0" text="경매지식">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="label_search14" alignment="CENTER" onMouseClicked="#label_search_clicked" prefHeight="47.0" prefWidth="26.0" text="l">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="lbInformationUse" alignment="CENTER" onMouseClicked="#lable_informationUse_clicked" prefHeight="54.0" prefWidth="110.0" text="이용안내">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </HBox>
+      <AnchorPane layoutX="715.0" layoutY="489.0" prefHeight="377.0" prefWidth="532.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="346.0" layoutX="8.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="509.0" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="15.0" prefWidth="156.0" style="-fx-background-color: white;" text="금일 진행될 경매 목록" />
+            <ListView fx:id="lvAuction" focusTraversable="false" layoutX="16.0" layoutY="30.0" prefHeight="329.0" prefWidth="490.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="an_searchArea" layoutX="60.0" layoutY="716.0" onMouseClicked="#an_searchArea_clicked" prefHeight="123.0" prefWidth="617.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="75.0" layoutX="2.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" width="613.0" />
+            <Label fx:id="label_searchArea" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="15.0" prefWidth="122.0" style="-fx-background-color: white;" text="법원별 물건 검색" />
+            <ComboBox fx:id="cbCou" layoutX="215.0" layoutY="38.0" prefHeight="35.0" prefWidth="268.0" />
+            <Button fx:id="btnSearchArt" layoutX="514.0" layoutY="38.0" mnemonicParsing="false" onAction="#onClickedBtnSearchArt" prefHeight="35.0" prefWidth="66.0" text="검색" />
+            <ComboBox fx:id="cbLoc" layoutX="38.0" layoutY="40.0" prefHeight="35.0" prefWidth="140.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

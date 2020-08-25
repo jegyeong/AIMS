@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="auction">
+	 
+	<select id="getMyArticleList" parameterClass="string" resultClass="A_articleVO">
+		select * from a_article where to_number(to_char(a_art_day,'yyyymmdd'))-to_number(to_char(sysdate,'yyyymmdd')) = 0 and a_art_no in (select a_art_no from interest where mem_id = #mem_id#);
+	</select>
+	
+	<select id="getTotalArticleList" resultClass="A_articleVO">
+		select * from a_article where to_number(to_char(a_art_day,'yyyymmdd'))-to_number(to_char(sysdate,'yyyymmdd')) = 0;
+	</select>
+	
+</sqlMap>
+
+
+<!-- public List<A_articleVO> getMyArticleList(); -->
+<!-- 	public List<A_articleVO> getTotalArticleList(); -->
+<!-- 	public List<ServerSocket> getTotalServ(); -->
+<!-- 	public A_articleVO getArticleInfo(String a_art_no); //카테고리와 법원을 조인한 쿼리문 호출  -->

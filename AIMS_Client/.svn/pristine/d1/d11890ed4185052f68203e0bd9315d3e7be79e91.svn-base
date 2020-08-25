@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="307.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="kr.or.ddit.controller.knowledge.user.FormatDownController">
+   <children>
+      <Label layoutX="60.0" layoutY="48.0" text="제목">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameTf" layoutX="107.0" layoutY="46.0" prefHeight="23.0" prefWidth="436.0" />
+      <Label layoutX="60.0" layoutY="96.0" text="파일 목록">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ListView fx:id="fileList" layoutX="60.0" layoutY="127.0" prefHeight="146.0" prefWidth="480.0" />
+   </children>
+</AnchorPane>

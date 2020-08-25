@@ -1,0 +1,339 @@
+package kr.or.ddit.controller.search;
+
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+import kr.or.ddit.service.search.ISearchService;
+import kr.or.ddit.vo.A_articleVO;
+import kr.or.ddit.vo.CategoryAVO;
+import kr.or.ddit.vo.CategoryBVO;
+import kr.or.ddit.vo.CategoryCVO;
+
+public class CategoryController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private ComboBox<CategoryAVO> comboA;
+
+    @FXML
+    private ComboBox<CategoryBVO> comboB;
+
+    @FXML
+    private ComboBox<CategoryCVO> comboC;
+
+    @FXML
+    private Button btnSearch;
+
+    @FXML
+    private TableView<A_articleVO> table;
+
+    @FXML
+    private TableColumn<A_articleVO, String> numCol;
+
+    @FXML
+    private TableColumn<A_articleVO, String> nameCol;
+
+    @FXML
+    private TableColumn<?, ?> colCatA;
+
+    @FXML
+    private TableColumn<?, ?> colCatB;
+
+    @FXML
+    private TableColumn<?, ?> colCatC;
+
+
+    @FXML
+    void btnSearchClick(ActionEvent event) {
+    	
+    	String a = null;
+    	String b = null;
+    	String c = null;
+    	
+    	if( comboA.getValue() != null) {
+    		a = comboA.getValue().getCat_a_no();
+    	}
+    	if(comboB.getValue() != null) {
+    		b = comboB.getValue().getCat_b_no();
+    	}
+    	if(comboC.getValue() != null) {
+    		c = comboC.getValue().getCat_c_no();
+    	}
+    	Map<String, String> categoryMap = new HashMap<String, String>();
+    	
+    	categoryMap.put("cat_a_no", a);
+    	categoryMap.put("cat_b_no", b);
+    	categoryMap.put("cat_c_no", c);
+    	
+    	try {
+			stuffList = service.categoryASearch(categoryMap);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	data = FXCollections.observableArrayList(stuffList);
+    	
+    	table.setItems(data);
+    	
+    	
+    }
+
+    @FXML
+    void tableClick(MouseEvent event) throws IOException {
+    	if(table.getSelectionModel().getSelectedItem()==null) return;
+    	FXMLLoader loader = new FXMLLoader(NumController.class.getResource("../../fxml/search/fxmlDetail.fxml"));
+    	Parent root = loader.load();
+    	
+    	DetailController controller = loader.getController(); // 다른 컨트롤러를 미리 가져와
+    	controller.setTextField(table.getSelectionModel().getSelectedItem()); // 그 컨트롤러에 테이블에선택한애의 값을 넘겨줘
+    	  	
+    	Stage stage = (Stage) btnSearch.getScene().getWindow(); 
+    	Scene scene = new Scene(root);
+    	
+    	stage.setScene(scene);
+    	stage.setTitle("물건 상세정보 ");
+    	stage.show();
+    }
+
+    List<A_articleVO> stuffList;
+    ObservableList<A_articleVO> data;
+    
+    ISearchService service;
+
+    
+    @FXML
+    void initialize() {
+    	//Service객체 생성
+    	try {
+    		Registry reg = LocateRegistry.getRegistry("192.168.0.118",8888);
+			
+			service =  (ISearchService)reg.lookup("searchService");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+//------------------------------------------------------------------------------------------------------------
+    	//콤보박스 설정 (대분류)
+    	List<CategoryAVO> Alist = null;
+		try {
+			Alist = service.getAllACategory();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ObservableList<CategoryAVO> Adata = FXCollections.observableArrayList(Alist);
+    	
+    	comboA.setItems(Adata);
+    	
+    	comboA.setCellFactory(new Callback<ListView<CategoryAVO>, ListCell<CategoryAVO>>() {
+			@Override
+			public ListCell<CategoryAVO> call(ListView<CategoryAVO> param) {
+				return new ListCell<CategoryAVO>() {
+					@Override
+					protected void updateItem(CategoryAVO item, boolean empty) {
+						super.updateItem(item, empty);
+						if(item == null || empty) {
+							setText(null);
+						}else {
+							setText(item.getCat_a_name());
+						}
+					}
+				};
+			}
+		});
+    	comboA.setButtonCell(new ListCell<CategoryAVO>() {
+    		@Override
+    		protected void updateItem(CategoryAVO item, boolean empty) {
+    			super.updateItem(item, empty);
+    			if(item == null || empty) {
+    				setText(null);
+    			}else {
+    				setText(item.getCat_a_name());
+    			}
+    		}
+    	});
+    	//CA.setValue(CA.getItems().get(0));
+//--------------------------------------------------------------------------------------------------------------    	
+    	//콤보박스 설정(중분류)
+    	List<CategoryBVO> Blist = null;
+		try {
+			Blist = service.getAllBCategory(comboA.getItems().get(0).getCat_a_no());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ObservableList<CategoryBVO> Bdata = FXCollections.observableArrayList(Blist);
+    	
+    	comboB.setItems(Bdata);
+    	
+    	comboB.setCellFactory(new Callback<ListView<CategoryBVO>, ListCell<CategoryBVO>>() {
+    		@Override
+    		public ListCell<CategoryBVO> call(ListView<CategoryBVO> param) {
+    			return new ListCell<CategoryBVO>() {
+    				@Override
+    				protected void updateItem(CategoryBVO item, boolean empty) {
+    					super.updateItem(item, empty);
+    					if(item == null || empty) {
+    						setText(null);
+    					}else {
+    						setText(item.getCat_b_name());
+    					}
+    				}
+    			};
+    		}
+		});
+    	comboB.setButtonCell(new ListCell<CategoryBVO>() {
+    		@Override
+    		protected void updateItem(CategoryBVO item, boolean empty) {
+    			super.updateItem(item, empty);
+    			if(item==null || empty) {
+    				setText(null);
+    			}else {
+    				setText(item.getCat_b_name());
+    			}
+    		}
+    	});
+    	//CB.setValue(CB.getItems().get(0));
+//----------------------------------------------------------------------------------------------------------------    	
+    	//콤보박스 설정(소분류)
+    	List<CategoryCVO> Clist = null;
+		try {
+			Clist = service.getAllCCategory(comboB.getItems().get(0).getCat_b_no());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ObservableList<CategoryCVO> Cdata = FXCollections.observableArrayList(Clist);
+    	
+    	comboC.setItems(Cdata);
+    	
+    	comboC.setCellFactory(new Callback<ListView<CategoryCVO>, ListCell<CategoryCVO>>() {
+    		@Override
+    		public ListCell<CategoryCVO> call(ListView<CategoryCVO> param) {
+    			return new ListCell<CategoryCVO>() {
+    				@Override
+    				protected void updateItem(CategoryCVO item, boolean empty) {
+    					super.updateItem(item, empty);
+    					if(item == null || empty) {
+    						setText(null);
+    					}else {
+    						setText(item.getCat_c_name());
+    					}
+    				}
+    			};
+    		}
+		});
+    	comboC.setButtonCell(new ListCell<CategoryCVO>() {
+    		@Override
+    		protected void updateItem(CategoryCVO item, boolean empty) {
+    			super.updateItem(item, empty);
+    			if(item == null || empty) {
+    				setText(null);
+    			}else {
+    				setText(item.getCat_c_name());
+    			}
+    		}
+    	});
+    	//CC.setValue(CC.getItems().get(0));
+//----------------------------------------------------------------------------------------------------------------    	
+    	// 콤보박스 클릭이벤트 대분류 (addListener)
+    	comboA.valueProperty().addListener(new ChangeListener<CategoryAVO>() {
+			@Override
+			public void changed(ObservableValue<? extends CategoryAVO> observable, CategoryAVO oldValue,
+					CategoryAVO newValue) {
+				if(newValue == null) return;
+				List<CategoryBVO> Blist = null;
+				try {
+					Blist = service.getAllBCategory(newValue.getCat_a_no());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	ObservableList<CategoryBVO> Bdata = FXCollections.observableArrayList(Blist);
+		    	
+		    	comboB.setItems(Bdata);
+		    	comboC.getItems().clear();
+			}
+		});
+//----------------------------------------------------------------------------------------------------------------    	
+    	// 콤보박스 클릭이벤트 중분류 (addListener)
+    	comboB.valueProperty().addListener(new ChangeListener<CategoryBVO>() {
+			@Override
+			public void changed(ObservableValue<? extends CategoryBVO> observable, CategoryBVO oldValue,
+					CategoryBVO newValue) {
+				if(newValue == null) return;
+		    	List<CategoryCVO> Clist = null;
+				try {
+					Clist = service.getAllCCategory(newValue.getCat_b_no());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	ObservableList<CategoryCVO> Cdata = FXCollections.observableArrayList(Clist);
+		    	
+		    	comboC.setItems(Cdata);
+				
+			}
+		});
+    	
+    	
+    	try {
+			stuffList = service.getAllShow();
+		
+			data = FXCollections.observableArrayList(stuffList);
+			
+			table.setItems(data);
+			
+			numCol.setCellValueFactory(new PropertyValueFactory<A_articleVO, String>("a_art_no"));
+			nameCol.setCellValueFactory(new PropertyValueFactory<A_articleVO, String>("a_art_name"));
+			
+			colCatA.setCellValueFactory(new PropertyValueFactory<>("cat_a_no"));
+			colCatB.setCellValueFactory(new PropertyValueFactory<>("cat_b_no"));
+			colCatC.setCellValueFactory(new PropertyValueFactory<>("cat_c_no"));
+			
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			
+		}
+    	
+
+    }
+}
+

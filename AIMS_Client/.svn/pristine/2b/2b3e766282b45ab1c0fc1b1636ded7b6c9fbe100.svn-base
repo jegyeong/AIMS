@@ -1,0 +1,75 @@
+package kr.or.ddit.controller.notice;
+
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.web.WebView;
+import javafx.util.Callback;
+import kr.or.ddit.vo.NoticeVO;
+import kr.or.ddit.vo.Notice_FileVO;
+
+public class NoticePopupController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private Label tf_title;
+
+    @FXML
+    private WebView html_content;
+
+    @FXML
+    private TextArea tf_writer;
+
+    @FXML
+    private ListView<Notice_FileVO> lt_file;
+    
+    public void setNoticePopup(NoticeVO noticeInfo) {
+    	tf_title.setText(noticeInfo.getNotice_title());
+    	tf_writer.setText(noticeInfo.getNotice_writer());
+    	html_content.getEngine().loadContent(noticeInfo.getNotice_content());
+    	
+    }
+    
+    public void setNoticePopup(List<Notice_FileVO> fileList, NoticeVO noticeInfo) {
+    	tf_title.setText(noticeInfo.getNotice_title());
+    	tf_writer.setText(noticeInfo.getNotice_writer());
+    	html_content.getEngine().loadContent(noticeInfo.getNotice_content());	
+    	ObservableList<Notice_FileVO> fileDate =  FXCollections.observableArrayList(fileList);
+    	lt_file.setItems(fileDate);
+    }
+    
+    @FXML
+    void initialize() {
+    	lt_file.setCellFactory(new Callback<ListView<Notice_FileVO>, ListCell<Notice_FileVO>>() {
+			
+			@Override
+			public ListCell<Notice_FileVO> call(ListView<Notice_FileVO> param) {			
+				return new ListCell<Notice_FileVO>() {
+					@Override
+					protected void updateItem(Notice_FileVO item, boolean empty) {
+						super.updateItem(item, empty);
+						if(!empty) {
+							String[] path = item.getFile_addr().split("/");
+				    		String fileName = path[path.length];
+				    		setText(fileName);
+						}
+					}
+				};
+			}
+			
+		});
+    }
+}

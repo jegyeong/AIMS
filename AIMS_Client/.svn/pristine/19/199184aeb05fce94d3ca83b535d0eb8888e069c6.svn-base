@@ -1,0 +1,112 @@
+package kr.or.ddit.controller.knowledge.user;
+
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import kr.or.ddit.service.knowledge.IKnowledgeService;
+import kr.or.ddit.vo.A_FormJoinForm_FileVO;
+
+public class AuctionFormatController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private TableView<A_FormJoinForm_FileVO> formatTable;
+
+    @FXML
+    private TableColumn<?, ?> numCol;
+
+    @FXML
+    private TableColumn<?, ?> titleCol;
+
+    private IKnowledgeService service;
+    private FormatDownController downController;
+    private ObservableList<A_FormJoinForm_FileVO> data;
+    
+    private void setData() {
+    	try {
+	    	List<A_FormJoinForm_FileVO> joinVo = service.joinForm();
+	    	data = FXCollections.observableArrayList(joinVo);
+	    	formatTable.setItems(data);
+    	
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    @FXML
+    void initialize() {
+    	try {
+			Registry reg = LocateRegistry.getRegistry(8888);
+			
+			service = (IKnowledgeService) reg.lookup("knowledge");
+			
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+    	
+    	formatTable.setOnMouseClicked(e -> {
+    		try {
+    			
+    	    	if(formatTable.getSelectionModel().isEmpty()) {
+    	    		return;
+    	    	}
+    	    	try {
+    	    		Stage mainStage = (Stage) formatTable.getScene().getWindow();
+    	    		FXMLLoader loader = new FXMLLoader(AuctionFormatController.class.getResource("../../../fxml/knowledge/user/formatDown.fxml"));
+    	        	Parent root = loader.load();
+    	        	downController = loader.getController();
+    	        	
+    	        	if(!formatTable.getSelectionModel().isEmpty()) {
+    	        		A_FormJoinForm_FileVO joinVo = formatTable.getSelectionModel().getSelectedItem();
+    	        		
+    	        		downController.show(joinVo);
+    	        	}
+    	        	
+    	        	Stage stage = new Stage(StageStyle.DECORATED);
+    	        	stage.initModality(Modality.APPLICATION_MODAL);
+    	        	stage.initOwner(mainStage);
+    	        	
+    	        	Scene scene = new Scene(root);
+    	        	stage.setScene(scene);
+    	        	stage.show();
+    	    		
+    			} catch (IOException e2) {
+    			  e2.printStackTrace();
+    			}
+    	    	} catch (Exception e3) {
+    	    		e3.printStackTrace();
+    	    	}
+    	});
+    	
+    	numCol.setCellValueFactory(new PropertyValueFactory<>("rownum"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("a_form_name"));
+    	
+    	setData();
+
+    }
+}

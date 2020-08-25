@@ -1,0 +1,65 @@
+package kr.or.ddit.controller.statistics;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+
+public class StatisticsMainController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private Button btnYear;
+
+    @FXML
+    private Button btnCourt;
+
+    @FXML
+    private Button btnArea;
+
+    @FXML
+    private Button btnTerm;
+
+    @FXML
+    private AnchorPane subAnchor;
+
+    @FXML
+    void btnAreaClick(ActionEvent event) throws IOException {
+    	Parent area = FXMLLoader.load(StatisticsMainController.class.getResource("../../fxml/statistics/area_statistics.fxml"));
+    	for(int i = 0; i < subAnchor.getChildren().size(); i++) {
+    		subAnchor.getChildren().remove(i);
+    	}
+    	subAnchor.getChildren().addAll(area);
+    }
+
+    @FXML
+    void btnCourtClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnTermClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnYearClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void initialize() {
+        
+
+    }
+}

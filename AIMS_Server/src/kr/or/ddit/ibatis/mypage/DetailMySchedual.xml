@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ 	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ 	
+ 	<sqlMap  namespace="detailMySH">
+ 	
+ 	<select id="getMydetailSH" resultClass="A_articleVO"  parameterClass="Map">
+ 		select a_art_name, a_art_day
+		 from a_article
+		where a_art_no in (select a_art_no from interest where mem_id=#id#)
+  		and to_number(to_char(a_art_day,'yyyymmdd')) - to_number(#day#) = 0
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	</sqlMap>

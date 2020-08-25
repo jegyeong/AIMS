@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="870.0" prefWidth="890.0" stylesheets="@../../../../../../../css/notice.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.notice.admin.NoticeComplainListController">
+   <children>
+      <BorderPane layoutX="-1.0" layoutY="18.0" prefHeight="852.0" prefWidth="890.0">
+         <center>
+            <TableView fx:id="tv_List" onMouseClicked="#onClickedTv_Result" prefHeight="714.0" prefWidth="880.0" style="-fx-border-color: #d9d9d9d9; -fx-border-width: 3;" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="col_no" prefWidth="103.0" text="글번호" />
+                <TableColumn fx:id="col_cate" prefWidth="112.0" text="카테고리" />
+                  <TableColumn fx:id="col_title" prefWidth="532.0" text="제목" />
+                  <TableColumn fx:id="col_date" minWidth="0.0" prefWidth="132.0" text="작성일자" />
+              </columns>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </BorderPane.margin>
+            </TableView>
+         </center>
+         <top>
+            <Label text="민원 답볍 게시판" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Label>
+         </top>
+         <bottom>
+            <Pagination fx:id="pagin" prefHeight="56.0" prefWidth="890.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </Pagination>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

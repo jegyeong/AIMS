@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1280.0" stylesheets="@../../../../../../../css/knowledge.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.knowledge.admin.AdminKnowledgeLawController">
+   <children>
+      <TableView fx:id="lawTable" layoutX="140.0" layoutY="40.0" onMouseClicked="#lawTableClick" prefHeight="790.0" prefWidth="1000.0">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="999.0" text="법률이름" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnAdd" layoutX="445.0" layoutY="870.0" mnemonicParsing="false" onAction="#btnAddClick" prefHeight="50.0" prefWidth="150.0" text="등록하기">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnHome" layoutX="695.0" layoutY="870.0" mnemonicParsing="false" onAction="#btnHomeClick" prefHeight="50.0" prefWidth="150.0" text="홈으로">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

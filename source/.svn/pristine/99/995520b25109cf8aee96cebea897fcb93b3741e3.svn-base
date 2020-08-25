@@ -1,0 +1,51 @@
+
+#btnSearchArt{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btn_myPage{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btn_logOut{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnLogin{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}
+
+#lbSearch{
+	-fx-font-family : "NanumGothic";
+}
+#lbStatistics{
+	-fx-font-family : "NanumGothic";
+}
+#lbAuction{
+	-fx-font-family : "NanumGothic";
+}
+#lbNotice{
+	-fx-font-family : "NanumGothic";
+}
+#lbKnowledge{
+	-fx-font-family : "NanumGothic";
+}
+#lbInformationUse{
+	-fx-font-family : "NanumGothic";
+}

@@ -1,0 +1,76 @@
+package kr.or.ddit.dao.login;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.ibatis.BuildedSqlMapClient;
+import kr.or.ddit.vo.MemberVO;
+
+public class LoginDaoImpl implements ILoginDao {
+	private SqlMapClient smc;
+	private static LoginDaoImpl dao;
+	
+	private LoginDaoImpl() {
+		smc = BuildedSqlMapClient.getSqlMapClient();
+	}
+	
+	public static LoginDaoImpl getInstance() {
+		if(dao==null) dao = new LoginDaoImpl();
+		return dao;
+	}
+	//싱글톤
+	
+	@Override
+	public MemberVO getmemUser(MemberVO memberVo) {
+		MemberVO memVo = null;
+		try {
+			memVo = (MemberVO) smc.queryForObject("login.getmemUser",memberVo);
+		} catch (SQLException e) {
+			memVo = null;
+			e.printStackTrace();
+		}
+		return memVo;
+	}
+
+	@Override
+	public MemberVO findIdUser(MemberVO memberVo) {
+		MemberVO memList = null;
+		try {
+			memList = (MemberVO) smc.queryForObject("login.findIdUser",memberVo);
+		} catch (SQLException e) {
+			memList = null;
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memList;
+	}
+
+	@Override
+	public MemberVO findPassUser(MemberVO memberVo) {
+		MemberVO memList = null;
+		try {
+			memList = (MemberVO) smc.queryForObject("login.findPassUser",memberVo);
+		} catch (SQLException e) {
+			memList = null;
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memList;
+	}
+
+	@Override
+	public int updateTemporaryPass(MemberVO memberVo) {
+		int cnt = 0;
+		try {
+			cnt = smc.update("login.updateTemporaryPass", memberVo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+}

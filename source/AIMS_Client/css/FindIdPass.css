@@ -1,0 +1,30 @@
+#btnAgency{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}
+
+#btn_confirm{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btn_findPass{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btnCancel{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}

@@ -1,0 +1,92 @@
+package kr.or.ddit.controller.search;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+
+
+// webview용 import 
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.Point;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+
+
+
+
+public class MapController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane Map;
+
+    
+    private static void initFX() {
+  
+//    	JFrame frame = new JFrame("FX");
+//    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//    	frame.getContentPane().setLayout(null);
+    	final JFXPanel fxPanel = new JFXPanel();
+
+//    	frame.add(fxPanel);
+//    	frame.setVisible(true);
+
+    	fxPanel.setSize(new Dimension(800, 800));
+    	fxPanel.setLocation(new Point(0, 27));
+//    	frame.getContentPane().setPreferredSize(new Dimension(300, 327));
+//    	frame.pack();
+//    	frame.setResizable(false);
+
+    	Platform.runLater(new Runnable() {
+    		public void run() {
+    			initAndLoadWebView(fxPanel);
+    		}
+    	});
+    }
+
+    private static void initAndLoadWebView(final JFXPanel fxPanel) {
+
+    	Group group = new Group();
+    	Scene scene = new Scene(group);
+    	fxPanel.setScene(scene);
+
+    	WebView webView = new WebView();
+
+    	group.getChildren().add(webView);
+    	webView.setMinSize(800, 800);
+    	webView.setMaxSize(800, 800);
+
+
+    	WebEngine webEngine = webView.getEngine();
+    	webEngine.load("http://localhost/MapAPI/Map.html");
+    	
+   
+    }
+
+    
+    
+    @FXML
+    void initialize() {
+    	initFX();
+    	WebView webView = new WebView();
+    	WebEngine webEngine = webView.getEngine();
+    	webEngine.load("http://localhost/MapAPI/Map.html");
+    	Map.getChildren().add(webView);
+    	
+    }
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.mypage.MymemIntersetController">
+   <children>
+      <TableView fx:id="interestView" onSort="#interestView" prefHeight="870.0" prefWidth="890.0">
+        <columns>
+          <TableColumn fx:id="prodNum" prefWidth="245.0" text="물건번호" />
+          <TableColumn fx:id="prodName" prefWidth="339.0" text="물건명" />
+            <TableColumn fx:id="autionDate" prefWidth="305.0" text="경매날짜" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,66 @@
+
+#btnBack{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#qArea{
+	-fx-border-color : #d9d9d9;
+	-fx-border-width: 3;
+}
+
+#aArea{
+	-fx-border-color : #d9d9d9;
+	-fx-border-width: 3;
+}
+
+#btnAdd{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnHome{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#htmlA{
+	-fx-border-color : #d9d9d9;
+	-fx-border-width: 3;
+}
+
+#htmlQ{
+	-fx-border-color : #d9d9d9;
+	-fx-border-width: 3;
+}
+
+#btnUpdate{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnDelete{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnOk{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}

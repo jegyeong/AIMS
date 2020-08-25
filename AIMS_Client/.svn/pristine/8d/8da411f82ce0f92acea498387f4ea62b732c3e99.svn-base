@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.knowledge.user.GuideSubController">
+   <children>
+      <ImageView fx:id="subView1" fitHeight="33.0" fitWidth="162.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView2" fitHeight="33.0" fitWidth="162.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView3" fitHeight="33.0" fitWidth="162.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView4" fitHeight="33.0" fitWidth="162.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView5" fitHeight="33.0" fitWidth="162.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="179.0" prefHeight="33.0" prefWidth="555.0" text="매각기일은 법원 안에서 진행합니다. 매각장소에는 매수신청인이 입찰표를 작성할 수 있는 설비(입찰표 기재대)가 마련되어 있습니다." wrapText="true" />
+      <Label layoutX="179.0" layoutY="35.0" prefHeight="62.0" prefWidth="555.0" text="입찰절차는 집행관이 진행합니다. 집행관은 입찰을 시작하기에 앞서 입찰희망자가 매각물건명세서 · 현황조사보고서 및 평가서의 사본을 볼 수 있도록 합니다. 또한 특별한 매각조건이 있으면 이를 알려드립니다. 집행관이 입찰표의 제출을 최고하고 입찰마감시각과 개찰시각을 고지하면 입찰이 시작됩니다." wrapText="true" />
+      <Label layoutX="179.0" layoutY="100.0" prefHeight="105.0" prefWidth="555.0" text="기일입찰에 참여하려면 흰색 용지로 된 “기일입찰표”를 작성하여야 합니다. 기일입찰표에는 ① 사건번호, ② 입찰자의 성명과 주소, ③ 물건번호, ④ 입찰가격, ⑤ 대리인에 의하여 입찰하는 경우에는 대리인의 성명과 주소, ⑥ 입찰보증금액을 기재합니다. 입찰가격은 일정한 금액으로 표시하여야 하며, 다른 사람의 입찰가격에 대한 비율로 표시할 수 없습니다.입찰을 하려는 사람은 입찰표 기재대에 들어가서 입찰표를 기재하고, 매수신청보증을 입찰보증금 봉투에 넣고 1차로 봉한 다음, 기재한 입찰표와 매수신청보증봉투를 다시 큰 입찰봉투에 넣어 스테이플러로 찍어 봉하고 봉투의 지정된 위치에 날인하면 됩니다." wrapText="true" />
+      <Label layoutX="179.0" layoutY="210.0" prefHeight="110.0" prefWidth="555.0" text="입찰표와 매수신청보증이 들어 있는 봉투를 집행관에게 제출하여야 합니다. 봉투를 입찰함에 넣으면 집행관에게 제출한 것이 됩니다. 한 번 제출한 입찰표는 취소, 변경 또는 교환할 수 없습니다. 매수신청의 보증금액은 최저매각가격의 1/10입니다. 다만 법원이 상당하다고 인정하는 때에는 보증금액을 달리 정할 수 있으므로 주의하시기 바랍니다(재입찰의 경우에는 매수신청의 보증금액을 입찰가격의 2/10 혹은 3/10으로 정하는 것이 보통입니다). 매수신청보증을 제공하려면 현금, 자기앞수표 또는 일정액의 보증료를 지급하고 발급받은 지급위탁계약체결문서(경매보증보험증권)를 제출하면 됩니다. 매수신청보증을 제출하지 아니하면 입찰이 무효로 처리됩니다." wrapText="true" />
+      <Label layoutX="3.0" layoutY="353.0" prefHeight="33.0" prefWidth="730.0" text="① 입찰의 마감 및 개찰 - 입찰을 마감하면 지체 없이 입찰표를 개봉하여 개찰을 실시합니다. 입찰에 참여한 사람은 입찰표를 개봉할 때 참여할 수 있습니다." wrapText="true" />
+      <Label layoutX="3.0" layoutY="380.0" prefHeight="62.0" prefWidth="730.0" text="② 최고가매수신고인의 결정 - 개찰 결과 가장 높은 가격으로 입찰하고 정해진 입찰보증금을 제공한 사람이 최고가매수신고인으로 결정됩니다. 만일 가장 높은 가격으로 입찰한 사람이 2인 이상일 경우에는 그들만을 상대로 추가입찰을 실시합니다. 추가입찰을 실시한 결과 또 다시 2인 이상이 가장 높은 가격으로 입찰한 경우에는 추첨에 의하여 최고가매수신고인을 정합니다." wrapText="true" />
+      <Label layoutX="3.0" layoutY="430.0" prefHeight="76.0" prefWidth="730.0" text="③ 차순위매수신고인의 결정 - 최고가매수신고인 이외의 매수신고인은 매각기일을 마칠 때까지 차순위매수신고를 할 수 있습니다. 차순위매수신고란, 최고가매수신고인이 대금지급의무를 이행하지 아니하는 경우에는 자기의 입찰에 대하여 매각을 허가하여 달라는 신고를 하는 것을 말합니다. 차순위매수신고는 그 신고액이 최저매각가격 이상이고 최고가입찰가에서 그 보증금액을 공제한 금액을 넘는 경우에만 할 수 있습니다." wrapText="true" />
+      <Label layoutX="3.0" layoutY="502.0" prefHeight="33.0" prefWidth="730.0" text="④ 매각기일의 종결 - 최고가매수신고인과 차순위매수신고인이 결정되면 집행관은 그들의 성명과 가격을 부르고 매각기일의 종결을 고지하게 됩니다. 입찰자가 없는 사건은 입찰불능으로 처리하고 종결을 고지합니다." wrapText="true" />
+      <Label layoutX="3.0" layoutY="540.0" prefHeight="33.0" prefWidth="730.0" text="⑤ 입찰보증금의 반환 -  집행관은 매각기일의 종결을 고지한 후에는 최고가매수신고인 및 차순위매수신고인 이외의 입찰자에게 그들이 제출한 입찰보증금을 즉시 반환하게 됩니다." wrapText="true" />
+   </children>
+</AnchorPane>

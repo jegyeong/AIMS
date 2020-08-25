@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1280.0" stylesheets="@../../../../../../css/search.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.search.ButtonController">
+   <children>
+      <VBox fx:id="BTN" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="930.0" prefWidth="340.0">
+         <children>
+            <Button fx:id="btnNum" mnemonicParsing="false" onAction="#btnNumClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="물건번호">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMap" mnemonicParsing="false" onAction="#btnMapClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="지도">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCourt" mnemonicParsing="false" onAction="#btnCourtClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="법원">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDate" mnemonicParsing="false" onAction="#btnDateClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="기간">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCategory" mnemonicParsing="false" onAction="#btnCategoryClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="카테고리">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnPrice" mnemonicParsing="false" onAction="#btnPriceClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="감정 평가액">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnLow" mnemonicParsing="false" onAction="#btnLowClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="최저 매각가격">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnArea" mnemonicParsing="false" onAction="#btnAreaClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="면적">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnTour" mnemonicParsing="false" onAction="#btnTourClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="유찰횟수">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnInter" mnemonicParsing="false" onAction="#btnInterClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="다수관심도">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCnt" mnemonicParsing="false" onAction="#btnCntClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="조회수">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnResult" mnemonicParsing="false" onAction="#btnResultClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="매각결과">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnTotal" mnemonicParsing="false" onAction="#btnTotalClick" prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 25;" text="통합검색">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <AnchorPane fx:id="AA" layoutX="380.0" layoutY="14.0" prefHeight="870.0" prefWidth="890.0" />
+      <Button fx:id="btnHome" layoutX="1116.0" layoutY="889.0" mnemonicParsing="false" onAction="#btnHomeClick" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="홈으로" />
+   </children>
+</AnchorPane>

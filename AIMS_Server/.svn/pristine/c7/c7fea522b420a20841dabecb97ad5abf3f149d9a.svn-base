@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="admin">
+	<select id="getAllStuff" resultClass="articleVo">
+		select * from a_article
+	</select>
+	
+	<select id="NumSearch" parameterClass="String" resultClass="articleVo">
+		select * from a_article where a_art_no like '%' || #a_art_no# || '%'
+	</select>
+	
+	<insert id="insertStuff" parameterClass="articleVo">
+		insert into a_article (a_art_no, a_art_loc, cou_no, cat_a_no, cat_b_no, cat_c_no, a_art_low, a_art_area, a_art_cnt, a_art_inter, a_art_tour, a_art_day, a_art_result, a_art_name, a_art_appr, a_art_price, a_art_addnum)
+		values (a_article_seq.nextval, #a_art_loc#, #cou_no#, #cat_a_no#, #cat_b_no#, #cat_c_no#, #a_art_low#, #a_art_area#, #a_art_cnt#, #a_art_inter#, #a_art_tour#, to_date(#a_art_day#, 'YYYY-MM-DD HH24:MI'), #a_art_result#, #a_art_name#, #a_art_appr#, #a_art_price#, #a_art_addnum#)
+	</insert>
+	
+	<delete id="deleteStuff" parameterClass="String">
+		delete from a_article where a_art_no = #a_art_no#
+	</delete>
+	
+	<update id="updateStuff" parameterClass="articleVo">
+		update a_article set a_art_loc=#a_art_loc#, cou_no=#cou_no#, cat_a_no=#cat_a_no#, cat_b_no=#cat_b_no#, cat_c_no= #cat_c_no#, a_art_low=#a_art_low#, a_art_area=#a_art_area#, 
+		a_art_cnt=#a_art_cnt#, a_art_inter=#a_art_inter#, a_art_tour=#a_art_tour#, a_art_day=to_date(#a_art_day#, 'YYYY-MM-DD HH24:MI'), 
+		a_art_result=#a_art_result#, a_art_name=#a_art_name#, a_art_appr=#a_art_appr# where a_art_no=#a_art_no# 
+	</update>
+	
+	<select id="getAllACategory" resultClass="CAVo">
+		select * from category_a
+	</select>
+
+	<select id="getAllBCategory" resultClass="CBVo" parameterClass="String">
+		select * from category_b where cat_a_no = #cat_a_no#
+	</select>
+
+	<select id="getAllCCategory" resultClass="CCVo" parameterClass="String">
+		select * from category_c where cat_b_no = #cat_b_no#
+	</select>
+	
+	<select id="getAllCourt" resultClass="courtVo">
+		select * from court
+	</select>
+	
+	
+	
+</sqlMap>

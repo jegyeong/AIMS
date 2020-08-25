@@ -1,0 +1,82 @@
+package kr.or.ddit.controller.notice.admin;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+
+public class NoticeAdminMainController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private VBox btnArea;
+
+    @FXML
+    private Button btn_notice;
+
+    @FXML
+    private Button btn_Com;
+
+    @FXML
+    private AnchorPane contentsArea;
+    
+
+    @FXML
+    void onClickedeBtn_Com(ActionEvent event) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(NoticeAdminMainController.class.getResource("../../../fxml/notice/admin/NoticComplainListAdmin.fxml"));
+    		Parent root = loader.load();
+    	
+    		NoticeComplainListController controller = loader.getController();
+    		controller.setDialog(contentsArea);
+    		contentsArea.getChildren().remove(0);
+			contentsArea.getChildren().add(root);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    void onClickedeBtn_Notice(ActionEvent event) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(NoticeAdminMainController.class.getResource("../../../fxml/notice/admin/NoticeAdmin.fxml"));
+    		Parent root = loader.load();
+    	
+    		NoticeAdminController controller = loader.getController();
+    		controller.setDialog(contentsArea);
+    		contentsArea.getChildren().remove(0);
+			contentsArea.getChildren().add(root);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    void initialize() {
+    	try {
+//			Parent root = FXMLLoader.load(NoticeAdminMainController.class.getResource("../../../fxml/notice/admin/NoticeAdmin.fxml"));
+    		FXMLLoader loader = new FXMLLoader(NoticeAdminMainController.class.getResource("../../../fxml/notice/admin/NoticeAdmin.fxml"));
+    		Parent root = loader.load();
+    	
+    		NoticeAdminController controller = loader.getController();
+    		controller.setDialog(contentsArea);
+			contentsArea.getChildren().add(root);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+}

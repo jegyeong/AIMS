@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+
+<sqlMap namespace="managerfaq">
+	<select id="getAllFAQList" resultClass="faqVo">
+		select * from faq
+	</select>
+	
+	<select id="getDetailsList" resultClass="faqVo">
+		select * from where faq_no=#faq_no#
+	</select>
+	
+	<insert id="insertFAQ" parameterClass="faqVo">
+		insert into faq(faq_no, faq_title, faq_content)
+		values (FAQ_seq.nextval, #faq_title#, #faq_content#)
+	</insert>
+	
+	<update id="updateFAQ">
+		update faq set faq_no = #faq_no#, faq_title = #faq_title#,
+			faq_content = #faq_content#
+	</update>
+</sqlMap>

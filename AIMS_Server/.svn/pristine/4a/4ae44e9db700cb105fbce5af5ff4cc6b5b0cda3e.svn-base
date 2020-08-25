@@ -1,0 +1,17 @@
+package kr.or.ddit.service.auction;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.vo.A_articleVO;
+
+public interface IauctionServer {
+	
+	public List<ServerSocket> getMyServerList();
+	public List<ServerSocket> getServerList();
+	public Map<ServerSocket,A_articleVO> getServerSocketMap();
+}

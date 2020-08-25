@@ -1,0 +1,64 @@
+package kr.or.ddit.service.adminmypage;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+
+import kr.or.ddit.dao.adminmypage.ImemberInfodao;
+import kr.or.ddit.dao.adminmypage.MemberInfoDaoImpl;
+import kr.or.ddit.vo.MemberInfoVO;
+
+
+public class MemberInfoServiceImpl extends UnicastRemoteObject implements ImemberInfoService {
+
+	private static MemberInfoServiceImpl service;
+	
+	private ImemberInfodao dao;
+	
+	public MemberInfoServiceImpl()  throws RemoteException{
+		dao = MemberInfoDaoImpl.getInstance();
+	}
+	
+	public static ImemberInfoService getInstance() {
+			try {
+				if(service == null)
+				service = new MemberInfoServiceImpl();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		return service;
+	}
+
+	@Override
+	public List <MemberInfoVO> getSearchMember(String mem_id) throws RemoteException {
+		return dao.getSearchMember(mem_id);
+	}
+
+	@Override
+	public int updateMember(MemberInfoVO memVO) throws RemoteException {
+		return dao.updateMember(memVO);
+	}
+
+	@Override
+	public int insertMember(MemberInfoVO memVO) throws RemoteException{
+
+		return dao.insertMember(memVO);
+	}
+
+	@Override
+	public int deleteMember(String memId) throws RemoteException{
+		return dao.deleteMember(memId);
+	}
+
+	@Override
+	public List<MemberInfoVO> tableview(String mem_id)throws RemoteException {
+		return dao.tableview(mem_id);
+	}
+
+	@Override
+	public List<MemberInfoVO> getMymember()throws RemoteException {
+		return dao.getMymember();
+	}
+
+	
+}

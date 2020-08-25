@@ -1,0 +1,123 @@
+package kr.or.ddit.controller.InformationUse;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+
+
+public class MainTemplateController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private VBox btnArea;
+
+    @FXML
+    private Button btnFAQ;
+
+    @FXML
+    private Button btnAgency;
+
+    @FXML
+    private Button btnSiteMap;
+
+    @FXML
+    private AnchorPane contentsArea;
+
+    @FXML
+    private Button btnHome;
+
+    @FXML
+    void btnAgencyClicked(ActionEvent event) {
+
+    	try {
+    		FXMLLoader loader = new FXMLLoader(MainTemplateController.class.getResource("../fxml/Agency.fxml")); 
+			Parent root = loader.load();
+			AgencyController mAgenCon = loader.getController();
+			mAgenCon.setContentsArea(contentsArea);
+			
+			//뭐가 있으면 지워주기
+			if(contentsArea.getChildren().size()!=0) {
+				for(int i=0; i<contentsArea.getChildren().size(); i++) {
+					contentsArea.getChildren().remove(i);
+				}
+			}
+			contentsArea.getChildren().add(root);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    void btnFAQClicked(ActionEvent event) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(MainTemplateController.class.getResource("../fxml/FAQ.fxml")); 
+			Parent root = loader.load();
+			FAQController mfaqCon = loader.getController();
+			mfaqCon.setContentsArea(contentsArea);
+			
+//			Parent root = FXMLLoader.load(MainTemplateController.class.getResource("../fxml/FAQ.fxml"));
+			if(contentsArea.getChildren().size()!=0) {
+				for(int i=0; i<contentsArea.getChildren().size(); i++) {
+					contentsArea.getChildren().remove(i);
+				}
+			}
+			contentsArea.getChildren().add(root);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		}
+    }
+
+    @FXML
+    void btnHomeClicked(ActionEvent event) { //홈으로
+//    	try {
+////			Parent root = FXMLLoader.load(Main.class.getResource(".."));
+//			
+//		} catch (IOException e) {
+//			// TODO: handle exception
+//		}
+    }
+
+    @FXML
+    void btnSiteMapClicked(ActionEvent event) {
+    	try {
+			Parent root = FXMLLoader.load(MainTemplateController.class.getResource("../fxml/SiteMap.fxml"));
+			if(contentsArea.getChildren().size()!=0) {
+				for(int i=0; i<contentsArea.getChildren().size(); i++) {
+					contentsArea.getChildren().remove(i);
+				}
+			}
+			contentsArea.getChildren().add(root);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    
+
+    @FXML
+    void initialize() {
+        assert btnArea != null : "fx:id=\"btnArea\" was not injected: check your FXML file 'MainTemplate.fxml'.";
+        assert btnFAQ != null : "fx:id=\"btnFAQ\" was not injected: check your FXML file 'MainTemplate.fxml'.";
+        assert btnAgency != null : "fx:id=\"btnAgency\" was not injected: check your FXML file 'MainTemplate.fxml'.";
+        assert btnSiteMap != null : "fx:id=\"btnSiteMap\" was not injected: check your FXML file 'MainTemplate.fxml'.";
+        assert contentsArea != null : "fx:id=\"contentsArea\" was not injected: check your FXML file 'MainTemplate.fxml'.";
+        assert btnHome != null : "fx:id=\"btnHome\" was not injected: check your FXML file 'MainTemplate.fxml'.";
+
+    }
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.HTMLEditor?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1280.0" stylesheets="@../../../../../../css/law.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.law.AdminLawEditController">
+   <children>
+      <Button fx:id="btnUpdate" layoutX="1089.0" layoutY="615.0" mnemonicParsing="false" onAction="#btnUpdateClick" prefHeight="50.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="수정">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnHome" layoutX="1089.0" layoutY="859.0" mnemonicParsing="false" onAction="#btnHomeClick" prefHeight="50.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="홈으로">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="categoryCom" layoutX="146.0" layoutY="122.0" prefHeight="35.0" prefWidth="830.0" style="-fx-background-color: white; -fx-border-color: #424242; -fx-background-radius: 10; -fx-border-radius: 10;" />
+      <TextField fx:id="tfTitle" layoutX="146.0" layoutY="228.0" prefHeight="35.0" prefWidth="830.0" style="-fx-background-color: white; -fx-border-color: #424242; -fx-background-radius: 10; -fx-border-radius: 10;" />
+      <Label layoutX="146.0" layoutY="94.0" text="카테고리">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="144.0" layoutY="199.0" text="관련법률 제목">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="146.0" layoutY="300.0" text="Q.">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="146.0" layoutY="601.0" text="A.">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <HTMLEditor fx:id="htmlA" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="145.0" layoutY="631.0" prefHeight="278.0" prefWidth="830.0" />
+      <HTMLEditor fx:id="htmlQ" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="145.0" layoutY="329.0" prefHeight="247.0" prefWidth="830.0" />
+      <Button fx:id="btnDelete" layoutX="1089.0" layoutY="698.0" mnemonicParsing="false" onAction="#btnDeleteClick" prefHeight="50.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="삭제">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnOk" layoutX="1089.0" layoutY="780.0" mnemonicParsing="false" onAction="#btnOkClick" prefHeight="50.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="확인">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

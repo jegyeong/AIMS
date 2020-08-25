@@ -1,0 +1,84 @@
+package kr.or.ddit.controller.stuff;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import kr.or.ddit.vo.AddApiVO;
+
+
+public class AddNumController {
+	private InsertController dialog;
+	
+    public InsertController getDialog() {
+		return dialog;
+	}
+
+	public void setDialog(InsertController dialog) {
+		this.dialog = dialog;
+	}
+
+	private UpdateAndDeleteController dialog1;
+	
+    public UpdateAndDeleteController getDialog1() {
+		return dialog1;
+	}
+
+	public void setDialog1(UpdateAndDeleteController dialog1) {
+		this.dialog1 = dialog1;
+	}
+	
+	@FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private Label addNum;
+
+    @FXML
+    private TextField txtDetail;
+
+    @FXML
+    private Button btnOK;
+
+    @FXML
+    private Label add;
+
+    @FXML
+    void btnOKClick(ActionEvent event) {
+    	
+    	Stage stage = (Stage) btnOK.getScene().getWindow();
+    	if(dialog != null) {
+    		dialog.inputAddr(addNum.getText(), add.getText()+" "+txtDetail.getText()); //첫번째 창한테 넘겨주는 정보
+       	}
+    	else{
+       		dialog1.inputAddr1(addNum.getText(), add.getText()+" "+txtDetail.getText()); //첫번째 창한테 넘겨주는 정보       		
+       	}
+    	
+    	
+    	stage.close();
+    }
+    
+    public void setTextField(AddApiVO AAVo) {
+    	addNum.setText(AAVo.getZipNo());
+    	String address = "";
+        for (int j = 0; j < 3; j++) {
+           address += AAVo.getAdres().split(" ")[j]+" ";
+        }
+
+    	add.setText(address);
+    }
+
+    @FXML
+    void initialize() {
+        
+
+    }
+}

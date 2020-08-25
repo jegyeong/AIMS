@@ -1,0 +1,128 @@
+package kr.or.ddit.controller.knowledge.admin;
+
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import kr.or.ddit.service.knowledge.IKnowledgeService;
+import kr.or.ddit.vo.Related_LawVO;
+
+public class AdminKnowledgeLawController {
+
+	@FXML
+	private ResourceBundle resources;
+
+	@FXML
+	private URL location;
+
+	@FXML
+	private TableView<Related_LawVO> lawTable;
+
+	@FXML
+	private TableColumn<?, ?> nameCol;
+
+	@FXML
+	private TableColumn<?, ?> contentCol;
+
+	@FXML
+	private Button btnAdd;
+
+	@FXML
+	private Button btnHome;
+
+	@FXML
+	void btnAddClick(ActionEvent event) throws IOException {
+		Stage stage = (Stage) btnAdd.getScene().getWindow();
+		Parent add = FXMLLoader.load(AdminKnowledgeLawController.class.getResource("../../../fxml/knowledge/admin/lawAdd.fxml"));
+
+		Scene scene = new Scene(add);
+		stage.setScene(scene);
+		stage.show();
+	}
+
+	@FXML
+	void btnHomeClick(ActionEvent event) throws IOException {
+		Stage stage = (Stage) btnHome.getScene().getWindow();
+		Parent main = FXMLLoader.load(AdminKnowledgeLawController.class.getResource("../../../fxml/knowledge/admin/adminKnowledgeMain.fxml"));
+
+		Scene scene = new Scene(main);
+		stage.setScene(scene);
+		stage.show();
+	}
+
+	private IKnowledgeService service;
+	private ObservableList<Related_LawVO> data;
+	private LawEditController lawEditController;
+
+	public void setData() {
+		try {
+			List<Related_LawVO> lawVo = service.getAllLaw();
+			data = FXCollections.observableArrayList(lawVo);
+			lawTable.setItems(data);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	@FXML
+	void initialize() {
+		try {
+			Registry reg = LocateRegistry.getRegistry(8888);
+
+			service = (IKnowledgeService) reg.lookup("knowledge");
+
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+
+			lawTable.setOnMouseClicked(e -> {
+				if (lawTable.getSelectionModel().isEmpty()) {
+					return;
+				}
+				try {
+					FXMLLoader loader = new FXMLLoader(
+							AdminKnowledgeLawController.class.getResource("../../../fxml/knowledge/admin/lawEdit.fxml"));
+					Parent root = loader.load();
+					lawEditController = loader.getController();
+
+					if (!lawTable.getSelectionModel().isEmpty()) {
+						Related_LawVO lawVo = lawTable.getSelectionModel().getSelectedItem();
+
+						lawEditController.show(lawVo);
+					}
+					Stage mainStage = (Stage) lawTable.getScene().getWindow();
+
+					Scene scene = new Scene(root);
+					mainStage.setScene(scene);
+					mainStage.show();
+
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+			});
+
+		nameCol.setCellValueFactory(new PropertyValueFactory<>("rel_l_name"));
+		contentCol.setCellValueFactory(new PropertyValueFactory<>("rel_l_content"));
+
+		setData();
+	}
+}

@@ -1,0 +1,20 @@
+package kr.or.ddit.service.auction;
+
+import org.quartz.Job;
+import org.quartz.JobDataMap;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+import kr.or.ddit.vo.A_articleVO;
+
+public class AuctionData implements Job{
+	
+		@Override
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		JobDataMap dataMap = arg0.getMergedJobDataMap();
+		A_articleVO articleVO = (A_articleVO) dataMap.get("article");
+		auctionServerImpl service = (auctionServerImpl) dataMap.get("service");
+		service.sendtoAlldata(articleVO.getA_art_no(), "start");
+	}
+}
+

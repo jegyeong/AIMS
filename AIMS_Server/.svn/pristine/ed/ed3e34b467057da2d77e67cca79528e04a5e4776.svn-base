@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="notice">
+	 
+	<select id="getNoticeTotalcount" resultClass="int">
+		select count(*) from notice
+	</select>
+	
+	<select id="getPaginNoticeList" resultClass="noticeVO" parameterClass="map"> 
+	 	 select *
+		 	from(
+		 	select A.*, rownum as RNUM
+			 	from(
+			 	select * from notice order by notice_no
+			 	)A
+		 	where rownum &lt;= #end#)
+	 	 where RNUM &gt; #start#
+	</select> 
+	
+	<select id="getNoticeFileList" resultClass="Notice_FileVO" parameterClass="string">
+		select * from Notice_File where notice_no = #notice_no#
+	</select> 
+	
+	<select id="getAnswerFileList" resultClass="Answer_FileVO" parameterClass="string">
+		select * from Answer_File where com_ans_no = #com_ans_no#
+	</select> 
+	
+	<select id="getQuestionFileList" resultClass="Question_FileVO" parameterClass="string">
+		select * from Question_File where com_que_no = #com_que_no#
+	</select> 
+	
+	<select id="getMyAnswerList" resultClass="Com_AnswerVO" parameterClass="string">
+		select * from Com_Answer where mem_id = #mem_id#
+	</select> 
+	<select id="getMyQuestionList" resultClass="Com_QuestionVO" parameterClass="string">
+		select * from Com_Answer where mem_id = #mem_id#
+	</select> 
+	
+	<insert id="insertAnswerVO" parameterClass="Answer_FileVO">
+		insert into answer_file values( ,#ans_f_addr#,#com_que_no#)
+	</insert>
+	
+</sqlMap>
+
+

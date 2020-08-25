@@ -1,0 +1,16 @@
+package kr.or.ddit.dao.aution;
+
+import java.net.ServerSocket;
+import java.util.List;
+
+import kr.or.ddit.vo.A_articleVO;
+
+public interface IauctionDAO {
+	public List<A_articleVO> getMyArticleList();
+	public List<A_articleVO> getTotalArticleList();
+	public List<ServerSocket> getTotalServ();
+	public int getMyArticleCnt();
+	public int getTotalArticleCnt();
+	public A_articleVO getArticleInfo(String a_art_no); //카테고리와 법원을 조인한 쿼리문 호출 
+}
+

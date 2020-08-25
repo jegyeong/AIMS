@@ -1,0 +1,51 @@
+package kr.or.ddit.service.auction;
+
+import java.net.Socket;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.quartz.CronScheduleBuilder;
+import org.quartz.CronTrigger;
+import org.quartz.Job;
+import org.quartz.JobBuilder;
+import org.quartz.JobDataMap;
+import org.quartz.JobDetail;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.TriggerBuilder;
+import org.quartz.impl.StdSchedulerFactory;
+
+import kr.or.ddit.vo.A_articleVO;
+
+public class AcutionScheduler {
+	
+	public AcutionScheduler(auctionServerImpl service){
+		JobDataMap jobMap = new JobDataMap();
+		jobMap.put("service",service);
+
+		
+		JobDetail changeData = JobBuilder.newJob(changeData.class).usingJobData(jobMap).build();
+		CronTrigger changeDataTrigger  = TriggerBuilder.newTrigger()
+//				.withSchedule(CronScheduleBuilder.cronSchedule("0 15 10 ? * MON-FRI")).build();
+//				.withSchedule(CronScheduleBuilder.cronSchedule("30 3 15 * * ? *")).build();
+				.withSchedule(CronScheduleBuilder.cronSchedule("40 25 21 22 4 ? 2020")).build();
+		StdSchedulerFactory startSchFactory = new StdSchedulerFactory();
+		
+		
+		try {
+			Scheduler startSch = startSchFactory.getScheduler();
+			startSch.start();
+			startSch.scheduleJob(changeData, changeDataTrigger);
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+	
+}

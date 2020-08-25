@@ -1,0 +1,129 @@
+#btnSearch{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnSreach{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnInter{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnBack{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnNum{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnMap{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnCourt{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnDate{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnCategory{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnPrice{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnLow{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnArea{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnTour{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnBack{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnCnt{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnResult{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnTotal{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnHome{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}

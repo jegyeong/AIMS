@@ -1,0 +1,20 @@
+package kr.or.ddit.service.auction;
+
+import java.net.ServerSocket;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.vo.A_articleVO;
+
+public interface IauctionServer extends Remote {
+	
+	public List<ServerSocket> getServerList() throws RemoteException;
+	public List<ServerSocket> getMyServerList()throws RemoteException;
+	public List<A_articleVO> getTotalArticleList()throws RemoteException;
+
+	public Map<ServerSocket,A_articleVO> getServerSocketMap()throws RemoteException;
+	public A_articleVO getArticleInfo(String a_art_no)throws RemoteException;
+	
+}	

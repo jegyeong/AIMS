@@ -1,0 +1,140 @@
+ package kr.or.ddit.dao.adminmypage;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.ibatis.BuildedSqlMapClient;
+import kr.or.ddit.vo.MemberVO;
+
+
+
+public class MemberInfoDaoImpl implements ImemberInfodao {
+	
+	
+	private SqlMapClient smc;
+	
+	private static MemberInfoDaoImpl dao;
+	
+	public MemberInfoDaoImpl() {
+		smc = BuildedSqlMapClient.getSqlMapClient();
+		
+	}
+	
+	public static MemberInfoDaoImpl getInstance() {
+		if(dao == null) dao = new MemberInfoDaoImpl();
+		
+		return dao;
+	}
+	
+	// 회원 id 검색
+	@Override
+	public List<MemberVO> getSearchMember(String mem_id) {
+		List<MemberVO> memList = null;
+		try {
+			memList = smc.queryForList("memberList.getSearchMember",mem_id);
+		} catch (SQLException e) {
+			memList = null;
+			e.printStackTrace();
+		}
+		return memList;
+	}
+
+	@Override
+	public int updateMember(MemberVO memVO) {
+		int cnt = 0;
+		try {
+			cnt = smc.update("memberList.updateMember",memVO);
+			if(cnt>0) {
+				System.out.println("update 작업성공!!");
+			}else {
+				System.out.println("update  작업실패...");
+			}
+		} catch (Exception e) {
+			memVO = null;
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public int insertBlackListMember(String mem_id) {
+		int cnt = 0;
+		try {
+			Object obj = smc.insert("memberList.insertBlackListMember",mem_id);
+			if(obj == null) {
+				cnt = 1;
+			System.out.println("insert 작업성공!!!!!");
+			}else {
+				cnt = 0;
+				System.out.println("insert 작업실패...");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public int deleteBlackListMember(String mem_id) {
+		int cnt = 0;
+		try {
+			cnt = smc.delete("memberList.deleteBlackListMember",mem_id);
+			if(cnt>0) {
+				System.out.println("delete 작업 성공!!");
+			}else {
+				System.out.println("delete 작업 실패...");
+			}
+		}catch(Exception e) {
+			cnt = 0;
+			e.printStackTrace();
+		}
+			return cnt;
+	}
+	
+	@Override
+	public int deleteMember(MemberVO memifVO) {
+		int cnt = 0;
+		try {
+			cnt = smc.delete("memberList.deleteMember",memifVO);
+			if(cnt>0) {
+				System.out.println("delete 작업 성공 !!");
+			}else {
+				System.out.println("delete 작업 실패 ...");
+			}
+			
+		} catch (Exception e) {
+			cnt = 0;
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	
+	// 테이블 뷰에 정보 나오는거 
+	@Override
+	public List<MemberVO> tableview(String mem_id) {
+
+		return null;
+	}
+	
+	
+	//테이블뷰 선택 후 회원정보 수정 버튼 누르면 정보 가져오는 거
+	@Override
+	public List<MemberVO> getMymember (){
+		List<MemberVO> myInfo = null;
+		try {
+			myInfo = smc.queryForList("memberList.getMymember");
+		} catch (SQLException e) {
+			myInfo = null;
+			e.printStackTrace();
+		}
+		return myInfo;
+		
+	}
+
+	
+
+
+}

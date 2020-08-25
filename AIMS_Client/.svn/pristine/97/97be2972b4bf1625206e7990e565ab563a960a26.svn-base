@@ -1,0 +1,37 @@
+package kr.or.ddit.service;
+
+import java.io.File;
+import java.net.Socket;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.vo.Answer_FileVO;
+import kr.or.ddit.vo.Com_AnswerVO;
+import kr.or.ddit.vo.Com_QuestionVO;
+import kr.or.ddit.vo.NoticeVO;
+import kr.or.ddit.vo.Notice_FileVO;
+import kr.or.ddit.vo.Question_FileVO;
+
+public interface InoticeServer extends Remote{
+	
+	public int getNoticTotalCount()throws RemoteException;
+	public List<NoticeVO> getPaginNoticeList(Map<String,Integer> pageMap)throws RemoteException;
+	
+	public List<Notice_FileVO> getNoticeFileList(String notice_no)throws RemoteException;
+	public List<Answer_FileVO> getAnswerFileList(String com_ans_no)throws RemoteException;
+	public List<Question_FileVO> getQuestionFileList(String com_que_no)throws RemoteException;
+	
+	public void saveAnswerFile(List<File> dataList,String com_que_no)throws RemoteException;
+	public long loadAnswerFile(Socket user,Answer_FileVO data)throws RemoteException;
+	
+	public void saveQuestionFile(List<File> dataList,String com_ans_no)throws RemoteException;
+	public long loadQuestionFile(Socket user,Question_FileVO data)throws RemoteException;
+	
+	public void saveNoticeFile(List<File> dataList,String notice_no)throws RemoteException;
+	public long loadNoticeFile(Socket user,Notice_FileVO data)throws RemoteException;
+	
+	public List<Com_AnswerVO> getMyAnswerList(String mem_id)throws RemoteException;
+	public List<Com_QuestionVO> getMyQuestionList(String mem_id)throws RemoteException;
+}

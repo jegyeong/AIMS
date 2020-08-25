@@ -1,0 +1,356 @@
+package kr.or.ddit.dao.search;
+
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.ibatis.BuildedSqlMapClient;
+import kr.or.ddit.vo.A_articleVO;
+import kr.or.ddit.vo.CategoryAVO;
+import kr.or.ddit.vo.CategoryBVO;
+import kr.or.ddit.vo.CategoryCVO;
+import kr.or.ddit.vo.CourtVO;
+
+
+
+public class SearchDao implements ISearchDao{
+//---------------------------------------------------------------
+	private SqlMapClient smc;
+	
+	private static SearchDao dao;
+	
+	private SearchDao() {
+		smc = BuildedSqlMapClient.getSqlMapClient();
+	}
+	
+	public static SearchDao getInstance() {
+		if(dao == null) dao = new SearchDao();
+		
+		return dao;
+	}
+//---------------------------------------------------------------
+	
+	@Override
+	public List<A_articleVO> numSearch(String a_art_no) {
+		List<A_articleVO> numlist = null;
+		
+		try {
+			numlist = smc.queryForList("search.numSearch", a_art_no);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("물건 번호 검색 실패");
+		}
+		
+		return numlist;
+	}
+
+	@Override
+	public List<A_articleVO> courtSearch(String cou_no) {
+		List<A_articleVO> courtlist = null;
+		
+		try {
+			courtlist = smc.queryForList("search.courtSearch", cou_no);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("법원 검색 실패");
+		}
+		
+		return courtlist;
+	}
+
+
+	@Override
+	public List<A_articleVO> dateSearch(Map<String, String> a_art_day) {
+		// Map의 구조
+		// key		value
+		// field	검색할 컬럼명
+		// search	검색할 내용
+		List<A_articleVO> datelist = null;
+		
+		try {
+			datelist = smc.queryForList("search.dateSearch", a_art_day);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("기간 검색 실패");
+		}
+		
+		return datelist;
+	}
+
+	@Override
+	public List<A_articleVO> categoryASearch(Map<String, String> cat_a_no) {
+		// Map의 구조
+		// key		value
+		// field	검색할 컬럼명
+		// search	검색할 내용
+		List<A_articleVO> categoryList = null;
+		
+		try {
+			categoryList = smc.queryForList("search.categoryASearch", cat_a_no);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("카테고리 검색 실패");
+		}
+		
+		return categoryList;
+	}
+
+	@Override
+	public List<A_articleVO> priceSearch(Map<String, String> a_art_price) {
+		// Map의 구조
+		// key		value
+		// field	검색할 컬럼명
+		// search	검색할 내용
+		List<A_articleVO> priceList = null;
+		
+		try {
+			priceList = smc.queryForList("search.priceSearch", a_art_price);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("감정평가액 검색 실패");
+		}
+		
+		return priceList;
+	}
+
+	@Override
+	public List<A_articleVO> lowSearch() {
+		List<A_articleVO> lowList = null;
+		
+		try {
+			lowList = smc.queryForList("search.lowSearch");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("최저가격 검색 실패");
+		}
+		
+		return lowList;
+	}
+
+	@Override
+	public List<A_articleVO> areaSearch(Map<String, String> a_art_area) {
+		// Map의 구조
+		// key		value
+		// field	검색할 컬럼명
+		// search	검색할 내용
+		List<A_articleVO> arealist = null;
+		
+		try {
+			arealist = smc.queryForList("search.areaSearch", a_art_area);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("면적 검색 실패");
+		}
+		
+		return arealist;
+	}
+
+	@Override
+	public List<A_articleVO> tourSearch() {
+		List<A_articleVO> tourlist = null;
+		
+		try {
+			tourlist = smc.queryForList("search.tourSearch");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("유찰횟수 검색 실패");
+		}
+		
+		return tourlist;
+	}
+
+	@Override
+	public List<A_articleVO> interSearch() {
+		List<A_articleVO> interlist = null;
+		
+		try {
+			interlist = smc.queryForList("search.interSearch");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("관심도 검색 실패");
+		}
+		
+		return interlist;
+	}
+
+	@Override
+	public List<A_articleVO> cntSearch() {
+		List<A_articleVO> cntlist = null;
+		
+		try {
+			cntlist = smc.queryForList("search.cntSearch");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("조회수 검색 실패");
+		}
+		
+		return cntlist;
+	}
+
+	@Override
+	public List<A_articleVO> resultSearch(String a_art_result) {
+		List<A_articleVO> resultlist = null;
+		
+		try {
+			resultlist = smc.queryForList("search.resultSearch", a_art_result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("경매 결과 검색 실패");
+		}
+		
+		return resultlist;
+	}
+
+
+	@Override
+	public List<A_articleVO> getAllShow() {
+		List<A_articleVO> allList = null;
+		
+		try {
+			allList = smc.queryForList("search.getAllShow");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("전체 정보 검색 결과 실패");
+		}
+		
+		return allList;
+	}
+
+	@Override
+	public List<CategoryAVO> getAllACategory() {
+		List<CategoryAVO> Alist = null;
+		
+		try {
+			Alist = smc.queryForList("search.getAllACategory");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("카테고리 A실패");
+		}
+		
+		return Alist;
+	}
+
+	@Override
+	public List<CategoryBVO> getAllBCategory(String cat_a_no) {
+		List<CategoryBVO> Blist = null;
+		
+		try {
+			Blist = smc.queryForList("search.getAllBCategory", cat_a_no);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("카테고리 B실패");
+		}
+		
+		return Blist;
+	}
+
+	@Override
+	public List<CategoryCVO> getAllCCategory(String cat_b_no) {
+		List<CategoryCVO> Clist = null;
+		
+		try {
+			Clist = smc.queryForList("search.getAllCCategory", cat_b_no);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("카테고리 C실패");
+		}
+		
+		return Clist;
+	}
+	
+	@Override
+	public A_articleVO getInfo(String no) {
+		A_articleVO vo = null;
+		try {
+			vo = (A_articleVO) smc.queryForObject("search.getInfo",no);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return vo;
+	}
+
+
+
+	@Override
+	public List<CourtVO> getAllCourt(String courtAdd) {
+		List<CourtVO> courtList = null;
+		
+		try {
+			courtList = smc.queryForList("search.getAllCourt", courtAdd);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("전체 법원 정보 실패");
+		}
+		
+		return courtList;
+	}
+
+	@Override
+	public int updateCnt(String a_art_no) {
+		int c = 0;
+		
+		try {
+			c = smc.update("search.updateCnt", a_art_no);
+		} catch (SQLException e) {
+			c = 0;
+			e.printStackTrace();
+			System.out.println("조회수 update실패");
+		}
+		
+		return c;
+	}
+
+	@Override
+	public int insertInter(String a_art_no) throws RemoteException {
+		int cnt = 0;
+		
+		try {
+			Object obj = smc.insert("search.insertInter", a_art_no);
+			
+			if(obj == null) {
+				cnt = 1;
+				System.out.println("관심도inset작업 성공");
+			}else {
+				cnt = 0;
+				System.out.println("관심도insert작업 실패");
+			}
+		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public List<A_articleVO> totalSearch(Map<String, String> search) throws RemoteException {
+		List<A_articleVO> totalList = null;
+		
+		try {
+			totalList = smc.queryForList("search.totalSearch",search);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("total실패");
+		}
+		
+		return totalList;
+	}
+
+	@Override
+	public List<String> courtAdd() throws RemoteException {
+		List<String> deoList = null;
+		
+		try {
+			deoList = smc.queryForList("search.courtAdd");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return deoList;
+	}
+
+}

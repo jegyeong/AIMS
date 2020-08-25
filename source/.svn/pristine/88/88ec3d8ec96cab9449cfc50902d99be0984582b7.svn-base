@@ -1,0 +1,63 @@
+#Search{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#ok{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnJungbokCon{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnAddSerach{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnEmailCon{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnNumCom{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnConfirm{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnHome{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#listview{
+	-fx-border-color : #d9d9d9;
+	-fx-border-width : 3;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}

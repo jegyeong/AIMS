@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="890.0" stylesheets="@../../../../../../../css/knowledge.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.knowledge.user.AuctionStepController">
+   <children>
+      <ImageView fx:id="mainView" fitHeight="310.0" fitWidth="700.0" layoutX="95.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView1" fitHeight="48.0" fitWidth="174.0" layoutX="80.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView2" fitHeight="48.0" fitWidth="174.0" layoutX="80.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView3" fitHeight="48.0" fitWidth="174.0" layoutX="80.0" layoutY="455.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView4" fitHeight="48.0" fitWidth="174.0" layoutX="80.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView5" fitHeight="48.0" fitWidth="174.0" layoutX="80.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView6" fitHeight="48.0" fitWidth="174.0" layoutX="80.0" layoutY="632.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView7" fitHeight="48.0" fitWidth="174.0" layoutX="80.0" layoutY="685.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView8" fitHeight="48.0" fitWidth="174.0" layoutX="80.0" layoutY="750.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="subView9" fitHeight="48.0" fitWidth="174.0" layoutX="80.0" layoutY="815.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="275.0" layoutY="330.0" prefHeight="48.0" prefWidth="555.0" text="채권자가 경매신청을 하면 법원은 경매개시결정을 하여 매각할 부동산을 압류하고 관할등기소에 경매개시결정의 가입등기를 촉탁하여 경매개시결정 사실을 등기기록에 기입하도록 합니다. 법원은 경매개시결정 정본을 채무자에게 송달합니다." wrapText="true" />
+      <Label layoutX="275.0" layoutY="385.0" prefHeight="61.0" prefWidth="555.0" text="매각할 부동산이 압류되면, 집행법원은 채권자들이 배당요구를 할 수 있는 기간을 첫 매각기일 이전으로 정합니다. 법원은 경매개시결에 따른 압류의 효력이 생긴 때부터 1주일 안에 경매개시결정을 한 취지와 배당요구의 종기를 법원경매정보 홈페이지의 법원경매공고란 또는 법원게시판에 게시하는 방법으로 공고합니다." wrapText="true" />
+      <Label layoutX="275.0" layoutY="455.0" prefHeight="48.0" prefWidth="555.0" text="법원은 집행관에게 매각할 부동산의 현상, 점유관계, 차임 또는 보증금의 액수, 기타 현황에 관하여 조사를 명하고, 감정인에게 매각할 부동산을 평가하게 합니다. 법원은 감정인의 평가액을 참작하여 최저매각가격을 정합니다." wrapText="true" />
+      <Label layoutX="275.0" layoutY="510.0" prefHeight="48.0" prefWidth="555.0" text="매각방법으로는, ① 매수신청인이 매각기일에 매각장소에서 입찰표를 제출하는 기일입찰 방법과 ② 매수신청인이 지정된 입찰기간 안에 직접 또는 우편으로 입찰표를 제출하는 기간입찰 방법이 있습니다. 법원은 두 방법 중 하나를 선택하고 매각기일 등을 지정하여 통지, 공고를 합니다." wrapText="true" />
+      <Label layoutX="275.0" layoutY="565.0" prefHeight="61.0" prefWidth="555.0" text="기일입찰의 경우, 집행관이 미리 지정된 매각기일에 매각장소에서 입찰을 실시하여 최고가매수신고인과 차순위매수신고인을 정합니다.  기간입찰의 경우, 집행관이 입찰기간 동안 입찰봉투를 접수하여 보관하다가 매각기일에 입찰봉투를 개봉하여 최고가매수신고인과 차순위매수신고인을 정합니다. 기일입찰과 달리 매각기일에는 입찰을 실시하지 않습니다." wrapText="true" />
+      <Label layoutX="275.0" layoutY="632.0" prefHeight="30.0" prefWidth="555.0" text="법원은 지정된 매각졀정기일에 이해관계인의 의견을 들은 후 매각허가 여부를 결정합니다. 매각허가 여부의 결정에 불복하는 이해관계인은 즉시항고를 할 수 있습니다." wrapText="true" />
+      <Label layoutX="275.0" layoutY="680.0" prefHeight="61.0" prefWidth="555.0" text="매각허가결정이 확정되면 법원은 매각대금의 지급기한을 정하여 매수인에게 매각대금의 납부를 명합니다. 매수인은 지정된 지급기한 안에는 언제든지 매각대금을 납부할 수 있습니다. 매수인이 지정된 지급기한까지 매각대금을 모두 납부하지 아니하면, 법원은 차순위매수신고인이 있는 때에는 그에 대하여 매각을 허가할 것인지 여부를 결정하고 차순위매수신고인이 없는 때에는 재매각을 명합니다." wrapText="true" />
+      <Label layoutX="275.0" layoutY="750.0" prefHeight="61.0" prefWidth="555.0" text="매수인은 대금을 모두 납부하면 부동산의 소유권을 취득합니다. 법원은 매수인이 필요한 서류를 제출하면 관할등기소에 매수인 명의의 소유권이전등기, 매수인이 인수하지 아니하는 부동산에 관한 부담의 말소등기를 촉탁하게 됩니다. 매수인은 대금을 모두 납부한 후에는 부동산의 인도명령을 신청할 수 있습니다." wrapText="true" />
+      <Label layoutX="275.0" layoutY="815.0" prefHeight="39.0" prefWidth="555.0" text="매수인이 매각대금을 모두 내면 법원은 배당기일을 정하여 이해관계인과 배당을 요구한 채권자를 소환하고 배당을 하게 됩니다." wrapText="true" />
+   </children>
+</AnchorPane>

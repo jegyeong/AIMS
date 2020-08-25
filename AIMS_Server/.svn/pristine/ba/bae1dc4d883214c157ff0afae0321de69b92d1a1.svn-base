@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="search">
+	<select id="getAllShow" resultClass="articleVo">
+	select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa;
+>>>>>>> .r116083
+	</select>
+
+	<select id="numSearch" parameterClass="String" resultClass="articleVo">
+	select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa
+	where a_art_no like '%' || #a_art_no# || '%'
+	</select>
+
+	<select id="courtSearch" parameterClass="String" resultClass="articleVo">
+	select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa where cou_no like '%' || #cou_no#|| '%'
+	</select>
+
+	<select id="dateSearch" parameterClass="map" resultClass="articleVo">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article  aa where 1 = 1
+		<isNotNull property="start" prepend="and">
+			a_art_day &gt;=
+			to_date(#start#,'yyyymmdd')
+		</isNotNull>
+		<isNotNull property="end" prepend="and">
+			a_art_day &lt;=
+			to_date(#end#,'yyyymmdd')
+		</isNotNull>
+		<!-- A_ART_DAY between to_date(#start#,'yyyymmdd') and to_date(#end#,'yyyymmdd') -->
+	</select>
+
+	<select id="categoryASearch" parameterClass="map"
+		resultClass="articleVo">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa where 1 = 1
+		<isNotNull property="cat_a_no" prepend="and">
+			cat_a_no = #cat_a_no#
+		</isNotNull>
+		<isNotNull property="cat_b_no" prepend="and">
+			cat_b_no = #cat_b_no#
+		</isNotNull>
+		<isNotNull property="cat_c_no" prepend="and">
+			cat_c_no = #cat_c_no#
+		</isNotNull>
+	</select>
+
+	<select id="priceSearch" parameterClass="map"
+		resultClass="articleVo">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa where 1 = 1
+		<isNotNull property="start" prepend="and">
+			a_art_price &gt;=
+			$start$
+		</isNotNull>
+		<isNotNull property="end" prepend="and">
+			a_art_price &lt;= $end$
+		</isNotNull>
+	</select>
+
+	<select id="lowSearch" resultClass="articleVo">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa 
+order by a_art_low asc
+	</select>
+
+	<select id="areaSearch" parameterClass="map"
+		resultClass="articleVo">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa where 1 = 1
+		<isNotNull property="start" prepend="and">
+			to_number(a_art_area)
+			&gt;= $start$
+		</isNotNull>
+		<isNotNull property="end" prepend="and">
+			to_number(a_art_area)
+			&lt;= $end$
+		</isNotNull>
+
+
+
+
+
+		<!-- where to_number(a_art_area) between $start$ and $end$ -->
+	</select>
+
+	<select id="tourSearch" resultClass="articleVo">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa
+		order by a_art_tour asc
+	</select>
+
+	<select id="interSearch" resultClass="articleVo">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa
+		order by a_art_inter desc
+	</select>
+
+	<select id="cntSearch" resultClass="articleVo">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa
+		order by a_art_cnt desc
+	</select>
+
+	<select id="resultSearch" parameterClass="String"
+		resultClass="articleVo">
+
+	</select>
+
+
+
+	<select id="getAllCourt" resultClass="courtVo">
+		select * from court
+	</select>
+
+	<select id="getAllACategory" resultClass="CAVo">
+		select * from
+		category_a
+	</select>
+
+	<select id="getAllBCategory" resultClass="CBVo"
+		parameterClass="String">
+		select * from category_b where cat_a_no = #cat_a_no#
+	</select>
+
+	<select id="getAllCCategory" resultClass="CCVo"
+		parameterClass="String">
+		select * from category_c where cat_b_no = #cat_b_no#
+	</select>
+
+
+
+
+
+
+
+
+	<select id="getInfo" parameterClass="String"
+		resultClass="articleVo">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa
+		where a_art_no = #a_art_no#
+	</select>
+
+
+</sqlMap>

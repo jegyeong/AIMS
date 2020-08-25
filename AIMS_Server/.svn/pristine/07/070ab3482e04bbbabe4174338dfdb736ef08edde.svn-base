@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="auction">
+	 
+	<select id="getMyArticleList" parameterClass="string" resultClass="A_articleVO">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa where to_number(to_char(a_art_day,'yyyymmdd'))-to_number(to_char(sysdate,'yyyymmdd')) = 0 and a_art_no in (select a_art_no from interest where mem_id = #mem_id#);
+	</select>
+	
+	<select id="getTotalArticleList" resultClass="A_articleVO">
+		select aa.A_ART_NO,A_ART_LOC,
+ (select cou_name from court where court.cou_no=aa.cou_no) COU_NO,
+ (select cat_a_name from category_A where category_A.cat_a_no= aa.CAT_A_NO) CAT_A_NO,
+ (select cat_b_name from category_B where category_B.cat_b_no= aa.CAT_b_NO) CAT_b_NO,
+ (select cat_c_name from category_c where category_c.cat_c_no= aa.CAT_c_NO) CAT_c_NO,
+A_ART_LOW,A_ART_AREA,A_ART_CNT,
+ (select  count(*) from article_result a1
+where a1.a_art_no = aa.a_art_no and res_state='유찰') A_ART_TOUR,
+A_ART_DAY,A_ART_NAME,A_ART_APPR,A_ART_PRICE,A_ART_ADDNUM,
+(select count(*) from interest where interest.a_art_no = aa.a_art_no) a_art_inter,
+nvl((
+select  res_state from article_result a1
+where res_date = (select max(res_date) from article_result b1 where a1.a_art_no=b1.a_art_no) 
+and a1.a_art_no = aa.a_art_no
+), '준비중') a_art_result
+from A_article aa where to_number(to_char(a_art_day,'yyyymmdd'))-to_number(to_char(sysdate,'yyyymmdd')) = 0;
+	</select>
+	
+</sqlMap>
+
+
+<!-- public List<A_articleVO> getMyArticleList(); -->
+<!-- 	public List<A_articleVO> getTotalArticleList(); -->
+<!-- 	public List<ServerSocket> getTotalServ(); -->
+<!-- 	public A_articleVO getArticleInfo(String a_art_no); //카테고리와 법원을 조인한 쿼리문 호출  -->

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.mypage.Com_QuestionController">
+   <children>
+      <TableView fx:id="inforView" onSort="#inforView" prefHeight="870.0" prefWidth="890.0">
+        <columns>
+          <TableColumn fx:id="Title" prefWidth="635.0" text="제목" />
+          <TableColumn fx:id="Date" prefWidth="145.0" text="날짜" />
+            <TableColumn fx:id="state" minWidth="3.0" prefWidth="109.0" text="현황" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

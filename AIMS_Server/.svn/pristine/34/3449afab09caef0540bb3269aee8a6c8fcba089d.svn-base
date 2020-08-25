@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+
+<sqlMap namespace="manageragency">
+	<select id="getAllCourt" resultClass="agencyVo">
+		select * from court
+	</select> 
+	
+	<select id="getCourtAddr" parameterClass="agencyVo">
+		select * from court where cou_loc = #cou_loc#
+	</select>
+	
+	<select id="getCourtName" parameterClass="string" resultClass="agencyVo">
+		select * from court where cou_name = #cou_name#
+	</select>
+	
+	<select id="getCourtSum" parameterClass="string" resultClass="agencyVo">
+		select * court where cou_loc = #cou_loc#, cou_name = #cou_name#
+	</select>
+	
+	<insert id="insertCourt" parameterClass="agencyVo">
+		insert into court (cou_no, cou_name, cou_loc, cou_tel)
+		values (COURT_seq.nextval, #cou_name#, #cou_loc#, #cou_tel#)
+	</insert>
+	
+	<update id="updateCourt" parameterClass="agencyVo">
+		update court set cou_name = #cou_name#, cou_loc = #cou_loc#,cou_tel = #cou_tel#
+				where cou_no = #cou_no#
+	</update>
+</sqlMap>
+
+
+
+
+
+
+

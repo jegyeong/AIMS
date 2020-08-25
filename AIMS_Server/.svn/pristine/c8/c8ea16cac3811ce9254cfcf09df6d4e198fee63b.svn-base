@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ 	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ 	
+ 	<sqlMap namespace="memberList">
+ 	
+ 	<!-- 회원 검색   -->
+ 	<select id="getSearchMember" resultClass="MemberInfoVO" parameterClass="String">
+ 		select * from member where mem_id like '%' || #search# ||'%' 
+
+ 	</select>
+ 	
+ 	<!-- 회원정보 수정 버튼 누른 후 회원 정보 수정하기  -->
+ 	<update id="updateMember" parameterClass="MemberInfoVO">
+ 		update member set  mem_pass=#mem_pass#,
+ 						mem_name=#mem_name#, mem_addr=#mem_addr#,
+ 						mem_tel=#mem_tel#,mem_email=#mem_email#,
+ 						mem_regno=#mem_regno#
+		where mem_id=#mem_id#
+ 	</update>
+ 	
+ 	<!-- 블랙리스트 추가 하는거 ..블랙리스트 버튼을 누르면 블랙리스트에 추가 되는거  -->
+ 	<insert id="insertMember" parameterClass="MemberInfoVO">
+ 		insert into member(mem_id, mem_pass,
+ 						mem_name, mem_addr,
+ 						mem_tel,mem_email,
+ 						mem_regno)
+ 		values(#mem_id#,#mem_pass#,#mem_name#,#mem_addr#,#mem_tel#,#mem_email#,#mem_regno#)					
+ 	</insert>
+ 	
+ 	<!--  회원 정보 수정 버튼 누른 후 회원 삭제하기  -->
+ 	<delete id="deleteMember" parameterClass="String">
+ 		delete from member where mem_id=#mem_id#
+ 	</delete>
+ 	
+ 	
+ 	<!--  회원 검색 하고 회원 수정버튼을 누르면  해당  데이터만 나오는거  -->
+ 	<select id="getMymember" parameterClass="String"  resultClass="MemberInfoVO">
+ 		select * from member 
+ 	</select>
+ 
+ 	</sqlMap>

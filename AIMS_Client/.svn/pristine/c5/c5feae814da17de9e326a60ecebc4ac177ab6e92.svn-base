@@ -1,0 +1,149 @@
+package kr.or.ddit.controller.InformationUse;
+
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import kr.or.ddit.service.InformationUse.IFAQService;
+import kr.or.ddit.vo.FAQVO;
+
+public class FAQDetailsController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private TextField tfTitle;
+
+    @FXML
+    private TextArea tfContents;
+
+    @FXML
+    private TextField tfFile;
+
+    @FXML
+    private Button btnConfirm;
+    
+    @FXML
+    private Button btnFrontModi;
+    
+    @FXML
+    private Button btnModify;
+    
+    @FXML
+    private AnchorPane contentsArea;
+    
+    public AnchorPane getContentsArea() {
+    	return contentsArea;
+    }
+    
+    public void setContentsArea(AnchorPane contentsArea) {
+    	this.contentsArea = contentsArea;
+    }
+    
+    public FAQVO faqVoInfo;
+	
+	public FAQVO getFaqVoInfo() {
+		return faqVoInfo;
+	}
+
+	public void setFaqVoInfo(FAQVO faqVoInfo) {
+		this.faqVoInfo = faqVoInfo;
+	}
+    
+    private ObservableList<FAQVO> faqTableList;
+    private IFAQService service;
+    private FAQVO faqVo;
+    
+    
+    @FXML
+    void btnModifyClicked(ActionEvent event) {
+    	btnModify.isDisable();
+    	//수정할수없다는 Alert창 띄우기
+    }
+    
+
+    @FXML
+    void btnConfirmClicked(ActionEvent event) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(FAQDetailsController.class.getResource("../../fxml/InformationUse/FAQ.fxml"));
+    		Parent root = loader.load();
+    		FAQController mfadCon = loader.getController();
+    		mfadCon.setContentsArea(contentsArea);
+    		mfadCon.setFaqVoInfo(getFaqVoInfo());
+    		
+    		if(contentsArea.getChildren().size()!=0) {
+    			for(int i=0; i<contentsArea.getChildren().size(); i++) {
+    				contentsArea.getChildren().remove(0);
+    			}
+    		}
+    		contentsArea.getChildren().add(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	
+    }
+    
+    @FXML
+    void btnFrontModiClicked(ActionEvent event) {
+    	
+    	//ManagerFAQServiceImpl service;
+    	//수정 가능한 상태로 만들기
+        tfTitle.setEditable(true);
+        tfContents.setEditable(true);
+        
+    }
+    
+    //값 가져오는 메서드 만듦
+    public void setName(FAQVO faqVo) {
+    	tfTitle.setText(faqVo.getFaq_title());
+    	tfContents.setText(faqVo.getFaq_content());
+    }
+    
+    @FXML
+    void initialize() {
+
+    	try {
+			Registry reg = LocateRegistry.getRegistry(8888);
+			service = (IFAQService) reg.lookup("FAQ");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			
+		}catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+    	
+        
+        faqTableList = FXCollections.observableArrayList();
+        
+        //수정불가능한 상태로 만들기
+        tfTitle.setEditable(false);
+        tfContents.setEditable(false);
+//        btnModify.setDisable(true);
+//        btnFrontModi.setDisable(true);
+        btnFrontModi.setVisible(false);
+        btnModify.setVisible(false);
+        
+
+    }
+}

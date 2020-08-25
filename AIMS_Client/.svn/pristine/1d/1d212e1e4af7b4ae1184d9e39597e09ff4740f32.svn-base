@@ -1,0 +1,59 @@
+package kr.or.ddit.controller.search;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
+import kr.or.ddit.vo.A_articleVO;
+
+public class ResultController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private ComboBox<?> resultCombo;
+
+    @FXML
+    private Button btnSearch;
+
+    @FXML
+    private TableView<A_articleVO> table;
+
+    @FXML
+    private TableColumn<A_articleVO, String> numCol;
+
+    @FXML
+    private TableColumn<A_articleVO, String> nameCol;
+
+    @FXML
+    private TableColumn<A_articleVO, String> resultCol;
+
+    @FXML
+    private Pagination page;
+
+    @FXML
+    void btnSearchClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tableClick(MouseEvent event) {
+
+    }
+
+    @FXML
+    void initialize() {
+       
+
+    }
+}

@@ -1,0 +1,65 @@
+package kr.or.ddit.service.InformationUse;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+
+import com.sun.javafx.collections.MappingChange.Map;
+
+import kr.or.ddit.dao.InformationUse.IManagerAgencyDao;
+import kr.or.ddit.dao.InformationUse.ManagerAgencyDaoImpl;
+import kr.or.ddit.vo.AgencyVO;
+
+
+
+public class ManagerAgencyServiceImpl extends UnicastRemoteObject implements IManagerAgencyService {
+	
+	private IManagerAgencyDao dao;
+	private static ManagerAgencyServiceImpl instance;
+	private ManagerAgencyServiceImpl() throws RemoteException {
+		dao = ManagerAgencyDaoImpl.getInstance();
+	}
+	public static ManagerAgencyServiceImpl getInstance() {
+		if(instance == null){
+			try {
+				instance = new ManagerAgencyServiceImpl();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+		return instance;
+	}
+	
+	
+	@Override
+	public List<AgencyVO> getAllCourt() {
+		return dao.getAllCourt();
+	}
+	@Override
+	public List<AgencyVO> getCourtAddr(String addr) {
+		return dao.getCourtAddr(addr);
+	}
+	@Override
+	public List<AgencyVO> getCourtName(String name) {
+		return dao.getCourtName(name);
+	}
+	@Override
+	public List<AgencyVO> getCourtSum(Map<String, String> searchMap) {
+		return dao.getCourtSum(searchMap);
+	}
+	@Override
+	public int insertCourt(AgencyVO agencyVo) {
+		return dao.insertCourt(agencyVo);
+	}
+	@Override
+	public int updateCourt(AgencyVO agencyVo) {
+		return dao.updateCourt(agencyVo);
+	}
+	@Override
+	public int getAllAgencyCount() {
+		return dao.getAllAgencyCount();
+	}
+	
+	
+	
+}

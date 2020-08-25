@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace = "admin_knowledge">
+
+	<select id="getTerms" resultClass="termVo">
+		select * from a_terminology
+	</select>
+	
+	<insert id="insertTerms" parameterClass="termVo">
+		insert into a_terminology (a_ter_no, a_ter_name, a_ter_content)
+		values (a_terminology_seq.nextVal, #a_ter_name#, #a_ter_content#)
+	</insert>
+	
+	<update id="updateTerms" parameterClass="termVo">
+		update a_terminology set a_ter_name = #a_ter_name#, a_ter_content = #a_ter_content# where a_ter_no = #a_ter_no#
+	</update>
+	
+	<delete id="deleteTerms" parameterClass="termVo">
+		delete from a_terminology where a_ter_name = #a_ter_name#
+	</delete>
+	
+	<select id="getAllForm" resultClass="formVo">
+		select * from a_form
+	</select>
+	
+	<select id="getAllFile" resultClass="fileVo">
+		select * from form_file
+	</select>
+	
+	<select id="joinForm" resultClass="joinVo">
+		select rownum, A.a_form_name a_form_name, B.form_f_addr form_f_addr, 
+		A.a_form_no a_form_no, B.form_f_no form_f_no 
+		from a_form A, form_file B
+ 		 where A.a_form_no = B.a_form_no
+	</select>
+	
+	<insert id="insertForm" parameterClass="formVo">
+		<selectKey keyProperty="a_form_no" resultClass="String" type="pre">
+			select a_form_seq.nextVal as a_form_no from dual
+		</selectKey>
+		insert into a_form (a_form_no, a_form_name)
+		values(#a_form_no#, #a_form_name#)
+	</insert>
+	
+	<insert id="insertFile" parameterClass="fileVo">
+		insert into form_file (form_f_no, form_f_addr, a_form_no)
+		values(form_file_seq.nextVal, #form_f_addr#, #a_form_no#)
+	</insert>
+	
+	<update id="updateForm" parameterClass="formVo">
+		update a_form set a_form_name = #a_form_name# where a_form_no = #a_form_no#
+	</update>
+	
+	<update id="updateFile" parameterClass="fileVo" >
+		update form_file set form_f_addr = #form_f_addr# where form_f_no = #form_f_no#
+	</update>
+	
+	<delete id="deleteForm" parameterClass="formVo">
+		delete from a_form where a_form_no = #a_form_no#
+	</delete>
+	
+	<delete id="deleteFile" parameterClass="fileVo">
+		delete from form_file where a_form_no = #a_form_no# and form_f_addr like '%$form_f_addr$%'
+	</delete>
+	
+	<select id="getAllLaw" resultClass="lawVo">
+		select * from related_law
+	</select> 
+	
+	<!-- <insert id="insertLaw" parameterClass="lawVo">
+		insert into related_law (rel_l_no, rel_l_content, rel_l_name)
+		values(related_law_seq.nextVal, #rel_l_content#, #rel_l_name#)
+	</insert> -->
+	
+	<!-- <update id="updateLaw" parameterClass="lawVo">
+		update related_law set rel_l_content = #rel_l_content#, rel_l_name = #rel_l_name# where rel_l_no = #rel_l_no#
+	</update> -->
+	
+	<!-- <delete id="deleteLaw" parameterClass="lawVo">
+		delete from related_law where rel_l_no = #rel_l_no#
+	</delete> -->
+	
+	<select id = "searchTerms" parameterClass="String" resultClass="termVo">
+		select * from a_terminology where a_ter_name like '%' || #a_ter_name# || '%'
+	</select>
+	
+	<select id="getAllTerm" resultClass="termVo">
+		select * from a_terminology
+	</select>
+	
+	<select id= "getFormList" parameterClass="string" resultClass="fileVo">
+		select * from form_file where a_form_no =#a_form_no#
+	</select> 
+	<!-- <select id = "searchLaw" parameterClass="String" resultClass="lawVo">
+		select * from related_law where rel_l_name like '%' || #rel_l_name# || '%'
+	</select> -->
+	
+</sqlMap>

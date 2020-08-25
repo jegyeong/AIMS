@@ -1,0 +1,63 @@
+package kr.or.ddit.service.auction;
+
+import org.quartz.CronScheduleBuilder;
+import org.quartz.CronTrigger;
+import org.quartz.JobBuilder;
+import org.quartz.JobDataMap;
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.TriggerBuilder;
+import org.quartz.impl.StdSchedulerFactory;
+
+public class AcutionScheduler {
+	Scheduler startSch;
+	Scheduler endSch;
+	auctionServerImpl service;
+	public void getService(auctionServerImpl service ) {
+		this.service = service;
+	}
+	public AcutionScheduler(){
+		
+		JobDataMap jobMap = new JobDataMap();
+		jobMap.put("service",service);
+		
+		JobDetail jStart = JobBuilder.newJob(AuctionListUpdate.class).withIdentity("testJob").usingJobData(jobMap).build();
+		CronTrigger startTrigger  = TriggerBuilder.newTrigger().withIdentity("crontrigger","crontriggergroup1")
+				.withSchedule(CronScheduleBuilder.cronSchedule("0 0 6 ? * MON-FRI")).build();
+		StdSchedulerFactory startSchFactory = new StdSchedulerFactory();
+		
+		try {
+			startSch = startSchFactory.getScheduler();
+			startSch.start();
+			startSch.scheduleJob(jStart, startTrigger);
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		JobDetail jEnd = JobBuilder.newJob(AuctionListDelete.class).withIdentity("testJob1").usingJobData(jobMap).build();
+		CronTrigger endTrigger  = TriggerBuilder.newTrigger().withIdentity("crontrigger","crontriggergroup2")
+				.withSchedule(CronScheduleBuilder.cronSchedule("0 0 22 ? * MON-FRI")).build();
+		StdSchedulerFactory endSchFactory = new StdSchedulerFactory();
+		
+		try {
+			endSch = endSchFactory.getScheduler();
+			endSch.start();
+			endSch.scheduleJob(jEnd, endTrigger);
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void endSchedule() {
+		try {
+			startSch.shutdown();
+			endSch.shutdown();
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}

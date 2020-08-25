@@ -1,0 +1,24 @@
+package kr.or.ddit.controller.search;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+
+public class MapController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane Map;
+
+    @FXML
+    void initialize() {
+        assert Map != null : "fx:id=\"Map\" was not injected: check your FXML file 'fxmlMap.fxml'.";
+
+    }
+}

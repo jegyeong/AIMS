@@ -1,0 +1,109 @@
+#btnAgency{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}
+
+#btnSearch{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 13.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnFrontModi{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 13.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnModify{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+	
+}
+#btnConfirm{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+	
+}
+
+#btnFAQ{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnSiteMap{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 24.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnHome{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+	
+}
+
+#btnAdd{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 13.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnDelete{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+	
+}
+
+#btnFrontDelete{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 13.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnFAQ{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btnAgency{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+	
+}
+#btnSiteMap{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btnHome{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}

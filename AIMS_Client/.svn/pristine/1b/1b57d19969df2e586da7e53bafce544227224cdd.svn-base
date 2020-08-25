@@ -1,0 +1,71 @@
+package kr.or.ddit.controller.knowledge.admin;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import kr.or.ddit.service.knowledge.IKnowledgeService;
+
+public class AdminKnowledgeMainController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane mainAnchor;
+    
+    @FXML
+    private Button btnTerms;
+
+    @FXML
+    private Button btnLaw;
+
+    @FXML
+    private Button btnFormat;
+
+    @FXML
+    void btnFormatClick(ActionEvent event) throws IOException {
+    	Parent format = FXMLLoader.load(AdminKnowledgeMainController.class.getResource("../../../fxml/knowledge/admin/adminKnowledgeFormat.fxml"));
+    	
+    	for(int i = 0; i < mainAnchor.getChildren().size(); i++) {
+    		mainAnchor.getChildren().remove(i);
+    	}
+    	mainAnchor.getChildren().addAll(format);
+    }
+
+    @FXML
+    void btnLawClick(ActionEvent event) throws IOException {
+    	Parent law = FXMLLoader.load(AdminKnowledgeMainController.class.getResource("../../../fxml/knowledge/admin/adminKnowledgeLaw.fxml"));
+    	
+    	for(int i = 0; i < mainAnchor.getChildren().size(); i++) {
+    		mainAnchor.getChildren().remove(i);
+    	}
+    	mainAnchor.getChildren().addAll(law);
+    }
+
+    @FXML
+    void btnTermsClick(ActionEvent event) throws IOException {
+    	Parent terms = FXMLLoader.load(AdminKnowledgeMainController.class.getResource("../../../fxml/knowledge/admin/adminKnowledgeTerms.fxml"));
+    	
+    	for(int i = 0; i < mainAnchor.getChildren().size(); i++) {
+    		mainAnchor.getChildren().remove(i);
+    	}
+    	mainAnchor.getChildren().addAll(terms);
+    }
+
+    private IKnowledgeService service;
+    @FXML
+    void initialize() {
+//    	Font.loadFont(getClass().getResourceAsStream("/DoHyeon-Regular.ttf"), 20);
+    }
+}

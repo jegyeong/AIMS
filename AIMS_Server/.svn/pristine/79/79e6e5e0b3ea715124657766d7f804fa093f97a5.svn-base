@@ -1,0 +1,249 @@
+package kr.or.ddit.dao;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.ibatis.BuildedSqlMapClient;
+import kr.or.ddit.vo.Answer_FileVO;
+import kr.or.ddit.vo.Com_AnswerVO;
+import kr.or.ddit.vo.Com_QuestionVO;
+import kr.or.ddit.vo.NoticeVO;
+import kr.or.ddit.vo.Notice_FileVO;
+import kr.or.ddit.vo.Question_FileVO;
+
+public class noticeDAOImpl implements InoticeDAO {
+	private SqlMapClient smc;
+	private static noticeDAOImpl instance;
+
+	private Map<String,Socket> userSocket;
+	
+	private noticeDAOImpl() {
+		smc = BuildedSqlMapClient.getSqlMapClient();
+	}
+	
+	public static noticeDAOImpl getInstance() {
+		
+		if(instance==null) {
+			instance = new noticeDAOImpl();
+		}
+		return instance;
+	}
+	
+	ArrayList<String> fileSave(List<File> dataList,String folderName) {
+		ArrayList<String> filesPath = new ArrayList<String>();
+		File path = new File("D:/D_Other/dataStage/"+folderName+"/");
+		for(File file : dataList) {
+			try {
+					
+			String name = file.getName();
+			FileInputStream fis = new FileInputStream(file);
+			FileOutputStream fos = new FileOutputStream(path.getPath()+name);
+			filesPath.add(path.getPath()+name);
+			byte[] buffer = new byte[1024];
+			int len = 0;
+			while((len=fis.read(buffer))!=-1) {
+				fos.write(buffer, 0, len);
+			}
+			fos.flush();
+			
+			fis.close();
+			fos.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return filesPath;
+	}
+	
+	
+	@Override
+	public int getNoticTotalCount() throws RemoteException{
+		int num = 0 ;
+		try {
+			 num = (int) smc.queryForObject("notice.getNoticeTotalcount");
+			 System.out.println("디비출력"+num);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return num;
+	}
+
+	@Override
+	public List<NoticeVO> getPaginNoticeList(Map<String, Integer> pageMap)throws RemoteException {
+		List<NoticeVO> list = null;
+		
+		try {
+			list = smc.queryForList("notice.getPaginNoticeList",pageMap);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Notice_FileVO> getNoticeFileList(String notice_no)throws RemoteException {
+		List<Notice_FileVO> list = null;
+		try {
+			list = smc.queryForList("notice.getNoticeFileList",notice_no);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+
+	@Override
+	public List<Answer_FileVO> getAnswerFileList(String com_ans_no)throws RemoteException {
+		List<Answer_FileVO> list = null;
+		try {
+			list = smc.queryForList("notice.getAnswerFileList", com_ans_no);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Question_FileVO> getQuestionFileList(String com_que_no)throws RemoteException {
+		List<Question_FileVO> list = null;
+		try {
+			list = smc.queryForList("notice.getQuestionFileList", com_que_no);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	@Override
+	public void saveAnswerFile(List<File> dataList,String com_que_no)throws RemoteException {
+		ArrayList<String> PathList = fileSave(dataList,"AnswerFile");
+		
+		
+		
+	}
+	
+	
+	@Override
+	public void saveQuestionFile(List<File> dataList, String com_ans_no)throws RemoteException {
+		ArrayList<String> PathList = fileSave(dataList,"QuestionFile");
+		
+		
+	}
+
+	@Override
+	public void saveNoticeFile(List<File> dataList, String notice_no)throws RemoteException {
+		ArrayList<String> PathList = fileSave(dataList,"NoticeFile");
+		
+		
+	}
+
+	@Override
+	public List<Com_AnswerVO> getMyAnswerList(String mem_id)throws RemoteException {
+		List<Com_AnswerVO> list = null;
+		try {
+			list = smc.queryForList("notice.getMyAnswerList", mem_id);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Com_QuestionVO> getMyQuestionList(String mem_id)throws RemoteException {
+		List<Com_QuestionVO> list = null;
+		try {
+			list = smc.queryForList("notice.getMyQuestionList", mem_id);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	
+	@Override
+	public long loadAnswerFile(Socket server, Answer_FileVO data)throws RemoteException {
+		File outputFile = new File(data.getAns_f_addr());
+			try {
+				
+				byte[] buffer = new byte[1024];
+				int len = 0;
+				FileInputStream fis = new FileInputStream(outputFile);
+				OutputStream os = server.getOutputStream();
+				
+				while ((len=fis.read(buffer))!=-1) {
+					os.write(buffer,0,len);
+				}
+				os.flush();
+			} catch (IOException e) {
+				
+			}
+		return outputFile.length();
+	}
+	
+	
+
+	@Override
+	public long loadQuestionFile(Socket server, Question_FileVO data )throws RemoteException {
+		File outputFile = new File(data.getQue_f_addr());
+			try {
+				
+				byte[] buffer = new byte[1024];
+				int len = 0;
+				FileInputStream fis = new FileInputStream(outputFile);
+				OutputStream os = server.getOutputStream();
+				
+				while ((len=fis.read(buffer))!=-1) {
+					os.write(buffer,0,len);
+				}
+				os.flush();
+			} catch (IOException e) {
+				
+			}
+			return outputFile.length();
+	}
+	
+
+	@Override
+	public long loadNoticeFile(Socket server, Notice_FileVO data)throws RemoteException {
+		File outputFile = new File(data.getFile_addr());
+			try {
+				
+				byte[] buffer = new byte[1024];
+				int len = 0;
+				FileInputStream fis = new FileInputStream(outputFile);
+				OutputStream os = server.getOutputStream();
+				
+				while ((len=fis.read(buffer))!=-1) {
+					os.write(buffer,0,len);
+				}
+				os.flush();
+			} catch (IOException e) {
+				
+			
+		}
+			return outputFile.length();
+	}
+
+}

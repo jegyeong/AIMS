@@ -1,0 +1,294 @@
+package kr.or.ddit.controller.main;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+
+public class MainPageController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane topLogo;
+
+    @FXML
+    private ImageView imageView_logo;
+
+    @FXML
+    private AnchorPane an_topMenu;
+
+    @FXML
+    private Label labael_join;
+
+    @FXML
+    private Label labael_sitemap;
+
+    @FXML
+    private AnchorPane an_frontNotice;
+
+    @FXML
+    private ListView<?> tableView_frontNotice;
+
+    @FXML
+    private AnchorPane an_Notice;
+
+    @FXML
+    private TableColumn<?, ?> col_notice_title;
+
+    @FXML
+    private TableColumn<?, ?> col_notice_contents;
+
+    @FXML
+    private AnchorPane bottomLogo;
+
+    @FXML
+    private ImageView imageView_bottonLogo;
+
+    @FXML
+    private AnchorPane an_searchArea;
+
+    @FXML
+    private Label label_searchArea;
+
+    @FXML
+    private ComboBox<?> combo_searchArea;
+
+    @FXML
+    private TextField tf_searchArea;
+
+    @FXML
+    private Button btn_searchArea;
+
+    @FXML
+    private AnchorPane an_Login;
+
+    @FXML
+    private Button btn_login;
+
+    @FXML
+    private AnchorPane an_interest;
+
+    @FXML
+    private ListView<?> listView_interest;
+
+    @FXML
+    private AnchorPane an_totalSearch;
+
+    @FXML
+    private TextArea tf_totalSearch;
+
+    @FXML
+    private Button btn_totalSearch;
+
+    @FXML
+    private HBox an_navigation;
+
+    @FXML
+    private Label label_search;
+
+    @FXML
+    private Label label_statistics;
+
+    @FXML
+    private Label label_notice;
+
+    @FXML
+    private Label label_knowledge;
+
+    @FXML
+    private Label label_auction;
+
+    @FXML
+    private Label label_mypage;
+
+    @FXML
+    private Label lable_informationUse;
+
+    @FXML
+    void an_Login_Clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void an_Notice_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void an_frontNotice_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void an_interest_Clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void an_navigation_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void an_searchArea_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void an_topMenu_Clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void an_totalSearch_Clciked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void bottomLogo_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void btn_login_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void btn_searchAreaClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn_totalSearch_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void combo_searchAreaAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void combo_totalSearch(ActionEvent event) {
+
+    }
+
+    @FXML
+    void imageView_bottonLogo_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void labael_join_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void labael_sitemap_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void label_auction_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void label_knowledge_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void label_mypage_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void label_notice_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void label_search_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void label_statistics_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void lable_informationUse_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void listView_interest_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void tableView_frontNotice_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void topLogo_Clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void initialize() {
+        assert topLogo != null : "fx:id=\"topLogo\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert imageView_logo != null : "fx:id=\"imageView_logo\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert an_topMenu != null : "fx:id=\"an_topMenu\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert labael_join != null : "fx:id=\"labael_join\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert labael_sitemap != null : "fx:id=\"labael_sitemap\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert an_frontNotice != null : "fx:id=\"an_frontNotice\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert tableView_frontNotice != null : "fx:id=\"tableView_frontNotice\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert an_Notice != null : "fx:id=\"an_Notice\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert col_notice_title != null : "fx:id=\"col_notice_title\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert col_notice_contents != null : "fx:id=\"col_notice_contents\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert bottomLogo != null : "fx:id=\"bottomLogo\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert imageView_bottonLogo != null : "fx:id=\"imageView_bottonLogo\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert an_searchArea != null : "fx:id=\"an_searchArea\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert label_searchArea != null : "fx:id=\"label_searchArea\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert combo_searchArea != null : "fx:id=\"combo_searchArea\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert tf_searchArea != null : "fx:id=\"tf_searchArea\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert btn_searchArea != null : "fx:id=\"btn_searchArea\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert an_Login != null : "fx:id=\"an_Login\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert btn_login != null : "fx:id=\"btn_login\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert an_interest != null : "fx:id=\"an_interest\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert listView_interest != null : "fx:id=\"listView_interest\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert an_totalSearch != null : "fx:id=\"an_totalSearch\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert tf_totalSearch != null : "fx:id=\"tf_totalSearch\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert btn_totalSearch != null : "fx:id=\"btn_totalSearch\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert an_navigation != null : "fx:id=\"an_navigation\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert label_search != null : "fx:id=\"label_search\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert label_statistics != null : "fx:id=\"label_statistics\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert label_notice != null : "fx:id=\"label_notice\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert label_knowledge != null : "fx:id=\"label_knowledge\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert label_auction != null : "fx:id=\"label_auction\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert label_mypage != null : "fx:id=\"label_mypage\" was not injected: check your FXML file 'MainPage.fxml'.";
+        assert lable_informationUse != null : "fx:id=\"lable_informationUse\" was not injected: check your FXML file 'MainPage.fxml'.";
+
+    }
+}

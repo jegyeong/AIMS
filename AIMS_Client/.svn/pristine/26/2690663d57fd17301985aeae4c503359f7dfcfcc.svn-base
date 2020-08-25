@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" stylesheets="@../../../../../../css/mypage.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.mypage.InputController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="47.0" prefWidth="400.0">
+               <children>
+                  <Label text="일정관리">
+                     <HBox.margin>
+                        <Insets left="50.0" top="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="addDate" mnemonicParsing="false" onAction="#addClick" style="-fx-background-color: white; -fx-border-color: white;" text="저장" textFill="#60a3fe">
+                     <HBox.margin>
+                        <Insets left="200.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="58.0" prefWidth="400.0">
+               <children>
+                  <TextField fx:id="txttitle" promptText="일정제목" style="-fx-background-color: white; -fx-border-color: white;">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="73.0" prefWidth="400.0" style="-fx-border-color: lightgrey white white white;">
+               <children>
+                  <DatePicker fx:id="Sdate" style="-fx-border-color: #424242; -fx-border-radius: 5; -fx-background-color: white;">
+                     <HBox.margin>
+                        <Insets left="35.0" top="20.0" />
+                     </HBox.margin>
+                  </DatePicker>
+                  <DatePicker fx:id="Edate" style="-fx-border-color: #424242; -fx-border-radius: 5; -fx-background-color: white;">
+                     <HBox.margin>
+                        <Insets left="8.0" top="20.0" />
+                     </HBox.margin>
+                  </DatePicker>
+               </children>
+            </HBox>
+            <HBox prefHeight="238.0" prefWidth="400.0">
+               <children>
+                  <TextArea fx:id="txtCont" prefHeight="242.0" prefWidth="310.0" style="-fx-background-color: white; -fx-border-color: #d9d9d9d9; -fx-border-width: 3;">
+                     <HBox.margin>
+                        <Insets left="45.0" right="45.0" top="5.0" />
+                     </HBox.margin>
+                  </TextArea>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <HBox prefHeight="10.0" prefWidth="400.0" style="-fx-background-color: #ecf5fd; -fx-border-color: #ecf5fd  #ecf5fd lightgrey  #ecf5fd;" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>

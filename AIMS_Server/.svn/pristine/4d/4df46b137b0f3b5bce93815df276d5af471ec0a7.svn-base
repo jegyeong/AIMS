@@ -1,0 +1,38 @@
+package kr.or.ddit.dao.InformationUse;
+
+import java.util.List;
+
+import kr.or.ddit.vo.FAQVO;
+
+
+
+public interface IManagerFAQDao {
+	
+	/**
+	 * ëª¨ë“  FAQë¥? ê²??ƒ‰?•´?„œ ë°˜í™˜?•˜?Š” ë©”ì„œ?“œ
+	 * @return ê²??ƒ‰?œ FAQë¦¬ìŠ¤?Š¸!
+	 */
+	public List<FAQVO> getAllFAQList();
+	
+	/**
+	 * FAQ_Num?„ ë§¤ê°œë³??ˆ˜ë¡? ë°›ì•„ ?•´?‹¹?•˜?Š” FAQë¥? ë°˜í™˜?•˜?Š” ë©”ì„œ?“œ
+	 * @param faqNum ê²??ƒ‰ë²ˆí˜¸
+	 * @return ê²??ƒ‰?œ FAQë¦¬ìŠ¤?Š¸
+	 */
+	public List<FAQVO> getDetailsList(String faqNum);
+	
+	/**
+	 * faqVo?— ?‹´ê²¨ì§„ ?ë£Œë?? DB?— insert?•˜?Š” ë©”ì„œ?“œ
+	 * @param faqVo DB?— insert?•  ?ë£Œê? ???¥?œ FAQVO ê°ì²´
+	 * @return DB?‘?—… ?„±ê³? : 1, ?‹¤?Œ¨ : 0
+	 */ 
+	public int insertFAQ(FAQVO faqVo);
+	
+	/**
+	 * faqVo?— ?‹´ê²¨ì§„ ?ë£Œë?? ?´?š©?•˜?—¬ DB?— FAQ?˜ ? •ë³´ë??  update?•˜?Š” ë©”ì„œ?“œ
+	 * @param faqVo ?ˆ˜? •?•  ? •ë³´ê? ???¥?œ voê°ì²´
+	 * @return ?‘?—…?„±ê³? : 1, ?‹¤?Œ¨ : 0
+	 */
+	public int updateFAQ(FAQVO faqVo);
+
+}

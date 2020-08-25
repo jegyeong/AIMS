@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="law">
+	<select id="getAllLawCategory" resultClass="lawCaVo">
+		select * from law_category
+	</select>
+	
+	<select id="getAllRelated_Law" parameterClass="String" resultClass="lawVo">
+		select * from related_law where cat_law_no = #cat_law_no#
+	</select>
+	
+	<select id="getAllShowRelated_Law" parameterClass="map" resultClass="lawVo">
+		select * from related_law
+        where cat_law_no = #cat_law_no#
+          and rel_l_title = #rel_l_title#
+	</select>
+	
+	
+	
+	
+	
+<!-- 관리자 -->	
+	<insert id="insertLaw" parameterClass="lawVo">
+		insert into related_law values(related_law_seq.nextval, #cat_law_no#, #rel_l_title#, #rel_l_question#, #rel_l_answer#)
+	</insert>
+	
+	<update id="updateLaw" parameterClass="lawVo">
+		update related_law set cat_law_no = #cat_law_no#,
+							   rel_l_title = #rel_l_title#,
+							   rel_l_question = #rel_l_question#,
+							   rel_l_answer = #rel_l_answer#
+						 where rel_l_no = #rel_l_no#
+	</update>
+	
+	
+</sqlMap>

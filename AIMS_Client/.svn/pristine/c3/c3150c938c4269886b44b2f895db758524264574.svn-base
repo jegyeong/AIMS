@@ -1,0 +1,216 @@
+package kr.or.ddit.controller.auction;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Scanner;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.shape.Circle;
+import kr.or.ddit.service.auction.IauctionServer;
+import kr.or.ddit.vo.A_articleVO;
+
+public class AuctionRoomController {
+	private Socket socket;
+	private A_articleVO a_articleVO;
+	private IauctionServer auctionService;
+ 
+    @FXML
+    private Button btn_imgPrev;
+
+    @FXML
+    private Button btn_imgNext;
+
+    @FXML
+    private Label col_no;
+
+    @FXML
+    private Label col_loc;
+
+    @FXML
+    private Label col_couNo;
+
+    @FXML
+    private Label col_tour;
+
+    @FXML
+    private Label col_inter;
+
+    @FXML
+    private Label col_cnt;
+
+    @FXML
+    private Label col_low;
+
+    @FXML
+    private Label col_price;
+
+    @FXML
+    private Label col_catA;
+
+    @FXML
+    private Label col_catB;
+
+    @FXML
+    private Label col_catC;
+
+    @FXML
+    private Label tf_area;
+
+    @FXML
+    private Label col_area;
+
+    @FXML
+    private Label tf_state;
+
+    @FXML
+    private Label tf_Bidder;
+
+    @FXML
+    private Label tf_bidAmount;
+
+    @FXML
+    private Label tf_bidAmount1;
+
+    @FXML
+    private Button btnBidding;
+
+    @FXML
+    private TextField tf_price;
+
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    private Circle chk_1;
+
+    @FXML
+    private Circle chk_2;
+
+    @FXML
+    private Circle chk_3;
+
+    @FXML
+    void onClickedBtnBack(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickedBtnBidding(ActionEvent event) {
+    	
+    }
+
+    @FXML
+    void onClickedBtn_imgNext(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onclickedBtn_imgPrev(ActionEvent event) {
+
+    }
+
+	public void setdata(Socket socket, A_articleVO a_articleVO) {
+		this.socket = socket;
+		this.a_articleVO = a_articleVO;
+		A_articleVO info = auctionService.getArticleInfo(this.a_articleVO.getA_art_no());
+		col_area.setText(info.getA_art_area());
+		col_catA.setText(info.getCat_a_no());
+		col_catB.setText(info.getCat_b_no());
+		col_catC.setText(info.getCat_c_no());
+		col_cnt.setText(info.getA_art_cnt() + "");
+		col_couNo.setText(info.getCou_no());
+		col_inter.setText(info.getA_art_inter());
+		col_loc.setText(info.getA_art_loc());
+		col_low.setText(info.getA_art_low());
+		col_no.setText(info.getA_art_no());
+		col_price.setText(info.getA_art_price());
+		col_tour.setText(info.getA_art_tour() + "");
+		
+		new  ClientReceiver(this.socket).start();
+	}
+	
+	
+    @FXML
+    void initialize() {
+
+    }
+    
+    
+ 
+ 	class ClientSender extends Thread{
+ 		private Socket socket;
+ 		private DataInputStream in;
+ 		private DataOutputStream out; 
+ 		private String name;
+ 		private Scanner scan;
+ 		
+ 		//생성자
+ 		public ClientSender(Socket socket) {
+ 			this.socket = socket;
+ 			scan = new Scanner(System.in);
+ 			try {
+ 				in = new DataInputStream(this.socket.getInputStream());
+ 				out= new DataOutputStream(this.socket.getOutputStream());
+ 			} catch (Exception e) {
+ 				e.printStackTrace();
+ 			}
+ 		}
+ 		
+ 		@Override
+ 		public void run() {
+ 			try {
+ 				while(out != null) {
+ 					
+ 					out.writeUTF("아이디 보낸다.");
+ 					out.writeUTF(tf_price.getText());
+ 				}
+ 			} catch (Exception e) {
+ 				e.printStackTrace();
+ 			}
+ 		}
+ 	}
+ 	
+ 	class ClientReceiver extends Thread{
+ 		private Socket socket;
+ 		private DataInputStream in;
+
+ 		public ClientReceiver(Socket socket) {
+ 			this.socket = socket;
+ 			try {
+ 				in = new DataInputStream(this.socket.getInputStream());
+ 			} catch (Exception e) {
+ 				e.printStackTrace();
+ 			}	
+ 		}
+ 		
+ 		@Override
+ 		public void run() {
+ 			while(in!=null) {
+ 			
+				Platform.runLater(() -> {
+					try {
+						tf_Bidder.setText(in.readUTF());
+						tf_bidAmount.setText(in.readUTF());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				});
+ 				
+ 			}
+ 		}
+ 		
+
+ 	}
+    
+    
+    
+}

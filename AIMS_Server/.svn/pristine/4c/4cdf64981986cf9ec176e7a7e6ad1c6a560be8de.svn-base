@@ -1,0 +1,45 @@
+package kr.or.ddit.service.auction;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.rmi.RemoteException;
+
+import org.quartz.Job;
+import org.quartz.JobDataMap;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+import kr.or.ddit.vo.A_articleVO;
+
+public class AuctionListUpdate implements Job{
+	auctionServerImpl service;
+		@Override
+		public void execute(JobExecutionContext arg0) throws JobExecutionException {
+			JobDataMap dataMap = arg0.getMergedJobDataMap(); 
+			service = (auctionServerImpl) dataMap.get("list");
+			
+			try {
+				if(!service.getServerSocketMap().isEmpty()) {
+					for(ServerSocket socket:service.getTotalServerList()) {
+						try {
+							socket.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					service.mapClear();
+				}
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				for(A_articleVO a_articleVO : service.getTotalArticleList()) {
+					service.createServerSocket(a_articleVO);
+				}
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}		
+}

@@ -1,0 +1,143 @@
+#btnFileAdd{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnFileDelete{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btnAdd{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btn_notice{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btn_Answer{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btn_Home{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btn_AddFile{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btn_DeleteFile{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btn_Confirm{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+#btn_Cancle{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btn_Modify{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btn_Delete{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btn_Back{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btn_Com{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btnHome{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btn_Add{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btn_AddNotice{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btn_addFile{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btn_deleteFile{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btn_confirm{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btn_Answer1{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 12.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+
+
+
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}

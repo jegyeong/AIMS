@@ -1,0 +1,236 @@
+package kr.or.ddit.controller.search;
+
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+import kr.or.ddit.service.search.ISearchService;
+import kr.or.ddit.vo.A_articleVO;
+import kr.or.ddit.vo.CourtVO;
+
+public class CourtController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private ComboBox<CourtVO> searchCom;
+    
+    @FXML
+    private ComboBox<String> courtAddCom;
+    
+    
+    @FXML
+    private Button btnSearch;
+
+    @FXML
+    private TableView<A_articleVO> table;
+
+    @FXML
+    private TableColumn<A_articleVO, String> numCol;
+
+    @FXML
+    private TableColumn<A_articleVO, String> nameCol;
+
+    @FXML
+    private Pagination page;
+
+    List<A_articleVO> stuffList;
+    ObservableList<A_articleVO> data;
+    
+    ISearchService service;
+    
+
+    
+    
+    @FXML
+    void btnSearchClick(ActionEvent event) {
+    	String txt = searchCom.getValue().getCou_no();
+    	
+    	try {
+			stuffList = service.courtSearch(txt);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	data = FXCollections.observableArrayList(stuffList);
+    	
+    	table.setItems(data);
+    	
+    }
+
+    @FXML
+    void tableClick(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(NumController.class.getResource("../../fxml/search/fxmlDetail.fxml"));
+    	Parent root = loader.load();
+    	
+    	DetailController controller = loader.getController(); // 다른 컨트롤러를 미리 가져와
+    	controller.setTextField(table.getSelectionModel().getSelectedItem()); // 그 컨트롤러에 테이블에선택한애의 값을 넘겨줘
+    	  	
+    	Stage stage = (Stage) btnSearch.getScene().getWindow(); 
+    	Scene scene = new Scene(root);
+    	
+    	stage.setScene(scene);
+    	stage.setTitle("물건 상세정보 ");
+    	stage.show();
+    }
+    
+    
+    
+    @FXML
+    void initialize() {
+    	//Service객체 생성
+     	try {
+ 			Registry reg = LocateRegistry.getRegistry("localhost",8888);
+ 			service =  (ISearchService)reg.lookup("searchService");
+ 		} catch (RemoteException e) {
+ 			e.printStackTrace();
+ 		} catch (NotBoundException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		} 
+//-----------------------------------------------------------------------------------------------------------
+     	//법원의 지역 콤보박스 설정
+     	List<String> deoList = null;
+     	
+     	try {
+			deoList = service.courtAdd();
+			System.out.println(deoList);
+		} catch (RemoteException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+     	
+     	ObservableList<String> doData = FXCollections.observableArrayList(deoList);
+     	
+     	courtAddCom.setItems(doData);
+     	
+     	courtAddCom.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+			@Override
+			public ListCell<String> call(ListView<String> param) {
+				return new ListCell<String>() {
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if(item == null || empty) {
+							setText(null);
+						}else {
+							setText(item);
+						}
+					}
+				};
+			}
+     		
+		});courtAddCom.setButtonCell(new ListCell<String>() {
+			@Override
+			protected void updateItem(String item, boolean empty) {
+				// TODO Auto-generated method stub
+				super.updateItem(item, empty);
+				if(item == null || empty) {
+					setText(null);
+				}else {
+					setText(item);
+				}
+			}
+		});
+		//courtAddCom.setValue(courtAddCom.getItems().get(0));
+
+//-------------------------------------------------------------------------------------------------------
+     	// 법원의 지역 클릭이벤트
+     	courtAddCom.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				List<CourtVO> courtList = null;
+				
+				try {
+					courtList = service.getAllCourt(newValue);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				
+				ObservableList<CourtVO> courtData = FXCollections.observableArrayList(courtList);
+				
+				searchCom.setItems(courtData);
+			}
+		});
+  //----------------------------------------------------------------------------------------------------------
+     	// 법원 콤보박스 세팅
+		searchCom.setCellFactory(new Callback<ListView<CourtVO>, ListCell<CourtVO>>() {
+			@Override
+			public ListCell<CourtVO> call(ListView<CourtVO> param) {
+				return new ListCell<CourtVO>() {
+					@Override
+					protected void updateItem(CourtVO item, boolean empty) {
+						// TODO Auto-generated method stub
+						super.updateItem(item, empty);
+						if (!empty) {
+							setText(item.getCou_name());
+						} else {
+							setText(null);
+						}
+					}
+				};
+			}
+		});
+		searchCom.setButtonCell(new ListCell<CourtVO>() {
+			@Override
+			protected void updateItem(CourtVO item, boolean empty) {
+				super.updateItem(item, empty);
+				if (!empty) {
+					setText(item.getCou_name());
+				} else {
+					setText(null);
+				}
+			}
+		});
+		//searchCom.setValue(searchCom.getItems().get(0));
+     	
+//-------------------------------------------------------------------------------------------------------
+     	
+     	
+     	try {
+			stuffList = service.getAllShow();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+     	
+     	data = FXCollections.observableArrayList(stuffList);
+     	
+     	table.setItems(data);
+     	
+     	numCol.setCellValueFactory(new PropertyValueFactory<A_articleVO, String>("a_art_no"));
+     	nameCol.setCellValueFactory(new PropertyValueFactory<A_articleVO, String>("a_art_name"));
+    }
+}

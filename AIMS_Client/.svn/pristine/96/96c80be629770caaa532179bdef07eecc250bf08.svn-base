@@ -1,0 +1,29 @@
+package kr.or.ddit.controller.auction;
+
+import java.net.Socket;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
+import kr.or.ddit.vo.A_articleVO;
+
+public class AuctionRoomController {
+	private Socket socket;
+	private A_articleVO a_articleVO;
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+    
+    public void setdata(Socket socket, A_articleVO a_articleVO) {
+    	this.socket = socket;
+    	this.a_articleVO = a_articleVO;
+    	
+    }
+
+    @FXML
+    void initialize() {
+
+    }
+}

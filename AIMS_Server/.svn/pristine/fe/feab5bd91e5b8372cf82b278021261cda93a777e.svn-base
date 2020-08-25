@@ -1,0 +1,47 @@
+package kr.or.ddit.dao.InformationUse;
+
+import java.util.List;
+
+import com.sun.javafx.collections.MappingChange.Map;
+
+import kr.or.ddit.vo.AgencyVO;
+
+
+
+public interface IAgencyDao {
+	
+	/**
+	 * λª¨λ“  λ²•μ›?„ μ¶λ ¥?•΄μ£Όλ” λ©”μ„?“
+	 * @return κ²??ƒ‰? λ²•μ› λª©λ΅ List
+	 */
+	public List<AgencyVO> getAllCourt();
+	
+	/**
+	 * λ²•μ›?΄ ?„μΉν• μ§??—­(? λ¶??‚°κ΄‘μ—­?‹,μ¶©μ²­?‚¨?„..)?„ λ§¤κ°λ³??λ΅? λ°›μ•„?„ ?•΄?‹Ή?•?” λ²•μ›? λª©λ΅?„ μ¶λ ¥?•?” λ©”μ„?“
+	 * @param addr λ²•μ›?„μΉν• μ§??—­ λ§¤κ°λ³??
+	 * @return κ²??ƒ‰? λ²•μ› λª©λ΅ List
+	 */
+	public List<AgencyVO> getCourtAddr(String addr);
+	
+	/**
+	 * λ²•μ›? ?΄λ¦„μ„ λ§¤κ°λ³??λ΅? λ°›μ•„ ?•΄?‹Ή λ²•μ›? λª©λ΅?„ μ¶λ ¥?•?” λ©”μ„?“
+	 * @param name λ²•μ›λª? λ§¤κ°λ³??
+	 * @return κ²??ƒ‰? λ²•μ›? λª©λ΅ λ¦¬μ¤?Έ
+	 */
+	public List<AgencyVO> getCourtName(String name);
+	
+	/**
+	 * κ²??ƒ‰?•  μ§??—­κ³? λ²•μ›? ?΄λ¦„μ΄ ???¥? Mapκ°μ²΄λ¥? ??Όλ―Έν„°λ΅? λ°›μ•„ ?•΄?‹Ή λ²•μ›Listλ¥? λ°ν™?•?” λ©”μ„?“ 
+	 * @param searchMap κ²??ƒ‰?•  λ²•μ–Έ μ§??—­κ³? λ²•μ›?΄λ¦„μ΄ ???¥? Mapκ°μ²΄
+	 * @return κ²??ƒ‰? λ²•μ›? λª©λ΅?„ List?— ?‹΄?•„?„ λ°ν™?•?‹¤
+	 */
+	public List<AgencyVO> getCourtSum(Map<String, String> searchMap);
+	
+	/**
+	 * μ½¤λ³΄λ°•μ¤?—?„ ?„ ?ƒ?• μ§??—­λª…μ„ ??Όλ―Έν„°λ΅? λ°›μ•„ ?•΄?‹Ή λ²•μ›? Listλ¥? λ°ν™?•?” λ©”μ„?“
+	 * @param comAddr μ½¤λ³΄λ°•μ— ?„ ?ƒ?• λ²•μ› μ§??—­
+	 * @return κ²??ƒ‰? λ²•μ›? λª©λ΅?„ List?— ?‹΄?•„?„ λ°ν™?•?‹¤.
+	 */
+	public List<AgencyVO> getAreaSearch(String comboAddr);
+	
+}

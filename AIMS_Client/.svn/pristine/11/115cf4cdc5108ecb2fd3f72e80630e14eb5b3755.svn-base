@@ -1,0 +1,233 @@
+package kr.or.ddit.controller.mypage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.ResourceBundle;
+
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import kr.or.ddit.AlertDialog.AlertUtil;
+import kr.or.ddit.main.search.FXMLSearchMain;
+import kr.or.ddit.service.mypage.IMymemberService;
+import kr.or.ddit.vo.MemberVO;
+
+
+
+// 마이페이지 화면
+public class MymemberController {
+	
+	private MyInformationController myinfoController;
+	private ObservableList <MemberVO> data; 
+	private MemberVO membervo;
+	private IMymemberService service2;
+	
+	
+	// 내정보 controller
+	 private  MyInformationController mymemverinfoController;
+	 
+	 public MyInformationController getMymemberInfoController() {
+		 return mymemverinfoController;
+	 }
+	 
+	 public void setMainController(MyInformationController mymembercontroller) {
+		 this.mymemverinfoController = mymembercontroller;
+	 }
+	 private void setMainController(MymemberController mymemberController) {}
+	 
+	
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane mypage; 
+
+    @FXML
+    private Button myShcedual;  // 내일정 버튼
+
+    @FXML
+    private Button myInteres;	// 내 관심물건
+
+    @FXML
+    private Button myInformation;	// 내 정보 
+
+    @FXML
+    private Button myMinwon;	// 내민원
+
+    @FXML
+    private Button myAut;	// 내 경매 내역
+
+    @FXML
+    private Button mySection;	// 회원탈퇴
+
+    @FXML
+    private Button home;	// 돌아가기 
+    
+    public IMymemberService service;
+    
+    
+    //내일정 버튼 선택시  내일정 달력나오는걸로 화면  바뀌는거
+    @FXML
+    void btcShcedual(ActionEvent event) throws IOException {
+    	Parent root =  FXMLLoader.load(MymemberController.class.getResource("../../fxml/mypage/MySchedual.fxml"));
+    	
+    	for(int i = 0; i < mypage.getChildren().size(); i++ ) {
+    		mypage.getChildren().remove(i);
+    	}
+    	mypage.getChildren().addAll(root);
+    }
+    
+    
+    // 내 경매 내역 버튼
+    @FXML
+    void btnAut(ActionEvent event) throws IOException {
+    	Parent root =  FXMLLoader.load(MymemberController.class.getResource("../../fxml/mypage/MyAuction.fxml"));
+    	
+    	for(int i = 0; i <mypage.getChildren().size(); i++ ) {
+    		mypage.getChildren().remove(i);
+    	}
+    	mypage.getChildren().addAll(root);
+    }
+
+
+    
+    
+    // 홈으로 버튼
+    @FXML
+    void btnHome(ActionEvent event) {
+    	
+    		Stage currentStage =  (Stage) home.getScene().getWindow();
+        	if(!AlertUtil.showAlert(currentStage, "메인페이지로  ","이동하시겠습니까?","취소","이동")) {
+        		
+        		Stage stage = (Stage)home.getScene().getWindow();
+        		
+        		try {
+        			Parent root = FXMLLoader.load(FXMLSearchMain.class.getResource("../../fxml/main/MainPage.fxml"));
+        			Scene scene = new Scene(root);
+        			stage.setScene(scene);
+        			stage.setTitle("검색");
+        			stage.show();
+        		} catch (IOException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+        	}
+        	
+        	
+			/* 화면 전환 하는 부분 
+			 * MymemberController memberInfo = loader.getController();
+			 * memberInfo.setMainController(this); Scene scene = new Scene(root);
+			 * currentStage.setScene(scene); currentStage.show();
+			 */
+    		
+	
+    	
+    	
+    	
+    }
+    
+
+    
+    // 내 정보 버튼
+    @FXML
+    void btnInfo(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(MymemberController.class.getResource("../../fxml/mypage/MyInformation.fxml"));
+    	
+    	for(int i = 0; i < mypage.getChildren().size(); i++ ) {
+    		mypage.getChildren().remove(i);
+    	}
+    	mypage.getChildren().addAll(root);
+   
+ 
+    	
+    }
+    
+    // 내 관심 물건 버튼
+    @FXML
+    void btnInters(ActionEvent event) throws IOException {
+    	Parent root =  FXMLLoader.load(MymemberController.class.getResource("../../fxml/mypage/MymemInterest.fxml"));
+    	
+    	for(int i = 0; i <mypage.getChildren().size(); i++ ) {
+    		mypage.getChildren().remove(i);
+    	}
+    	mypage.getChildren().addAll(root);
+    	
+    }
+    
+    
+    // 내 민원버튼
+    @FXML
+    void btnMinwon(ActionEvent event) throws IOException {
+    	Parent root =  FXMLLoader.load(MymemberController.class.getResource("../../fxml/mypage/Com_QuestionController.fxml"));
+    	
+    	for(int i = 0; i <mypage.getChildren().size(); i++ ) {
+    		mypage.getChildren().remove(i);
+    	}
+    	mypage.getChildren().addAll(root);
+    	
+    	
+    	
+    	
+    }
+    
+    // 회원탈퇴
+    @FXML
+    void btnSection(ActionEvent event) throws IOException {
+    	
+    	Parent root =  FXMLLoader.load(MymemberController.class.getResource("../../fxml/mypage/Mymemtaltoe.fxml"));
+    	
+    	for(int i = 0; i < mypage.getChildren().size(); i++ ) {
+    		mypage.getChildren().remove(i);
+    	}
+    	mypage.getChildren().addAll(root);
+    	
+    	
+    	
+    }
+    
+    
+    
+    // 내일정에서의 화면 창 
+    @FXML
+    void mypageView(MouseEvent event) throws IOException {
+    	
+    }
+
+    @FXML
+    void initialize() {
+    	try {
+			Registry reg = LocateRegistry.getRegistry(8888);
+			service = (IMymemberService) reg.lookup("IMymemberService");
+			
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+    	
+   
+		try {
+			Parent root =  FXMLLoader.load(MymemberController.class.getResource("../../fxml/mypage/MySchedual.fxml"));
+			mypage.getChildren().clear();
+			mypage.getChildren().addAll(root);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
+}

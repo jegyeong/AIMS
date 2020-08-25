@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.knowledge.user.AuctionFormatController">
+   <children>
+      <TableView fx:id="formatTable" layoutX="36.0" layoutY="28.0" prefHeight="814.0" prefWidth="818.0">
+        <columns>
+          <TableColumn fx:id="numCol" prefWidth="215.0" text="글번호" />
+          <TableColumn fx:id="titleCol" minWidth="0.0" prefWidth="602.0" text="제목" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

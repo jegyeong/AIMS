@@ -1,0 +1,227 @@
+package kr.or.ddit.controller.auction;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import kr.or.ddit.service.auction.IauctionServer;
+import kr.or.ddit.vo.A_articleVO;
+
+public class AuctionRoomController {
+	private IauctionServer service;
+	private Socket socket;
+	private A_articleVO a_articleVO;
+	private IauctionServer auctionService;
+	private DataOutputStream dos; 
+ 
+    @FXML
+    private Button btn_imgPrev;
+
+    @FXML
+    private Button btn_imgNext;
+
+    @FXML
+    private Label col_no;
+
+    @FXML
+    private Label col_loc;
+
+    @FXML
+    private Label col_couNo;
+
+    @FXML
+    private Label col_tour;
+
+    @FXML
+    private Label col_inter;
+
+    @FXML
+    private Label col_cnt;
+
+    @FXML
+    private Label col_low;
+
+    @FXML
+    private Label col_price;
+
+    @FXML
+    private Label col_catA;
+
+    @FXML
+    private Label col_catB;
+
+    @FXML
+    private Label col_catC;
+
+    @FXML
+    private Label tf_area;
+
+    @FXML
+    private Label col_area;
+
+    @FXML
+    private Label tf_state;
+
+    @FXML
+    private Label tf_Bidder;
+
+    @FXML
+    private Label tf_bidAmount;
+
+    @FXML
+    private Button btnBidding;
+
+    @FXML
+    private TextField tf_price;
+
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    private Circle chk_1;
+
+    @FXML
+    private Circle chk_2;
+
+    @FXML
+    private Circle chk_3;
+
+    @FXML
+    void onClickedBtnBack(ActionEvent event) {
+		try {
+			Stage stage = (Stage) btn_imgNext.getScene().getWindow();
+
+			FXMLLoader loader = new FXMLLoader(AuctionRoomController.class.getResource("AuctionMain./fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    
+    	
+    }
+
+    @FXML
+    void onClickedBtnBidding(ActionEvent event) {
+    	if(Integer.parseInt(tf_bidAmount.getText()) > Integer.parseInt(tf_price.getText())) {
+    		try {
+				dos.writeUTF("아이디");
+				dos.writeUTF(tf_price.getText());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    		
+    	}
+    }
+
+    @FXML
+    void onClickedBtn_imgNext(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onclickedBtn_imgPrev(ActionEvent event) {
+
+    }
+
+	public void setdata(Socket socket, A_articleVO a_articleVO) {
+		this.socket = socket;
+		this.a_articleVO = a_articleVO;
+		A_articleVO info = null;
+		try {
+			info = auctionService.getArticleInfo(this.a_articleVO.getA_art_no());
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		col_area.setText(info.getA_art_area());
+		col_catA.setText(info.getCat_a_no());
+		col_catB.setText(info.getCat_b_no());
+		col_catC.setText(info.getCat_c_no());
+		col_cnt.setText(info.getA_art_cnt() + "");
+		col_couNo.setText(info.getCou_no());
+		col_inter.setText(info.getA_art_inter());
+		col_loc.setText(info.getA_art_loc());
+		col_low.setText(info.getA_art_low());
+		col_no.setText(info.getA_art_no());
+		col_price.setText(info.getA_art_price());
+		col_tour.setText(info.getA_art_tour() + "");
+		
+		new  ClientReceiver(this.socket).start();
+		
+		 try {
+			dos = new  DataOutputStream(this.socket.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	
+    @FXML
+    void initialize() {
+    	try {
+			Registry reg = LocateRegistry.getRegistry("localhost", 8888);
+			service = (IauctionServer) reg.lookup("auction");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    
+ 	class ClientReceiver extends Thread{
+ 		private Socket socket;
+ 		private DataInputStream in;
+
+ 		public ClientReceiver(Socket socket) {
+ 			this.socket = socket;
+ 			try {
+ 				in = new DataInputStream(this.socket.getInputStream());
+ 			} catch (Exception e) {
+ 				e.printStackTrace();
+ 			}	
+ 		}
+ 		
+ 		@Override
+ 		public void run() {
+ 			while(in!=null) {
+ 			
+				Platform.runLater(() -> {
+					try {
+						tf_Bidder.setText(in.readUTF());
+						tf_bidAmount.setText(in.readUTF());
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				});
+ 				
+ 			}
+ 		}
+ 		
+
+ 	}
+    
+    
+    
+}

@@ -1,0 +1,544 @@
+package kr.or.ddit.controller.stuff;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.text.ParseException;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+import kr.or.ddit.AlertDialog.AlertUtil;
+import kr.or.ddit.service.stuff.IAdminService;
+import kr.or.ddit.vo.A_articleVO;
+import kr.or.ddit.vo.CategoryAVO;
+import kr.or.ddit.vo.CategoryBVO;
+import kr.or.ddit.vo.CategoryCVO;
+import kr.or.ddit.vo.CourtVO;
+
+public class InsertController {
+	private File ApprFile;
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private TextField txtName;
+
+    @FXML
+    private ComboBox<CategoryAVO> CA;
+
+    @FXML
+    private ComboBox<CategoryBVO> CB;
+
+    @FXML
+    private ComboBox<CategoryCVO> CC;
+
+    @FXML
+    private ComboBox<CourtVO> CourtCom;
+
+    @FXML
+    private Button btnAddSearch_A;
+
+    @FXML
+    private TextField B_txtAdd1;
+
+    @FXML
+    private TextField B_txtAdd2;
+
+
+    @FXML
+    private Button btnAddSearch_B;
+
+    @FXML
+    private TextField txtLow;
+
+    @FXML
+    private TextField txtPaper;
+
+    @FXML
+    private Button btnPaperFile;
+
+    @FXML
+    private TextField txtPrice;
+
+    @FXML
+    private TextField txtPic;
+
+    @FXML
+    private Button btnPic;
+
+    @FXML
+    private TextField txtYear;
+
+    @FXML
+    private TextField txtMonth;
+
+    @FXML
+    private TextField txtDay;
+
+    @FXML
+    private TextField txtH;
+
+    @FXML
+    private TextField txtM;
+
+    @FXML
+    private TextField txtArea;
+
+    @FXML
+    private Button btnInsert;
+
+    @FXML
+    private Button btnBack;
+   
+
+    @FXML
+    void btnAddSearch_BClick(ActionEvent event) {
+    	try {
+    		
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../fxml/stuff/fxmlAddSearch.fxml"));
+			Parent root = (Parent)fxmlLoader.load();
+			Stage primaryStage = new Stage();
+			AddSearchController controller = fxmlLoader.getController();
+			controller.setDialog(this);
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("주소 검색");
+			primaryStage.show();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+
+    
+    public void inputAddr(String zipcode, String addr) { // 3번째 창한테 받은 정보
+    	B_txtAdd1.setText(zipcode);
+    	B_txtAdd2.setText(addr);
+    }
+    
+    
+    @FXML
+    void btnBackClick(ActionEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(AdminMainController.class.getResource("../../fxml/stuff/fxmlAdminMain.fxml"));
+    	Parent root = loader.load();
+    	  	
+    	Stage stage = (Stage) btnPic.getScene().getWindow(); 
+    	Scene scene = new Scene(root);
+    	
+    	stage.setScene(scene);
+    	stage.setTitle("정보관리");
+    	stage.show();
+    }
+
+    @FXML
+    void btnInsertClick(ActionEvent event) throws ParseException {
+    	
+    	
+    	if(AlertUtil.showAlert((Stage) btnPic.getScene().getWindow(), "물건 정보를 등록 하시겠습니까?") ) {
+    		A_articleVO articleVo = new A_articleVO();
+        	
+        	articleVo.setA_art_addnum(B_txtAdd1.getText());
+        	articleVo.setA_art_loc(B_txtAdd2.getText());
+        	articleVo.setCou_no(CourtCom.getValue().getCou_no());
+        	articleVo.setCat_a_no(CA.getValue().getCat_a_no());
+        	articleVo.setCat_b_no(CB.getValue().getCat_b_no());
+        	articleVo.setCat_c_no(CC.getValue().getCat_c_no());
+        	articleVo.setA_art_low(txtLow.getText());
+        	articleVo.setA_art_area(txtArea.getText());
+        	//-------------------------------------------------------------------날짜 insert
+        	String year = txtYear.getText();
+        	String month = txtMonth.getText();
+        	String day = txtDay.getText();
+        	String hour = txtH.getText();
+        	String minute = txtM.getText();
+        	
+        	String D = year + "-" + month + "-" + day + " " + hour + ":" + minute;
+        	articleVo.setA_art_day(D);
+        	//-----------------------------------------------------------------------------
+        	articleVo.setA_art_name(txtName.getText());
+        	articleVo.setA_art_appr(txtPaper.getText());
+        	articleVo.setA_art_price(txtPrice.getText());
+        	articleVo.setA_art_addnum(B_txtAdd1.getText());
+        	
+        	
+        	
+        	// not null이라서 대충 넣어준 애들------
+        	articleVo.setA_art_inter("8");
+        	articleVo.setA_art_result("유찰");
+        	articleVo.setA_art_cnt(4);
+        	articleVo.setA_art_tour(2);
+        	//-------------------------------
+        	
+        	
+        	
+        	try {
+				service.insertStuff(articleVo);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    }
+
+    @FXML
+    void btnPaperFileClick(ActionEvent event) {
+    	Stage stage = (Stage) btnBack.getScene().getWindow();
+    	
+        FileChooser fileChooser = new FileChooser(); //파일 선택하는 창이 열림
+
+        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All file", "*.*")); // 보여줄, 저장할 파일의 형식
+
+        File showDir = new File("d:/D_other/"); // 열어줄 파일의 경로
+        fileChooser.setInitialDirectory(showDir);
+
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        ApprFile = selectedFile; //apprfile은 선택된 파일이다.
+        
+        txtPaper.setText(selectedFile.getPath());
+    }
+
+    @FXML
+    void btnPicClick(ActionEvent event) {
+
+    }
+    
+   IAdminService service;
+   String select="";
+    
+    @FXML
+    void initialize() {
+    	txtPaper.setEditable(false);
+    	
+    	//Service객체 생성
+    	try {
+			Registry reg = LocateRegistry.getRegistry("localhost",8888);
+			
+			service =  (IAdminService)reg.lookup("adminService");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+//------------------------------------------------------------------------------------------------------------
+    	//콤보박스 설정 (대분류)
+    	List<CategoryAVO> Alist = null;
+		try {
+			Alist = service.getAllACategory();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ObservableList<CategoryAVO> Adata = FXCollections.observableArrayList(Alist);
+    	
+    	CA.setItems(Adata);
+    	
+    	CA.setCellFactory(new Callback<ListView<CategoryAVO>, ListCell<CategoryAVO>>() {
+			@Override
+			public ListCell<CategoryAVO> call(ListView<CategoryAVO> param) {
+				return new ListCell<CategoryAVO>() {
+					@Override
+					protected void updateItem(CategoryAVO item, boolean empty) {
+						super.updateItem(item, empty);
+						if(item == null || empty) {
+							setText(null);
+						}else {
+							setText(item.getCat_a_name());
+						}
+					}
+				};
+			}
+		});
+    	CA.setButtonCell(new ListCell<CategoryAVO>() {
+    		@Override
+    		protected void updateItem(CategoryAVO item, boolean empty) {
+    			super.updateItem(item, empty);
+    			if(item == null || empty) {
+    				setText(null);
+    			}else {
+    				setText(item.getCat_a_name());
+    			}
+    		}
+    	});
+    	//CA.setValue(CA.getItems().get(0));
+//--------------------------------------------------------------------------------------------------------------    	
+    	//콤보박스 설정(중분류)
+    	List<CategoryBVO> Blist = null;
+		try {
+			Blist = service.getAllBCategory(CA.getItems().get(0).getCat_a_no());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ObservableList<CategoryBVO> Bdata = FXCollections.observableArrayList(Blist);
+    	
+    	CB.setItems(Bdata);
+    	
+    	CB.setCellFactory(new Callback<ListView<CategoryBVO>, ListCell<CategoryBVO>>() {
+    		@Override
+    		public ListCell<CategoryBVO> call(ListView<CategoryBVO> param) {
+    			return new ListCell<CategoryBVO>() {
+    				@Override
+    				protected void updateItem(CategoryBVO item, boolean empty) {
+    					super.updateItem(item, empty);
+    					if(item == null || empty) {
+    						setText(null);
+    					}else {
+    						setText(item.getCat_b_name());
+    					}
+    				}
+    			};
+    		}
+		});
+    	CB.setButtonCell(new ListCell<CategoryBVO>() {
+    		@Override
+    		protected void updateItem(CategoryBVO item, boolean empty) {
+    			super.updateItem(item, empty);
+    			if(item==null || empty) {
+    				setText(null);
+    			}else {
+    				setText(item.getCat_b_name());
+    			}
+    		}
+    	});
+    	//CB.setValue(CB.getItems().get(0));
+//----------------------------------------------------------------------------------------------------------------    	
+    	//콤보박스 설정(소분류)
+    	List<CategoryCVO> Clist = null;
+		try {
+			Clist = service.getAllCCategory(CB.getItems().get(0).getCat_b_no());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ObservableList<CategoryCVO> Cdata = FXCollections.observableArrayList(Clist);
+    	
+    	CC.setItems(Cdata);
+    	
+    	CC.setCellFactory(new Callback<ListView<CategoryCVO>, ListCell<CategoryCVO>>() {
+    		@Override
+    		public ListCell<CategoryCVO> call(ListView<CategoryCVO> param) {
+    			return new ListCell<CategoryCVO>() {
+    				@Override
+    				protected void updateItem(CategoryCVO item, boolean empty) {
+    					super.updateItem(item, empty);
+    					if(item == null || empty) {
+    						setText(null);
+    					}else {
+    						setText(item.getCat_c_name());
+    					}
+    				}
+    			};
+    		}
+		});
+    	CC.setButtonCell(new ListCell<CategoryCVO>() {
+    		@Override
+    		protected void updateItem(CategoryCVO item, boolean empty) {
+    			super.updateItem(item, empty);
+    			if(item == null || empty) {
+    				setText(null);
+    			}else {
+    				setText(item.getCat_c_name());
+    			}
+    		}
+    	});
+    	//CC.setValue(CC.getItems().get(0));
+//----------------------------------------------------------------------------------------------------------------    	
+    	// 콤보박스 클릭이벤트 대분류 (addListener)
+    	CA.valueProperty().addListener(new ChangeListener<CategoryAVO>() {
+			@Override
+			public void changed(ObservableValue<? extends CategoryAVO> observable, CategoryAVO oldValue,
+					CategoryAVO newValue) {
+				
+				List<CategoryBVO> Blist = null;
+				try {
+					Blist = service.getAllBCategory(newValue.getCat_a_no());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	ObservableList<CategoryBVO> Bdata = FXCollections.observableArrayList(Blist);
+		    	
+		    	CB.setItems(Bdata);
+			}
+		});
+//----------------------------------------------------------------------------------------------------------------    	
+    	// 콤보박스 클릭이벤트 중분류 (addListener)
+    	CB.valueProperty().addListener(new ChangeListener<CategoryBVO>() {
+			@Override
+			public void changed(ObservableValue<? extends CategoryBVO> observable, CategoryBVO oldValue,
+					CategoryBVO newValue) {
+		    	List<CategoryCVO> Clist = null;
+				try {
+					Clist = service.getAllCCategory(newValue.getCat_b_no());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	ObservableList<CategoryCVO> Cdata = FXCollections.observableArrayList(Clist);
+		    	
+		    	CC.setItems(Cdata);
+				
+			}
+		});
+//----------------------------------------------------------------------------------------------------------------    	
+    	//콤보박스 설정(소유법원)
+    	List<CourtVO> courtList = null;
+		try {
+			courtList = service.getAllCourt();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ObservableList<CourtVO> courtData = FXCollections.observableArrayList(courtList);
+    	
+    	CourtCom.setItems(courtData);
+    	
+    	CourtCom.setCellFactory(new Callback<ListView<CourtVO>, ListCell<CourtVO>>() {
+    		@Override
+    		public ListCell<CourtVO> call(ListView<CourtVO> param) {
+    			return new ListCell<CourtVO>() {
+    				@Override
+    				protected void updateItem(CourtVO item, boolean empty) {
+    					super.updateItem(item, empty);
+    					if(item == null || empty) {
+    						setText(null);
+    					}else {
+    						setText(item.getCou_name());
+    					}
+    				}
+    			};
+    		}
+		});
+    	CourtCom.setButtonCell(new ListCell<CourtVO>() {
+    		@Override
+    		protected void updateItem(CourtVO item, boolean empty) {
+    			super.updateItem(item, empty);
+    			if(item == null || empty) {
+    				setText(null);
+    			}else {
+    				setText(item.getCou_name());
+    			}
+    		}
+    	});
+    	CourtCom.setValue(CourtCom.getItems().get(0));
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//@Override //서버로 보내주는거
+//public String clientToServer(String folderName, FileInfoVO fileData) throws RemoteException {
+//
+//	File file = new File("D:/D_Other/dataStage/" + folderName + "/" + fileData.getFileName());
+//	byte[] data = fileData.getFileData();
+//	try {
+//		FileOutputStream fos = new FileOutputStream(file);
+//		fos.write(data);
+//		fos.flush();
+//		fos.close();
+//	} catch (IOException e) {
+//		e.printStackTrace();
+//	}
+//	return file.getPath();
+//}
+//
+//
+//
+//@Override //서버에서 클라이언트로 보내주는거
+//public List<FileInfoVO> answerServerToClient(List<Answer_FileVO> list) throws RemoteException {
+//	List<FileInfoVO> fileList = new ArrayList<FileInfoVO>();
+//
+//	for (Answer_FileVO fileInfo : list) {
+//		File file = new File(fileInfo.getAns_f_addr());
+//		try {
+//			FileInputStream fis = new FileInputStream(file);
+//			byte[] buffer = new byte[(int) file.length()];
+//			fis.read(buffer);
+//			FileInfoVO filedate = new FileInfoVO();
+//			filedate.setFileData(buffer);
+//			filedate.setFileName(file.getName());
+//			fileList.add(filedate);
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
+//	return fileList;
+//}
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

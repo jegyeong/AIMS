@@ -1,0 +1,130 @@
+package kr.or.ddit.service.search;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.dao.search.ISearchDao;
+import kr.or.ddit.dao.search.SearchDao;
+import kr.or.ddit.vo.A_articleVO;
+import kr.or.ddit.vo.CategoryAVO;
+import kr.or.ddit.vo.CategoryBVO;
+import kr.or.ddit.vo.CategoryCVO;
+import kr.or.ddit.vo.CourtVO;
+
+
+
+
+public class SearchService extends UnicastRemoteObject implements ISearchService{
+//-----------------------------------------------------------------------------------------
+	private ISearchDao dao;
+	
+	private static SearchService service;
+	
+	private SearchService() throws RemoteException{
+		dao = SearchDao.getInstance();
+	}
+	
+	public static SearchService getInstance() {
+		if(service == null)
+			try {
+				service = new SearchService();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		return service;
+	}
+//-----------------------------------------------------------------------------------------
+	@Override
+	public List<A_articleVO> numSearch(String a_art_no) {
+		return dao.numSearch(a_art_no);
+	}
+
+	@Override
+	public List<A_articleVO> courtSearch(String cou_no) {
+		return dao.courtSearch(cou_no);
+	}
+
+	@Override
+	public List<A_articleVO> dateSearch(Map<String, String> a_art_day) {
+		return dao.dateSearch(a_art_day);
+	}
+
+	@Override
+	public List<A_articleVO> categoryASearch(Map<String, String> cat_a_no) {
+		return dao.categoryASearch(cat_a_no);
+	}
+
+	@Override
+	public List<A_articleVO> priceSearch(Map<String, String> a_art_price) {
+		return dao.priceSearch(a_art_price);
+	}
+
+	@Override
+	public List<A_articleVO> lowSearch() {
+		return dao.lowSearch();
+	}
+
+	@Override
+	public List<A_articleVO> areaSearch(Map<String, String> a_art_area) {
+		return dao.areaSearch(a_art_area);
+	}
+
+	@Override
+	public List<A_articleVO> tourSearch() {
+		return dao.tourSearch();
+	}
+
+	@Override
+	public List<A_articleVO> interSearch() {
+		return dao.interSearch();
+	}
+
+	@Override
+	public List<A_articleVO> cntSearch() {
+		return dao.cntSearch();
+	}
+
+	@Override
+	public List<A_articleVO> resultSearch(String a_art_result) {
+		return dao.resultSearch(a_art_result);
+	}
+
+	@Override
+	public List<A_articleVO> getAllShow() {
+		return dao.getAllShow(); 
+	}
+	
+	@Override
+	public List<CategoryAVO> getAllACategory() {
+		return dao.getAllACategory();
+	}
+
+	@Override
+	public List<CategoryBVO> getAllBCategory(String cat_a_no) {
+		return dao.getAllBCategory(cat_a_no);
+	}
+
+	@Override
+	public List<CategoryCVO> getAllCCategory(String cat_b_no) {
+		return dao.getAllCCategory(cat_b_no);
+	}
+
+	@Override
+	public A_articleVO getInfo(String no) {
+		return dao.getInfo(no);
+	}
+
+
+
+	@Override
+	public List<CourtVO> getAllCourt() {
+		return dao.getAllCourt();
+	}
+
+	
+
+}

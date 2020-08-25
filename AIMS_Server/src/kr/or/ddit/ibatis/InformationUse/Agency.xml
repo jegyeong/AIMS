@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+
+<sqlMap namespace="Agency">
+	<select id="getAllCourt" resultClass="AgencyVo">
+		select * from court
+	</select> 
+	<select id="getCourtAddr" parameterClass="AgencyVo">
+		select * from court where cou_loc = #cou_loc#
+	</select>
+	<select id="getCourtName" parameterClass="string" resultClass="AgencyVo">
+		select * from court where cou_name = #cou_name#
+	</select>
+	<select id="getCourtSum" parameterClass="string" resultClass="AgencyVo">
+		select * court where cou_loc = #cou_loc#, cou_name = #cou_name#
+	</select>
+	
+	<select id="getAreaSearch" parameterClass="string" resultClass="AgencyVo">
+		select * from court where cou_loc like '%' || #cou_loc# || '%'
+	</select>
+	
+	<insert id="insertDataConnect" parameterClass="map">
+		insert into data_connect values(#cou_name#,#cou_loc#)
+	</insert>
+	
+	<delete id="deleteDataConnect">
+		delete data_connect
+	</delete>
+	
+	<select id="getCourtSi" parameterClass="String" resultClass="String" >
+		select distinct substr(cou_loc, instr(cou_loc, ' ', 1)+1 , instr(cou_loc, ' ', 1,2)- instr(cou_loc, ' ', 1)-1 ) from court
+		where cou_loc like '%' || #cou_loc# || '%'
+	</select>
+	<select id="getCourtBoth" parameterClass="Map" resultClass="AgencyVo">
+		select * from court 
+				where cou_loc like '%'|| #para1# || '%'
+ 				and cou_loc like '%'|| #para2# || '%'
+	</select>
+	
+	<select id="getPagingCourtList" resultClass="AgencyVo" parameterClass="map">
+		select * from (
+    		select A.*, rownum as RNUM
+	      		 from (
+	        		select * from court order by cou_no
+	        	 ) A
+	        where rownum &lt;= #end# 
+    	)
+    	where rnum &gt; #start# 
+	</select>
+</sqlMap>

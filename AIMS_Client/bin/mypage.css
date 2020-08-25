@@ -1,0 +1,94 @@
+#confirm{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#myShcedual{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#myInteres{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#myInformation{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#myMinwon{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#myAut{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#mySection{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 20.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#home{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btnAddSerach{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btnemailCon{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btnnumCom{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btnModify{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#btnOut{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#ok{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 18.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+#Search{
+	-fx-font-family : "NanumGothicExtraBold";
+	-fx-font-size : 15.0px;
+	-fx-background-color: #424242;
+	-fx-text-fill : #ffffff;
+}
+
+AnchorPane{
+	-fx-background-color: #ffffff;
+}

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="notice">
+	 
+	<select id="getNoticeTotalcount" resultClass="int">
+		select count(*) from notice
+	</select>
+	<select id="getQuestionTotalcount" resultClass="int">
+		select count(*) from com_question where com_que_no not in(select com_ans_no from com_answer)
+	</select>
+	
+	<select id="getPaginNoticeList" resultClass="NoticeVO" parameterClass="map"> 
+	 	 select *
+		 	from(
+		 	select A.*, rownum as RNUM
+			 	from(
+			 	select * from notice order by notice_date desc
+			 	)A
+		 	where rownum &lt;= #end#)
+	 	 where RNUM &gt; #start#
+	</select> 
+	<select id="getPaginAnswerList" resultClass="Com_AnswerVO" parameterClass="map"> 
+	 	 select *
+		 	from(
+		 	select A.*, rownum as RNUM
+			 	from(
+			 	select * from Com_Answer where com_ans_no not in(select com_que_no from com_question) and com_ans_writeid=#id#  order by COM_ANS_WRITEDAY desc
+			 	)A
+		 	where rownum &lt;= #end#)
+	 	 where RNUM &gt; #start#
+	</select> 
+	<select id="getPaginQuestionList" resultClass="Com_QuestionVO" parameterClass="map"> 
+	 	 select *
+		 	from(
+		 	select A.*, rownum as RNUM
+			 	from(
+			 	select * from com_Question where com_que_no not in(select com_ans_no from com_answer) order by COM_QUE_WRITEDAY desc
+			 	)A
+		 	where rownum &lt;= #end#)
+	 	 where RNUM &gt; #start#
+	</select> 
+	
+	<select id="getNoticeFileList" resultClass="Notice_FileVO" parameterClass="string">
+		select * from Notice_File where notice_no = #notice_no#
+	</select> 
+	
+	<select id="getAnswerFileList" resultClass="Answer_FileVO" parameterClass="string">
+		select * from Answer_File where com_ans_no = #com_ans_no#
+	</select> 
+	
+	<select id="getQuestionFileList" resultClass="Question_FileVO" parameterClass="string">
+		select * from Question_File where com_que_no = #com_qus_no#
+	</select> 
+	
+	<select id="getMyAnswerList" resultClass="Com_AnswerVO" parameterClass="string">
+		select * from Com_Answer where mem_id = #mem_id#
+	</select> 
+	<select id="getMyQuestionList" resultClass="Com_QuestionVO" parameterClass="string">
+		select * from com_Question where mem_id = #mem_id#
+	</select> 
+	
+	<select id="getCategory_AList" resultClass="Category_AVO">
+		select * from CATEGORY_A 
+	</select>
+	
+	<select id="getNoiceSameFile" parameterClass="map" resultClass="int">
+		select count(*) from Notice_file where notice_no=#no# and file_addr like '%$file$%'
+	</select>
+	
+	<select id="getCom_QuestionList" parameterClass="Com_QuestionVO">
+	 	select * from com_Question where com_que_no not in (select com_ans_no from com_answer)
+	</select>
+	
+	<insert id="insertAnswer_file" parameterClass="Answer_FileVO">
+		insert into answer_file values(ANSWER_FILE_SEQ.nextval,#ans_f_addr#,#com_ans_no#)
+	</insert>
+	<insert id="insertCom_Answer" parameterClass="Com_AnswerVO">
+		insert into COM_ANSWER values(#com_ans_no# ,#com_ans_title#,#com_ans_writeid#,sysdate,#com_ans_content#)
+	</insert>
+	<insert id="insertQuestion_file" parameterClass="Question_FileVO">
+		insert into Question_file values(QUESTION_FILE_SEQ.nextval,#que_f_addr#,COM_question_seq.CURRVAL)
+	</insert>
+	<insert id="insertCom_Question" parameterClass="Com_QuestionVO">
+		insert into COM_Question values(COM_QUESTION_seq.NEXTVAL ,#com_que_title#,#com_que_writeid#,sysdate,#cat_a_no#,#com_que_content#)
+	</insert>
+	<insert id="insertNotice_file" parameterClass="Notice_FileVO">
+		insert into Notice_file values(NOTICE_FILE_SEQ.nextval,#file_addr#,NOTICE_seq.CURRVAL)
+	</insert>
+	<insert id="insertNotice_file2" parameterClass="Notice_FileVO">
+		insert into Notice_file values(NOTICE_FILE_SEQ.nextval,#file_addr#,#notice_no#)
+	</insert>
+	<insert id="insertNotice" parameterClass="NoticeVO">
+		insert into Notice values(NOTICE_seq.NEXTVAL ,#notice_title#,sysdate,0,#notice_content#,#notice_writer#)
+	</insert>
+	
+	
+	<delete id="deleteNotice_File" parameterClass="map">
+		delete from Notice_file where notice_no = #notice_no# and file_addr like'%$filename$%'
+	</delete>
+	
+	<delete id="deleteNotice" parameterClass="string">
+		delete from Notice where notice_no = #notice_no#
+	</delete>
+	
+	<delete id="deleteAllNotice_File" parameterClass="string">
+		delete from Notice_file where notice_no = #notice_no#
+	</delete>
+	
+	<update id="updataNotice" parameterClass="NoticeVO">
+		update notice set notice_title=#notice_title#, notice_content=#notice_content# where notice_no=#notice_no#
+	</update>
+	
+	<select id="getCategoryInfo" parameterClass="string" resultClass="Category_AVO">
+		select * from Category_A where cat_a_no=#cat_a_no#
+	</select>
+	
+	<update id="noticeUpCnt" parameterClass="string">
+		update notice set notice_cnt = to_number(notice_cnt)+1 where notice_no = #notice_no#
+	</update>
+</sqlMap>
+
+<!-- private String notice_no; -->
+<!-- 	private String notice_title; -->
+<!-- 	private String notice_date; -->
+<!-- 	private String notice_writer; -->
+<!-- 	private String notice_content; -->

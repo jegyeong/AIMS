@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.search.CntController">
+   <children>
+      <TableView fx:id="table" layoutX="14.0" layoutY="14.0" onMouseClicked="#tableClick" prefHeight="793.0" prefWidth="862.0">
+        <columns>
+          <TableColumn fx:id="numCol" prefWidth="211.0" text="물건 번호" />
+          <TableColumn fx:id="nameCol" prefWidth="438.0" text="물건 이름" />
+            <TableColumn fx:id="cntCol" prefWidth="212.0" text="조회수" />
+        </columns>
+      </TableView>
+      <Pagination fx:id="page" layoutX="321.0" layoutY="815.0" prefHeight="43.0" prefWidth="307.0" />
+   </children>
+</AnchorPane>

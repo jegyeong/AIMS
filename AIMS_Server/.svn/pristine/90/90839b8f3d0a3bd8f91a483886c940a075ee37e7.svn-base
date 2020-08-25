@@ -1,0 +1,62 @@
+package kr.or.ddit.dao.InformationUse;
+
+import java.util.List;
+
+import com.sun.javafx.collections.MappingChange.Map;
+
+import kr.or.ddit.vo.AgencyVO;
+
+
+
+public interface IManagerAgencyDao {
+	
+
+	/**
+	 * ëª¨ë“  ë²•ì›?„ ì¶œë ¥?•´ì£¼ëŠ” ë©”ì„œ?“œ
+	 * @return ê²??ƒ‰?œ ë²•ì› ëª©ë¡ List
+	 */
+	public List<AgencyVO> getAllCourt();
+	
+	/**
+	 * ë²•ì›?´ ?œ„ì¹˜í•œ ì§??—­(?˜ˆ ë¶??‚°ê´‘ì—­?‹œ,ì¶©ì²­?‚¨?„..)?„ ë§¤ê°œë³??ˆ˜ë¡? ë°›ì•„?„œ ?•´?‹¹?•˜?Š” ë²•ì›?˜ ëª©ë¡?„ ì¶œë ¥?•˜?Š” ë©”ì„œ?“œ
+	 * @param addr ë²•ì›?œ„ì¹˜í•œ ì§??—­ ë§¤ê°œë³??ˆ˜
+	 * @return ê²??ƒ‰?œ ë²•ì› ëª©ë¡ List
+	 */
+	public List<AgencyVO> getCourtAddr(String addr);
+	
+	/**
+	 * ë²•ì›?˜ ?´ë¦„ì„ ë§¤ê°œë³??ˆ˜ë¡? ë°›ì•„ ?•´?‹¹ ë²•ì›?˜ ëª©ë¡?„ ì¶œë ¥?•˜?Š” ë©”ì„œ?“œ
+	 * @param name ë²•ì›ëª? ë§¤ê°œë³??ˆ˜
+	 * @return ê²??ƒ‰?œ ë²•ì›?˜ ëª©ë¡ ë¦¬ìŠ¤?Š¸
+	 */
+	public List<AgencyVO> getCourtName(String name);
+	
+	/**
+	 * ê²??ƒ‰?•  ì§??—­ê³? ë²•ì›?˜ ?´ë¦„ì´ ???¥?œ Mapê°ì²´ë¥? ?ŒŒ?¼ë¯¸í„°ë¡? ë°›ì•„ ?•´?‹¹ ë²•ì›Listë¥? ë°˜í™˜?•˜?Š” ë©”ì„œ?“œ 
+	 * @param searchMap ê²??ƒ‰?•  ë²•ì–¸ ì§??—­ê³? ë²•ì›?´ë¦„ì´ ???¥?œ Mapê°ì²´
+	 * @return ê²??ƒ‰?œ ë²•ì›?˜ ëª©ë¡?„ List?— ?‹´?•„?„œ ë°˜í™˜?•œ?‹¤
+	 */
+	public List<AgencyVO> getCourtSum(Map<String, String> searchMap);
+	
+	/**
+	 * AgencyVO?— ?‹´ê¸? ?ë£Œë?? DB?— insert?•˜?Š” ë©”ì„œ?“œ
+	 * @param agencyVo DB?— insert?•  ?ë£Œê? ???¥?œ AgencyVO ê°ì²´
+	 * @return DB?‘?—… ?„±ê³? : 1, ?‹¤?Œ¨ : 0
+	 */
+	public int insertCourt(AgencyVO agencyVo);
+	
+	/**
+	 * AgencyVO?˜ ? •ë³´ë?? ?´?š©?•˜?—¬ ë²•ì› ? •ë³´ë?? ?ˆ˜? •?•˜?Š” ë©”ì„œ?“œ
+	 * @param angencyVo ?ˆ˜? •?•  ? •ë³´ê? ???¥?œ voê°ì²´
+	 * @return ?‘?—…?„±ê³? : 1, ?‹¤?Œ¨ : 0
+	 */
+	public int updateCourt(AgencyVO agencyVo);
+	
+	/**
+	 * ? „ì²? ? ˆì½”ë“œ ?ˆ˜ë¥? ë°˜í™˜?•˜?Š” ë©”ì„œ?“œ
+	 * @return ? „ì²? ? ˆì½”ë“œ ?ˆ˜ 
+	 */
+	public int getAllAgencyCount();
+
+
+}

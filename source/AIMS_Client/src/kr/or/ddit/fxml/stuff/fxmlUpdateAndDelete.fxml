@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="1280.0" stylesheets="@../../../../../../css/stuff.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.controller.stuff.UpdateAndDeleteController">
+   <children>
+      <VBox prefHeight="949.0" prefWidth="1280.0" spacing="10.0">
+         <children>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="109.0" prefWidth="1280.0">
+               <children>
+                  <Label text="● 물건이름 *">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtName" prefHeight="15.0" prefWidth="380.0">
+                     <HBox.margin>
+                        <Insets left="80.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="1280.0">
+               <children>
+                  <Label text="● 카테고리 * ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="CA" prefHeight="15.0" prefWidth="150.0" promptText="대분류">
+                     <HBox.margin>
+                        <Insets left="75.0" right="20.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="CB" prefHeight="15.0" prefWidth="150.0" promptText="중분류">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="CC" prefHeight="15.0" prefWidth="150.0" promptText="소분류">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="1280.0">
+               <children>
+                  <Label text="● 소유 법원 * ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="courtAddrCom" prefHeight="15.0" prefWidth="188.0" promptText="지역을 선택해주세요">
+                     <HBox.margin>
+                        <Insets left="70.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="CourtCom" prefHeight="23.0" prefWidth="245.0" promptText="법원을 선택해주세요">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="76.0" prefWidth="910.0">
+               <children>
+                  <Label alignment="CENTER" text="● 물건소재지 *">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="-199.0" right="37.0" />
+                     </HBox.margin>
+                  </Label>
+                  <AnchorPane prefHeight="119.0" prefWidth="506.0">
+                     <children>
+                        <TextField fx:id="B_txtAdd1" layoutX="27.0" layoutY="11.0" prefHeight="15.0" prefWidth="316.0" promptText="우편번호" />
+                        <TextField fx:id="B_txtAdd2" layoutX="27.0" layoutY="53.0" prefHeight="15.0" prefWidth="316.0" promptText="도로명주소" />
+                        <TextField fx:id="detailAdd1" layoutX="354.0" layoutY="53.0" prefHeight="15.0" prefWidth="154.0" promptText="상세주소" />
+                        <Button fx:id="btnAddSearch_B" layoutX="356.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnAddSearch_BClick" prefHeight="25.0" prefWidth="150.0" text="주소검색" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="1280.0">
+               <children>
+                  <Label text="● 최저 매각 가격 * ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtLow" prefHeight="15.0" prefWidth="380.0">
+                     <HBox.margin>
+                        <Insets left="25.0" right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="1280.0">
+               <children>
+                  <Label text="● 감정평가서 * ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtPaper" prefHeight="15.0" prefWidth="380.0">
+                     <HBox.margin>
+                        <Insets left="60.0" right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="btnPaperFile" mnemonicParsing="false" onAction="#btnPaperFileClick" prefHeight="30.0" prefWidth="143.0" text="감정평가서 등록" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="1280.0">
+               <children>
+                  <Label text="● 감정 평가액 * ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtPrice" prefHeight="15.0" prefWidth="296.0">
+                     <HBox.margin>
+                        <Insets left="55.0" right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="142.0" prefWidth="1280.0">
+               <children>
+                  <Label text="● 물건사진 * ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ScrollPane prefHeight="85.0" prefWidth="316.0" style="-fx-border-color: #d9d9d9d9; -fx-border-width: 3;">
+                     <content>
+                        <HBox fx:id="hBoxImg" maxHeight="139.0" minHeight="139.0" prefHeight="139.0" />
+                     </content>
+                     <HBox.margin>
+                        <Insets left="81.0" right="30.0" />
+                     </HBox.margin>
+                  </ScrollPane>
+                  <Button fx:id="btnPic" mnemonicParsing="false" onAction="#btnPicClick" prefHeight="30.0" prefWidth="150.0" text="이미지 등록" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="1280.0" spacing="10.0">
+               <children>
+                  <Label text="● 경매일 * ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" />
+                     </HBox.margin>
+                  </Label>
+                  <DatePicker fx:id="datepicker">
+                     <HBox.margin>
+                        <Insets left="90.0" />
+                     </HBox.margin>
+                  </DatePicker>
+                  <ComboBox fx:id="txtH" prefHeight="23.0" prefWidth="90.0">
+                     <HBox.margin>
+                        <Insets left="40.0" />
+                     </HBox.margin></ComboBox>
+                  <Label text="시" />
+                  <ComboBox fx:id="txtM" prefHeight="23.0" prefWidth="89.0">
+                     <HBox.margin>
+                        <Insets left="40.0" />
+                     </HBox.margin></ComboBox>
+                  <Label text="분" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="1280.0">
+               <children>
+                  <Label text="● 면적">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtArea" prefHeight="15.0" prefWidth="279.0">
+                     <HBox.margin>
+                        <Insets left="140.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label text="㎡">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="106.0" prefWidth="1280.0">
+               <children>
+                  <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#btnUpdateClick" prefHeight="50.0" prefWidth="150.0" text="수정">
+                     <HBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnOK" mnemonicParsing="false" onAction="#btnOKClick" prefHeight="50.0" prefWidth="150.0" text="확인">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeleteClick" prefHeight="50.0" prefWidth="150.0" text="삭제">
+                     <HBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#btnBackClick" prefHeight="50.0" prefWidth="150.0" text="뒤로가기">
+                     <HBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
